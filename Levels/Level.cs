@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GXPEngine;
 
-namespace GXPEngine.Levels
+class Level
 {
-    class Level
-    {
-    }
 }
