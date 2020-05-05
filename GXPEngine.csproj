@@ -74,7 +74,11 @@
     <Compile Include="GXPEngine\Utils\Time.cs" />
     <Compile Include="GXPEngine\Utils\Utils.cs" />
     <Compile Include="Levels\Level.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Levels\LevelHUD.cs" />
+=======
+    <Compile Include="Menu\Collections\Collections.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Menu\Menu Screens\Menu.cs" />
     <Compile Include="Menu\ScreenHandler.cs" />
     <Compile Include="MyGame.cs" />
@@ -85,6 +89,5 @@
     <Folder Include="Levels\Easy\" />
     <Folder Include="Levels\Hard\" />
     <Folder Include="Levels\Medium\" />
-    <Folder Include="Menu\Collections\" />
   </ItemGroup>
 </Project>

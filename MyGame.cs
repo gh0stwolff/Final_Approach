@@ -1,20 +1,20 @@
 using System;
 using GXPEngine;
 using System.Drawing;
-using System.Collections.Generic;
-
+using System.Collections.Generic;
+
 public class MyGame : Game
 {
 
-	public MyGame () : base(800, 600, false,false)
+	public MyGame () : base(1024, 768, false,false)
 	{
-        Level level = new Level();
-        AddChild(level);
+        ScreenHandler screenhandler = new ScreenHandler();
+        AddChild(screenhandler);
 	}
 
-    static void Main()
-    {
-        new MyGame().Start();
+    static void Main()
+    {
+        new MyGame().Start();
     }
 
 }

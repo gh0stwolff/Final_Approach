@@ -26,3 +26,8 @@ C:\Users\pamkm\Desktop\Final_Approach\obj\x86\Debug\GXPEngine.csprojAssemblyRefe
 C:\Users\pamkm\Desktop\Final_Approach\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
 C:\Users\pamkm\Desktop\Final_Approach\obj\x86\Debug\GXPEngine.exe
 C:\Users\pamkm\Desktop\Final_Approach\obj\x86\Debug\GXPEngine.pdb
+C:\Users\lynnm\OneDrive\Bureaublad\Project 4 Final Approach\Final_Approach\bin\Debug\GXPEngine.exe
+C:\Users\lynnm\OneDrive\Bureaublad\Project 4 Final Approach\Final_Approach\bin\Debug\GXPEngine.pdb
+C:\Users\lynnm\OneDrive\Bureaublad\Project 4 Final Approach\Final_Approach\obj\x86\Debug\GXPEngine.csprojAssemblyReference.cache
+C:\Users\lynnm\OneDrive\Bureaublad\Project 4 Final Approach\Final_Approach\obj\x86\Debug\GXPEngine.exe
+C:\Users\lynnm\OneDrive\Bureaublad\Project 4 Final Approach\Final_Approach\obj\x86\Debug\GXPEngine.pdb
