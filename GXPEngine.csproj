@@ -74,6 +74,7 @@
     <Compile Include="GXPEngine\Utils\Time.cs" />
     <Compile Include="GXPEngine\Utils\Utils.cs" />
     <Compile Include="Levels\Level.cs" />
+    <Compile Include="Menu\Menu Screens\Menu.cs" />
     <Compile Include="Menu\ScreenHandler.cs" />
     <Compile Include="MyGame.cs" />
   </ItemGroup>
@@ -82,6 +83,5 @@
     <Folder Include="Levels\Hard\" />
     <Folder Include="Levels\Medium\" />
     <Folder Include="Menu\Collections\" />
-    <Folder Include="Menu\Menu Screens\" />
   </ItemGroup>
 </Project>

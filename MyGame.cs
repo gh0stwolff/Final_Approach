@@ -8,6 +8,9 @@ public class MyGame : Game
 
 	public MyGame () : base(800, 600, false,false)
 	{
+        Level level = new Level();
+        AddChild(level);
+        Console.WriteLine(level);
 	}
 
     static void Main()
@@ -16,4 +19,3 @@ public class MyGame : Game
     }
 
 }
-
