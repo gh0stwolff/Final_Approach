@@ -10,7 +10,6 @@ public class MyGame : Game
 	{
         Level level = new Level();
         AddChild(level);
-        Console.WriteLine(level);
 	}
 
     static void Main()

@@ -74,9 +74,12 @@
     <Compile Include="GXPEngine\Utils\Time.cs" />
     <Compile Include="GXPEngine\Utils\Utils.cs" />
     <Compile Include="Levels\Level.cs" />
+    <Compile Include="Levels\LevelHUD.cs" />
     <Compile Include="Menu\Menu Screens\Menu.cs" />
     <Compile Include="Menu\ScreenHandler.cs" />
     <Compile Include="MyGame.cs" />
+    <Compile Include="Utils\Button.cs" />
+    <Compile Include="Utils\Vec2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Levels\Easy\" />
