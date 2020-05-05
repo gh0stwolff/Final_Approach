@@ -1,11 +1,14 @@
 ﻿using System;
+using GXPEngine;
+using System.Drawing;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace GXPEngine.Menu.Menu_Screens
+
+class Menu : Sprite
 {
-    class Menu
+    public Menu() : base("menuEXAMPLE.jpg")
     {
+
     }
 }
+

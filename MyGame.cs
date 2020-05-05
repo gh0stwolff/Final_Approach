@@ -8,8 +8,8 @@ public class MyGame : Game
 
 	public MyGame () : base(800, 600, false,false)
 	{
-        Level level = new Level();
-        AddChild(level);
+        ScreenHandler screenHandler = new ScreenHandler();
+        AddChild(screenHandler);
 	}
 
     static void Main()
