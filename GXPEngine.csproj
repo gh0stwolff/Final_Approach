@@ -78,6 +78,8 @@
     <Compile Include="Levels\LevelHUD.cs" />
     <Compile Include="Levels\MiniGames\Mix And Match\ClickablePiece.cs" />
     <Compile Include="Levels\MiniGames\Mix And Match\MixAndMatch.cs" />
+    <Compile Include="Levels\MiniGames\Puzzle drag and drop\Jigsaw.cs" />
+    <Compile Include="Levels\MiniGames\Puzzle drag and drop\Pieces.cs" />
     <Compile Include="Menu\Collections\Collections.cs" />
     <Compile Include="Menu\Menu Screens\Menu.cs" />
     <Compile Include="Menu\ScreenHandler.cs" />
