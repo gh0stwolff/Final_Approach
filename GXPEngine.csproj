@@ -73,8 +73,11 @@
     <Compile Include="GXPEngine\Utils\MouseHandler.cs" />
     <Compile Include="GXPEngine\Utils\Time.cs" />
     <Compile Include="GXPEngine\Utils\Utils.cs" />
+    <Compile Include="Levels\Easy\Level1Easy.cs" />
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\LevelHUD.cs" />
+    <Compile Include="Levels\MiniGames\Mix And Match\ClickablePiece.cs" />
+    <Compile Include="Levels\MiniGames\Mix And Match\MixAndMatch.cs" />
     <Compile Include="Menu\Menu Screens\Menu.cs" />
     <Compile Include="Menu\ScreenHandler.cs" />
     <Compile Include="MyGame.cs" />
@@ -82,7 +85,6 @@
     <Compile Include="Utils\Vec2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Levels\Easy\" />
     <Folder Include="Levels\Hard\" />
     <Folder Include="Levels\Medium\" />
     <Folder Include="Menu\Collections\" />

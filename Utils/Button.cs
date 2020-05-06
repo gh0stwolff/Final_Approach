@@ -8,20 +8,20 @@ using GXPEngine.Managers;
 
 public class Button : Sprite
 {
-    public bool Pressed = false;
+    protected bool Pressed = false;
 
-    private Vec2 _location;
+    protected Vec2 _position;
 
-    private bool _hover = false;
+    protected bool _hover = false;
 
     private float _sizeOnHover = 1.1f;
 
-    public Button(string fileName, Vec2 location) : base(fileName)
+    public Button(string fileName, Vec2 position) : base(fileName)
     {
-        _location = location;
+        _position = position;
         SetOrigin(width / 2, height / 2);
-        x = location.x;
-        y = location.y;
+        x = position.x;
+        y = position.y;
     }
 
     public void Update()
@@ -32,8 +32,8 @@ public class Button : Sprite
 
     private void hover()
     {
-        if (Mathf.Abs(_location.x - Input.mouseX) <= width/2 &&
-            Mathf.Abs(_location.y - Input.mouseY) <= height/2)
+        if (Mathf.Abs(_position.x - Input.mouseX) <= width/2 &&
+            Mathf.Abs(_position.y - Input.mouseY) <= height/2)
         {
             scale = _sizeOnHover;
             _hover = true;
