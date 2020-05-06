@@ -76,8 +76,12 @@
     <Compile Include="Levels\Easy\Level1Easy.cs" />
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\LevelHUD.cs" />
+<<<<<<< HEAD
     <Compile Include="Levels\MiniGames\Mix And Match\ClickablePiece.cs" />
     <Compile Include="Levels\MiniGames\Mix And Match\MixAndMatch.cs" />
+=======
+    <Compile Include="Menu\Collections\Collections.cs" />
+>>>>>>> master
     <Compile Include="Menu\Menu Screens\Menu.cs" />
     <Compile Include="Menu\ScreenHandler.cs" />
     <Compile Include="MyGame.cs" />
@@ -87,6 +91,5 @@
   <ItemGroup>
     <Folder Include="Levels\Hard\" />
     <Folder Include="Levels\Medium\" />
-    <Folder Include="Menu\Collections\" />
   </ItemGroup>
 </Project>
