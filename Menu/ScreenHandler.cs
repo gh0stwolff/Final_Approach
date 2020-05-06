@@ -6,18 +6,20 @@ using GXPEngine;
 
 class ScreenHandler : GameObject
 {
+    Button _buttonPlay;
     Menu _menu;
     Collections _collect;
 
-    enum State
+
+    enum Scene
     {
         MENU,
         COLLECTIONS,
     }
 
-    private State _state;
+    private Scene _scene;
 
-    private bool _isPlayerInMenu;
+    //private bool _isPlayerInMenu;
 
     public ScreenHandler() : base()
     {
@@ -27,48 +29,57 @@ class ScreenHandler : GameObject
 
     public void Update()
     {
-        handleState();
+        handleScene();
     }
 
-    public void handleState()
+    public void handleScene()
     {
-        switch (_state)
+        switch (_scene)
         {
-            case State.MENU:
+            case Scene.MENU:
                 handleMenuScene();
                 break;
 
-            case State.COLLECTIONS:
+            case Scene.COLLECTIONS:
                 handleCollectionsScene();
                 break;
         }
     }
 
-    private void setState(State newState)
+    private void setScene(Scene newScene)
     {
-        if (_state != newState)
+        if (_scene != newScene)
         {
-            _state = newState;
+            _scene = newScene;
         }
+    }
+
+    private void handleButtons()
+    {
+        
     }
 
 
     private void handleMenuScene()
     {
-        Console.WriteLine("does something");
         if (_menu == null)
         {
-            Console.WriteLine("WORKS");
             _menu = new Menu();
             AddChild(_menu);
+
+            Vec2 myVec = new Vec2(512, 384);
+
+            _buttonPlay = new Button("testbutton.png", myVec);
+            AddChild(_buttonPlay);
         }
 
-        if (Input.GetKeyDown(Key.C))
+        if (_buttonPlay.Pressed)
         {
-            setState(State.COLLECTIONS);
+            setScene(Scene.COLLECTIONS);
             if (_menu != null)
             {
                 _menu.LateDestroy();
+                _buttonPlay.LateDestroy();
                 _menu = null;
             }
         }
@@ -76,7 +87,6 @@ class ScreenHandler : GameObject
 
     private void handleCollectionsScene()
     {
-        Console.WriteLine("PPPPPPPPPP");
         if (_collect == null)
         {
             _collect = new Collections();
@@ -85,7 +95,7 @@ class ScreenHandler : GameObject
 
         if (Input.GetKeyDown(Key.M))
         {
-            setState(State.MENU);
+            setScene(Scene.MENU);
             if (_collect != null)
             {
                 _collect.LateDestroy();
