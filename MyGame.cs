@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class MyGame : Game
 {
 
-	public MyGame () : base(800, 600, false,false)
+	public MyGame () : base(1024, 768, false,false)
 	{
         ScreenHandler screenHandler = new ScreenHandler();
         AddChild(screenHandler);
