@@ -6,17 +6,17 @@ using System.Text;
 using GXPEngine;
 using GXPEngine.Managers;
 
-public class Button : Sprite
+public class Button : AnimSprite
 {
-    protected bool Pressed = false;
+    public bool Pressed = false;
 
     protected Vec2 _position;
 
     protected bool _hover = false;
 
-    private float _sizeOnHover = 1.1f;
+    protected float _sizeOnHover = 1.1f;
 
-    public Button(string fileName, Vec2 position) : base(fileName)
+    public Button(string fileName, Vec2 position, int cols = 1, int rows = 1) : base(fileName, cols, rows)
     {
         _position = position;
         SetOrigin(width / 2, height / 2);
@@ -30,7 +30,7 @@ public class Button : Sprite
         pressed();
     }
 
-    private void hover()
+    protected void hover()
     {
         if (Mathf.Abs(_position.x - Input.mouseX) <= width/2 &&
             Mathf.Abs(_position.y - Input.mouseY) <= height/2)
@@ -45,7 +45,7 @@ public class Button : Sprite
         }
     }
 
-    private void pressed()
+    protected void pressed()
     {
         if (_hover && Input.GetMouseButtonDown(0))
         { Pressed = true; }

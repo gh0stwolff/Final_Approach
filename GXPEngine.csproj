@@ -83,6 +83,8 @@
     <Compile Include="Menu\ScreenHandler.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="Utils\Button.cs" />
+    <Compile Include="Utils\Randomizer.cs" />
+    <Compile Include="Utils\Timer.cs" />
     <Compile Include="Utils\Vec2.cs" />
   </ItemGroup>
   <ItemGroup>
