@@ -2,3 +2,17 @@
 *.suo
 
 *.cache
+
+.vs/*
+
+bin/Debug/GXPEngine.exe
+
+bin/Debug/GXPEngine.pdb
+
+obj/x86/Debug/GXPEngine.csprojAssemblyReference.cache
+
+obj/x86/Debug/GXPEngine.exe
+
+obj/x86/Debug/GXPEngine.pdb
+
+obj/x86/Debug/GXPEngine.csproj.FileListAbsolute.text
