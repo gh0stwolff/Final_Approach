@@ -8,13 +8,21 @@ using GXPEngine.Managers;
 
 public class Button : AnimSprite
 {
+
+    private float _animationTimer = 0;
+
     public bool Pressed = false;
+    public bool StartAnimation = false;
 
     protected Vec2 _position;
 
-    protected bool _hover = false;
+    public bool _hover = false;
 
     protected float _sizeOnHover = 1.1f;
+
+    private int lastFrame;
+    private int numberOfFrames;
+    private int startFrame = 0;
 
     public Button(string fileName, Vec2 position, int cols = 1, int rows = 1) : base(fileName, cols, rows)
     {
@@ -22,12 +30,17 @@ public class Button : AnimSprite
         SetOrigin(width / 2, height / 2);
         x = position.x;
         y = position.y;
+
+        lastFrame = cols * rows - 1;
+        numberOfFrames = cols * rows;
     }
 
     public void Update()
     {
         hover();
         pressed();
+        startAnimation();
+        animation();
     }
 
     protected void hover()
@@ -45,10 +58,30 @@ public class Button : AnimSprite
         }
     }
 
+    private void animation()
+    {
+        if(StartAnimation)
+        { 
+        float _frameIntervalAF = 80f;
+
+        _animationTimer += Time.deltaTime;
+        int currentFrame = (int)(_animationTimer / _frameIntervalAF) % numberOfFrames + startFrame;
+        SetFrame(currentFrame);
+        }
+    }
+
+    protected void startAnimation()
+    {
+        Console.WriteLine(StartAnimation);
+        if (_hover && Input.GetMouseButtonDown(0))
+        { StartAnimation = true; }
+        else if (currentFrame == lastFrame)
+        { StartAnimation = false; }
+    }
+
     protected void pressed()
     {
-        Console.WriteLine(Pressed);
-        if (_hover && Input.GetMouseButtonDown(0))
+        if (currentFrame == lastFrame)
         { Pressed = true; }
         else
         { Pressed = false; }

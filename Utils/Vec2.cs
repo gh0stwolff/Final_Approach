@@ -36,7 +36,31 @@ public struct Vec2
         return new Vec2(left.x / right, left.y / right);
     }
 
-	public override string ToString () 
+    public static bool operator ==(Vec2 left, Vec2 right)
+    {
+        if (left.x == right.x && left.y == right.y)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    public static bool operator !=(Vec2 left, Vec2 right)
+    {
+        if (left.x != right.x || left.y != right.y)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    public override string ToString () 
 	{
 		return String.Format ("({0}; {1})", x, y);
 	}

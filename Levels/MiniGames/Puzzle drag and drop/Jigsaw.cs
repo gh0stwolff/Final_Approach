@@ -8,100 +8,112 @@ public class Jigsaw : GameObject
 {
     static private int _amountOfPieces = 4;
 
-    Vec2 _oldPosition1;
+    private int _startPointX = 654;
+    private int _startPointY = 315;
 
-
-    Pieces _piece1, _piece2, _piece3, _piece4;
+    Vec2[] points = new Vec2[_amountOfPieces];
+    Pieces[] piece = new Pieces[_amountOfPieces];
 
 
     public Jigsaw() : base()
     {
-        Pieces[] pieces = new Pieces[_amountOfPieces];
-        int[] places = new int[_amountOfPieces];
-
-        //Pieces[] places = new Pieces[4];
-        //int[] places = new int[];
-
-
-        //createPiece();
-        _oldPosition1.x = 120;
-        _oldPosition1.y = 150;
-        createPiece2();
+        
+        createPiece();
+        createPoints(2, 2);
 
     }
 
     public void Update()
     {
-        movePieces();
-        if (Input.GetMouseButtonDown(0))
-        {
-            Console.WriteLine(Input.mouseX);
-            Console.WriteLine(Input.mouseY);
-        }
-    }
-
-    private void createPiece2()
-    {
-
-        _piece1 = new Pieces("puzzle.png", new Vec2(120,150), 0);
-        AddChild(_piece1);
-        _piece2 = new Pieces("puzzle.png", new Vec2(120, 600), 1);
-        AddChild(_piece2);
-        _piece3 = new Pieces("puzzle.png", new Vec2(350, 150), 2);
-        AddChild(_piece3);
-        _piece4 = new Pieces("puzzle.png", new Vec2(350, 600), 3);
-        AddChild(_piece4);
-    }
-
-    private void movePieces()
-    {
-        //if(Input.GetMouseButtonDown(0) && Input.mouseX >= 470)
-        //{
-        //    _piece1.x = Input.mouseX;
-        //    _piece1.y = Input.mouseY;
-        //}
-
-        if (Input.GetMouseButtonDown(0) && _piece1._isSelected == true)
-        {
-            _piece1.x = Input.mouseX;
-            _piece1.y = Input.mouseY;
-        }
-        if (Input.GetMouseButton(0) && _piece2._isSelected == true)
-        {
-            _piece2.x = Input.mouseX;
-            _piece2.y = Input.mouseY;
-        }
-        if (Input.GetMouseButton(0) && _piece3._isSelected == true)
-        {
-            _piece3.x = Input.mouseX;
-            _piece3.y = Input.mouseY;
-        }
-        if (Input.GetMouseButton(0) && _piece4._isSelected == true)
-        {
-            _piece4.x = Input.mouseX;
-            _piece4.y = Input.mouseY;
-        }
-
+        checkClickingPoints();
+        checkPuzzleSucceeded();
     }
 
     private void createPiece()
     {
-        int place = 0;
         int i = 0;
-
 
         for (int x = 150; x < 550; x += 200)
         {
             for (int y = 150; y < 768; y += 400)
             {
-                Pieces _piece = new Pieces("puzzle.png", new Vec2(x, y), place);
+                Pieces _piece = new Pieces("puzzle.png", new Vec2(x, y), i);
                 AddChild(_piece);
+                piece[i] = _piece;
+                i++;
+            }
+        }
+    }
 
-                //pieces[i] = _piece;
+    private void checkPuzzleSucceeded()
+    {
+        if (points[0] == piece[0]._position && points[2] == piece[1]._position
+            && points[1] == piece[2]._position && points[3] == piece[3]._position)
+        {
+            Console.WriteLine("YEAHS1");
+        }
 
-                place++;
-                Console.WriteLine(place);
-                Console.WriteLine(_piece);
+        if (points[0] == piece[0]._position)
+        {
+            //Console.WriteLine("YEAHS1");
+        }
+        if (points[2] == piece[1]._position)
+        {
+            //Console.WriteLine("YEAHS1");
+        }
+        if (points[1] == piece[2]._position)
+        {
+            //Console.WriteLine("YEAHS1");
+        }
+        if (points[3] == piece[3]._position)
+        {
+            //Console.WriteLine("YEAHS1");
+        }
+
+    }
+
+    private void checkClickingPoints()
+    {
+        Vec2 mousePos = new Vec2(Input.mouseX, Input.mouseY);
+      
+        for(int i = 0; i < points.Length; i++)
+        {
+            Vec2 Delta = points[i] - mousePos;
+            if(Input.GetMouseButtonDown(0) &&  Delta.Length() <= 100 )
+            {
+               if(piece[0]._isSelected)
+                {
+                    piece[0]._position = points[i];
+                    Console.WriteLine(points[i]);
+                } 
+                else if(piece[1]._isSelected)
+                {
+                    piece[1]._position = points[i];
+                } 
+                else if (piece[2]._isSelected)
+                {
+                    piece[2]._position = points[i];
+                } 
+                else if (piece[3]._isSelected)
+                {
+                    piece[3]._position = points[i];
+                }
+            }
+        }
+    }
+
+    private void createPoints(int columns, int rows)
+    {
+        int i = 0;
+        int pieceWidth = piece[i].width;
+        int pieceHeight = piece[i].height;
+
+        for (int x = _startPointX; x < _startPointX + pieceWidth * columns; x += pieceWidth)
+        {
+            for (int y = _startPointY; y < _startPointY + pieceHeight * rows; y += pieceHeight )
+            {
+                points[i] = new Vec2(x,y);
+                i++;
             }
         }
     }

@@ -6,7 +6,7 @@ using GXPEngine;
 
 public class Pieces : AnimSprite
 {
-    protected Vec2 _position;
+    public Vec2 _position;
 
     public bool _isSelected;
 
@@ -28,12 +28,19 @@ public class Pieces : AnimSprite
     {
         mouseOnPiece();
         selectPiece();
+        updatePos();
+    }
+
+    private void updatePos()
+    {
+        x = _position.x;
+        y = _position.y;
     }
 
     private void mouseOnPiece()
     {
-        if (Mathf.Abs(_position.x - Input.mouseX) <= width / 2 &&
-            Mathf.Abs(_position.y - Input.mouseY) <= height / 2)
+        if (Mathf.Abs(x - Input.mouseX) <= width / 2 &&
+            Mathf.Abs(y - Input.mouseY) <= height / 2)
         {
             _isMouseOnPiece = true;
         }
