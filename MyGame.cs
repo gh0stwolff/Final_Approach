@@ -13,7 +13,7 @@ public class MyGame : Game
 
         Jigsaw jigsaw = new Jigsaw();
         AddChild(jigsaw);
-	}
+    }
 
     static void Main()
     {
