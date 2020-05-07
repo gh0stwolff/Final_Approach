@@ -26,7 +26,7 @@ class ClickablePiece : Button
 
     private EasyDraw _selection;
 
-    public ClickablePiece(string fileName, Vec2 position, int ID) : base(fileName, position, 2, 1)
+    public ClickablePiece(string fileName, Vec2 position, int ID) : base(fileName, position, 9, 1)
     {
         _id = ID;
 
@@ -85,7 +85,7 @@ class ClickablePiece : Button
         if (_active)
         { 
             selection();
-            SetFrame(1);
+            SetFrame(_id + 1);
         } else
         {
             SetFrame(0);
