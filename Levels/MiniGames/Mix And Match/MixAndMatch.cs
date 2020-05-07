@@ -20,15 +20,20 @@ public class MixAndMatch : Canvas
 
     private float timeDelta = 0;
 
+    private bool _doOnce = true;
+
     ClickablePiece[] pieces = new ClickablePiece[_amountOfPieces];
     int[] IDs = new int[_amountOfPieces];
 
     ClickablePiece click1;
+    CollectedMM _collection;
 
     public MixAndMatch(int width, int height) : base(width, height)
     {
-        click1 = new ClickablePiece("tilesColor.png", new Vec2(0, 0), 0);
+        click1 = new ClickablePiece("memoryTiles.png", new Vec2(0, 0), 0);
         loadPieces(_horizontalPieces, _verticalPieces);
+        _collection = new CollectedMM(new Vec2(0, 0), ((MyGame)game).width, ((MyGame)game).height, _amountOfPieces/2);
+        AddChild(_collection);
     }
 
     private void loadPieces(int colmns, int rows)
@@ -48,7 +53,7 @@ public class MixAndMatch : Canvas
         {
             for (int y = _startYGrid; y < _startYGrid + pieceHeight * rows; y += pieceHeight)
             {
-                ClickablePiece click = new ClickablePiece("tilesColor.png", new Vec2(x, y), IDs[i]);
+                ClickablePiece click = new ClickablePiece("memoryTiles.png", new Vec2(x, y), IDs[i]);
                 AddChild(click);
 
                 pieces[i] = click;
@@ -61,6 +66,19 @@ public class MixAndMatch : Canvas
     public void Update()
     {
         checkMatches();
+        debug();
+    }
+
+    private void debug()
+    {
+        if (Input.GetKeyDown(Key.ONE)) { _collection.Collected(0); }
+        if (Input.GetKeyDown(Key.TWO)) { _collection.Collected(1); }
+        if (Input.GetKeyDown(Key.THREE)) { _collection.Collected(2); }
+        if (Input.GetKeyDown(Key.FOUR)) { _collection.Collected(3); }
+        if (Input.GetKeyDown(Key.FIVE)) { _collection.Collected(4); }
+        if (Input.GetKeyDown(Key.SIX)) { _collection.Collected(5); }
+        if (Input.GetKeyDown(Key.SEVEN)) { _collection.Collected(6); }
+        if (Input.GetKeyDown(Key.EIGHT)) { _collection.Collected(7); }
     }
 
     private void checkMatches()
@@ -88,7 +106,11 @@ public class MixAndMatch : Canvas
             {
                 pieces[_firstPiece].LateDestroy();
                 pieces[_secondPiece].LateDestroy();
-                //Timer timer = new Timer(1000, resetChoices);
+                if (_doOnce)
+                {
+                    _collection.Collected(pieces[_firstPiece].ID);
+                    _doOnce = false;
+                }
                 resetChoices();
             }
             else
@@ -105,11 +127,14 @@ public class MixAndMatch : Canvas
         if (timeDelta > time)
         {
             timeDelta = 0;
-            pieces[_firstPiece].clearSelection();
-            pieces[_secondPiece].clearSelection(); ;
+            for (int i = 0; i < pieces.Length; i++)
+            {
+                pieces[i].clearSelection();
+            }
 
             _firstPiece = -1;
             _secondPiece = -1;
+            _doOnce = true;
         }
     }
 }
