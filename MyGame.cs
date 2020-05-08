@@ -11,8 +11,11 @@ public class MyGame : Game
         //ScreenHandler screenHandler = new ScreenHandler();
         //AddChild(screenHandler);
 
-        Jigsaw jigsaw = new Jigsaw();
-        AddChild(jigsaw);
+        //Jigsaw jigsaw = new Jigsaw();
+        //AddChild(jigsaw);
+
+        MixAndMatch mix = new MixAndMatch(width, height);
+        AddChild(mix);
     }
 
     static void Main()

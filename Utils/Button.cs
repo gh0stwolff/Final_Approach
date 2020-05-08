@@ -35,7 +35,7 @@ public class Button : AnimSprite
         numberOfFrames = cols * rows;
     }
 
-    public void Update()
+    virtual public void Update()
     {
         hover();
         pressed();
@@ -79,7 +79,7 @@ public class Button : AnimSprite
         { StartAnimation = false; }
     }
 
-    protected void pressed()
+    virtual protected void pressed()
     {
         if (currentFrame == lastFrame)
         { Pressed = true; }

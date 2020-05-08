@@ -36,7 +36,7 @@ class ClickablePiece : Button
         _selection.SetXY(-_selectionStrokeWidth / 2, -_selectionStrokeWidth / 2);
     }
 
-    public new void Update()
+    override public void Update()
     {
         hover();
         selected();
@@ -96,6 +96,13 @@ class ClickablePiece : Button
         }
     }
 
+    public void SelfDestroy()
+    {
+        Console.WriteLine("selfDestroy");
+        _hover = false;
+        LateDestroy();
+    }
+
     public void clearSelection()
     {
         _active = false;
@@ -126,10 +133,20 @@ class ClickablePiece : Button
         }
     }
 
-    public void SelfDestroy()
+    override protected void pressed()
     {
-        _selection.LateDestroy();
-        LateDestroy();
+        if(_hover && Input.GetMouseButtonDown(0)) 
+        { Pressed = true; }
+        else if (Input.GetMouseButtonDown(1))
+        { Pressed = false; }
+        else
+        {
+            Pressed = false;
+        }
+
+        if (Pressed) Console.WriteLine("PRESSED:"+ID);
+        if (_hover) Console.WriteLine("HOVER:"+ID+ "/ "+ parent);
+        
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using GXPEngine;
+using GXPEngine.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ public class ItemMM : AnimSprite
     private Vec2 _target;
     private Vec2 _velocity;
 
+    private Vec2 _orgSize;
+
     public int ID
     { get { return _id;
         }
@@ -33,6 +36,10 @@ public class ItemMM : AnimSprite
         _velocity.Normalize();
         _velocity *= _speed;
         _id = ID;
+
+        _orgSize = new Vec2(width, height);
+        Console.WriteLine(_orgSize);
+
         SetFrame(ID + 1);
         updatePosition();
     }
@@ -43,6 +50,10 @@ public class ItemMM : AnimSprite
         _target = position;
         _id = ID;
         SetFrame(ID + 1);
+        _orgSize = new Vec2(width, height);
+        Console.WriteLine(_orgSize);
+
+
         scale -= _deltaScale;
     }
 
@@ -68,9 +79,15 @@ public class ItemMM : AnimSprite
                 _continue = true;
             }
 
-            if (Mathf.Abs(_position.x - Input.mouseX) <= width/2 &&
-                Mathf.Abs(_position.y - Input.mouseY) <= height/2)
+
+            Vector2 checkPoint = InverseTransformPoint(Input.mouseX, Input.mouseY);
+            Console.WriteLine(checkPoint);
+
+            if (checkPoint.x > 0 && checkPoint.x <= _orgSize.x &&
+                checkPoint.y > 0 && checkPoint.y <= _orgSize.y)
             {
+                Console.WriteLine("BP");
+
                 pressed = true;
             } else
             {
