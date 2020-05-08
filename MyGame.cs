@@ -1,8 +1,8 @@
 using System;
 using GXPEngine;
 using System.Drawing;
-using System.Collections.Generic;
-
+using System.Collections.Generic;
+
 public class MyGame : Game
 {
 
@@ -10,12 +10,13 @@ public class MyGame : Game
 	{
         //ScreenHandler screenHandler = new ScreenHandler();
         //AddChild(screenHandler);
-        MixAndMatch mix = new MixAndMatch(((MyGame)game).width, ((MyGame)game).height);
-        AddChild(mix);
-	}
 
-    static void Main()
-    {
-        new MyGame().Start();
+        Jigsaw jigsaw = new Jigsaw();
+        AddChild(jigsaw);
+    }
+
+    static void Main()
+    {
+        new MyGame().Start();
     }
 }

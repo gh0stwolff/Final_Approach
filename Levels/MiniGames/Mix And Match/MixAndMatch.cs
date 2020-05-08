@@ -56,6 +56,7 @@ public class MixAndMatch : Canvas
             {
                 ClickablePiece click = new ClickablePiece("memoryTiles.png", new Vec2(x, y), IDs[i]);
                 AddChild(click);
+
                 pieces[i] = click;
                 Console.WriteLine("i = {0}, ID = {1}", i, IDs[i]);
                 i++;

@@ -54,11 +54,6 @@ class ScreenHandler : GameObject
         }
     }
 
-    private void handleButtons()
-    {
-        
-    }
-
 
     private void handleMenuScene()
     {
@@ -69,18 +64,20 @@ class ScreenHandler : GameObject
 
             Vec2 myVec = new Vec2(512, 384);
 
-            _buttonPlay = new Button("testbutton.png", myVec);
+            _buttonPlay = new Button("playbuttonL.png", myVec, 8, 1);
             AddChild(_buttonPlay);
         }
 
         if (_buttonPlay.Pressed)
         {
-            setScene(Scene.COLLECTIONS);
-            if (_menu != null)
-            {
-                _menu.LateDestroy();
-                _buttonPlay.LateDestroy();
-                _menu = null;
+            { 
+                setScene(Scene.COLLECTIONS);
+                if (_menu != null)
+                {
+                    _menu.LateDestroy();
+                    _buttonPlay.LateDestroy();
+                    _menu = null;
+                }
             }
         }
     }
