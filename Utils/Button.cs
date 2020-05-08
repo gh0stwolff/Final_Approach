@@ -47,6 +47,7 @@ public class Button : AnimSprite
 
     protected void pressed()
     {
+        
         if (_hover && Input.GetMouseButtonDown(0))
         { Pressed = true; }
         else

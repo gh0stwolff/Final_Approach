@@ -12,7 +12,12 @@ class CollectedMM : Canvas
 
     private int _offset = 100;
 
+    private int _active = -1;
+
+    private AnimSprite _infoBoard;
+
     Vec2[] collectionPoints;
+    private List<ItemMM> items = new List<ItemMM>();
 
     public CollectedMM(Vec2 position, int width, int height, int Matches) : base(width, height)
     {
@@ -23,6 +28,7 @@ class CollectedMM : Canvas
         collectionPoints = new Vec2[Matches];
         setCollectionPoints();
         silhouette();
+        setupInfoBoard();
     }
 
     private void setCollectionPoints()
@@ -41,16 +47,41 @@ class CollectedMM : Canvas
             AddChild(item);
         }
     }
+    private void setupInfoBoard()
+    {
+        _infoBoard = new AnimSprite("memoryTiles.png", 9, 1);
+        AddChild(_infoBoard);
+        _infoBoard.SetXY(800, 200);
+        _infoBoard.alpha = 0.0f;
+    }
 
     public void Update()
     {
-
+        updateInfoBoard();
     }
 
     public void Collected(int ID)
     {
         ItemMM item = new ItemMM(_spawnPoint, collectionPoints[ID], ID);
         AddChild(item);
+        items.Add(item);
+    }
+
+    private void updateInfoBoard()
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].pressed && i != _active)
+            {
+                _active = i;
+                _infoBoard.SetFrame(items[i].ID + 1);
+
+                if(_infoBoard.alpha != 1.0f)
+                {
+                    _infoBoard.alpha = 1.0f;
+                }
+            }
+        }
     }
 
 }

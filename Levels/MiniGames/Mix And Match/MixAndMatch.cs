@@ -17,6 +17,7 @@ public class MixAndMatch : Canvas
 
     private int _firstPiece = -1;
     private int _secondPiece = -1;
+    private int _piecesSelected = 0;
 
     private float timeDelta = 0;
 
@@ -64,6 +65,8 @@ public class MixAndMatch : Canvas
 
     public void Update()
     {
+
+        handlePresses();
         checkMatches();
         debug();
     }
@@ -80,21 +83,40 @@ public class MixAndMatch : Canvas
         if (Input.GetKeyDown(Key.EIGHT)) { _collection.Collected(7); }
     }
 
+    private void handlePresses()
+    {
+        if (_piecesSelected < 2)
+        {
+            for (int i = 0; i < pieces.Length; i++)
+            {
+                pieces[i].CheckPressed();
+            }
+        }
+        if (_firstPiece >= 0) { pieces[_firstPiece].CheckPressed(); }
+        if (_secondPiece >= 0) { pieces[_secondPiece].CheckPressed(); }
+        
+    }
+
     private void checkMatches()
     {
         for(int i = 0; i < pieces.Length; i++)
         {
-            if (pieces[i].Pressed)
+            if (pieces[i] != null)
             {
-                if (_firstPiece == -1)
+                if (pieces[i].Pressed)
                 {
-                    _firstPiece = i;
-                    Console.WriteLine("ID = {0}", pieces[_firstPiece].ID);
-                }
-                else if (_secondPiece == -1)
-                {
-                    _secondPiece = i;
-                    Console.WriteLine("ID = {0}", pieces[_secondPiece].ID);
+                    if (_firstPiece == -1)
+                    {
+                        _firstPiece = i;
+                        _piecesSelected++;
+                        Console.WriteLine("index = {1}, ID = {0}", pieces[_firstPiece].ID, i);
+                    }
+                    else if (_secondPiece == -1)
+                    {
+                        _secondPiece = i;
+                        _piecesSelected++;
+                        Console.WriteLine("index = {1}, ID = {0}", pieces[_secondPiece].ID, i);
+                    }
                 }
             }
         }
@@ -103,8 +125,10 @@ public class MixAndMatch : Canvas
         {
             if (pieces[_firstPiece].ID == pieces[_secondPiece].ID)
             {
-                pieces[_firstPiece].LateDestroy();
-                pieces[_secondPiece].LateDestroy();
+                pieces[_firstPiece].Pressed = false;
+                pieces[_secondPiece].Pressed = false;
+                pieces[_firstPiece].SelfDestroy();
+                pieces[_secondPiece].SelfDestroy();
                 if (_doOnce)
                 {
                     _collection.Collected(pieces[_firstPiece].ID);
@@ -128,11 +152,18 @@ public class MixAndMatch : Canvas
             timeDelta = 0;
             for (int i = 0; i < pieces.Length; i++)
             {
-                pieces[i].clearSelection();
+                //if (pieces[i] != null)
+                //{
+                    Console.WriteLine("index = {0} Cleared!", i);
+                    pieces[i].clearSelection();
+                //}
             }
 
+            //pieces[_firstPiece] = null;
+            //pieces[_secondPiece] = null;
             _firstPiece = -1;
             _secondPiece = -1;
+            _piecesSelected = 0;
             _doOnce = true;
         }
     }

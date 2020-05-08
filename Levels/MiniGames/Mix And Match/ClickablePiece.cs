@@ -39,13 +39,17 @@ class ClickablePiece : Button
     public new void Update()
     {
         hover();
-        pressed();
         selected();
         updateColor();
         if (Input.GetKeyDown(Key.D))
         {
             clearSelection();
         }
+    }
+
+    public void CheckPressed()
+    {
+        pressed();
     }
 
     private void updateColor()
@@ -120,6 +124,12 @@ class ClickablePiece : Button
             _selection.scale = 1.0f;
             _selection.SetXY(-_selectionStrokeWidth / 2, -_selectionStrokeWidth / 2);
         }
+    }
+
+    public void SelfDestroy()
+    {
+        _selection.LateDestroy();
+        LateDestroy();
     }
 
 }
