@@ -85,15 +85,15 @@ public class MixAndMatch : Canvas
 
     private void handlePresses()
     {
-        //if (_piecesSelected < 2)
-        //{
+        if (_piecesSelected < 2)
+        {
         for (int i = 0; i < pieces.Count; i++)
         {
             pieces[i].CheckPressed();
         }
-        //}
-        //if (_firstPiece >= 0) { pieces[_firstPiece].CheckPressed(); }
-        //if (_secondPiece >= 0) { pieces[_secondPiece].CheckPressed(); }
+        }
+        if (_firstPiece >= 0) { pieces[_firstPiece].CheckPressed(); }
+        if (_secondPiece >= 0) { pieces[_secondPiece].CheckPressed(); }
 
     }
 

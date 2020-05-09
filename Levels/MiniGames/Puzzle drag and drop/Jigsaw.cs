@@ -11,6 +11,7 @@ public class Jigsaw : GameObject
     private int _startPointX = 654;
     private int _startPointY = 315;
 
+
     Vec2[] points = new Vec2[_amountOfPieces];
     Pieces[] piece = new Pieces[_amountOfPieces];
 
@@ -27,6 +28,7 @@ public class Jigsaw : GameObject
     {
         checkClickingPoints();
         checkPuzzleSucceeded();
+        noOverlapPieces();
     }
 
     private void createPiece()
@@ -45,6 +47,38 @@ public class Jigsaw : GameObject
         }
     }
 
+    private void noOverlapPieces()
+    {
+        if (piece[0]._isSelected && (piece[0]._position == piece[1]._position
+            || piece[0]._position == piece[2]._position || piece[0]._position == piece[3]._position))
+        {
+            piece[0]._position.x = 150;
+            piece[0]._position.y = 150;
+            Console.WriteLine("overlappingPIECE1");
+        }
+        if (piece[1]._isSelected && (piece[1]._position == piece[2]._position
+            || piece[1]._position == piece[3]._position || piece[1]._position == piece[0]._position))
+        {
+            piece[1]._position.x = 150;
+            piece[1]._position.y = 550;
+            Console.WriteLine("overlappingPIECE2");
+        }
+        if (piece[2]._isSelected && (piece[2]._position == piece[0]._position
+            || piece[2]._position == piece[1]._position || piece[2]._position == piece[3]._position))
+        {
+            piece[2]._position.x = 350;
+            piece[2]._position.y = 150;
+            Console.WriteLine("overlappingPIECE3");
+        }
+        if (piece[3]._isSelected && (piece[3]._position == piece[0]._position
+            || piece[3]._position == piece[1]._position || piece[3]._position == piece[2]._position))
+        {
+            piece[3]._position.x = 350;
+            piece[3]._position.y = 550;
+            Console.WriteLine("overlappingPIECE4");
+        }
+    }
+
     private void checkPuzzleSucceeded()
     {
         if (points[0] == piece[0]._position && points[2] == piece[1]._position
@@ -55,22 +89,22 @@ public class Jigsaw : GameObject
 
         if (points[0] == piece[0]._position)
         {
-            //Console.WriteLine("YEAHS1");
+            piece[0].PieceInRightPlace = true;            
         }
         if (points[2] == piece[1]._position)
         {
-            //Console.WriteLine("YEAHS1");
+            piece[1].PieceInRightPlace = true;
         }
         if (points[1] == piece[2]._position)
         {
-            //Console.WriteLine("YEAHS1");
+            piece[2].PieceInRightPlace = true;
         }
         if (points[3] == piece[3]._position)
         {
-            //Console.WriteLine("YEAHS1");
+            piece[3].PieceInRightPlace = true;
         }
-
     }
+
 
     private void checkClickingPoints()
     {
@@ -84,25 +118,31 @@ public class Jigsaw : GameObject
                if(piece[0]._isSelected)
                 {
                     piece[0]._position = points[i];
+                    piece[0].updatePos();
                     Console.WriteLine(points[i]);
                 } 
                 else if(piece[1]._isSelected)
                 {
                     piece[1]._position = points[i];
+                    piece[1].updatePos();
                 } 
                 else if (piece[2]._isSelected)
                 {
                     piece[2]._position = points[i];
+                    piece[2].updatePos();
                 } 
                 else if (piece[3]._isSelected)
                 {
                     piece[3]._position = points[i];
+                    piece[3].updatePos();
                 }
             }
         }
+
+        
     }
 
-    private void createPoints(int columns, int rows)
+        private void createPoints(int columns, int rows)
     {
         int i = 0;
         int pieceWidth = piece[i].width;

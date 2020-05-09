@@ -12,6 +12,8 @@ public class Pieces : AnimSprite
 
     private bool _isMouseOnPiece;
 
+    public bool PieceInRightPlace = false;
+
     public Pieces(string fileName, Vec2 position, int puzzleID) : base(fileName, 2, 2)
     {
         _position = position;
@@ -31,10 +33,14 @@ public class Pieces : AnimSprite
         updatePos();
     }
 
-    private void updatePos()
+    public void updatePos()
     {
-        x = _position.x;
-        y = _position.y;
+        if (PieceInRightPlace == false)
+        {
+            x = _position.x;
+            y = _position.y;
+
+        }
     }
 
     private void mouseOnPiece()
@@ -52,7 +58,7 @@ public class Pieces : AnimSprite
     private void selectPiece()
     {
 
-        if (_isSelected == false && _isMouseOnPiece && Input.GetMouseButtonDown(0))
+        if (_isSelected == false && _isMouseOnPiece && Input.GetMouseButtonDown(0) && PieceInRightPlace == false)
         {
             _isSelected = true;
             scale = 1.2f;
