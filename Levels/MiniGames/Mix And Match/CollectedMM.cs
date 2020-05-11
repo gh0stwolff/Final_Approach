@@ -16,7 +16,7 @@ class CollectedMM : Canvas
 
     private AnimSprite _infoBoard;
 
-    Vec2[] collectionPoints;
+    private Vec2[] collectionPoints;
     private List<ItemMM> items = new List<ItemMM>();
 
     public CollectedMM(Vec2 position, int width, int height, int Matches) : base(width, height)
@@ -35,7 +35,7 @@ class CollectedMM : Canvas
     {
         for (int i = 0; i < collectionPoints.Length; i++)
         {
-            collectionPoints[i] = new Vec2((height / collectionPoints.Length * i) + _offset, pointsY);
+            collectionPoints[i] = new Vec2((width / collectionPoints.Length * i) + _offset, pointsY);
         }
     }
 

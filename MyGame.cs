@@ -14,8 +14,11 @@ public class MyGame : Game
         Jigsaw jigsaw = new Jigsaw();
         AddChild(jigsaw);
 
-        //MixAndMatch mix = new MixAndMatch(width, height);
-        //AddChild(mix);
+        MixAndMatch mix = new MixAndMatch(width, height);
+        AddChild(mix);
+
+        //BoneSlide slide = new BoneSlide(width, height);
+        //AddChild(slide);
     }
 
     static void Main()

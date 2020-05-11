@@ -144,8 +144,8 @@ class ClickablePiece : Button
             Pressed = false;
         }
 
-        if (Pressed) Console.WriteLine("PRESSED:"+ID);
-        if (_hover) Console.WriteLine("HOVER:"+ID+ "/ "+ parent);
+        //if (Pressed) Console.WriteLine("PRESSED:"+ID);
+        //if (_hover) Console.WriteLine("HOVER:"+ID+ "/ "+ parent);
         
     }
 

@@ -76,6 +76,8 @@
     <Compile Include="Levels\Easy\Level1Easy.cs" />
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\LevelHUD.cs" />
+    <Compile Include="Levels\MiniGames\Bone Slide\BlockBS.cs" />
+    <Compile Include="Levels\MiniGames\Bone Slide\BoneSlide.cs" />
     <Compile Include="Levels\MiniGames\Mix And Match\ClickablePiece.cs" />
     <Compile Include="Levels\MiniGames\Mix And Match\CollectedMM.cs" />
     <Compile Include="Levels\MiniGames\Mix And Match\ItemMM.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Menu\ScreenHandler.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="Utils\Button.cs" />
+    <Compile Include="Utils\CollisionInfo.cs" />
     <Compile Include="Utils\Randomizer.cs" />
     <Compile Include="Utils\Timer.cs" />
     <Compile Include="Utils\Vec2.cs" />

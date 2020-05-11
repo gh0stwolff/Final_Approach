@@ -21,7 +21,7 @@ public class MixAndMatch : Canvas
 
     private float timeDelta = 0;
 
-    private bool _doOnce = true;
+    private bool _reset = false;
 
     List<ClickablePiece> pieces = new List<ClickablePiece>();
     int[] IDs = new int[_amountOfPieces];
@@ -56,7 +56,6 @@ public class MixAndMatch : Canvas
             {
                 ClickablePiece click = new ClickablePiece("memoryTiles.png", new Vec2(x, y), IDs[i]);
                 AddChild(click);
-
                 pieces.Add(click);
                 Console.WriteLine("i = {0}, ID = {1}", i, IDs[i]);
                 i++;
@@ -69,6 +68,7 @@ public class MixAndMatch : Canvas
         handlePresses();
         checkMatches();
         debug();
+        resetChoices();
     }
 
     private void debug()
@@ -87,10 +87,10 @@ public class MixAndMatch : Canvas
     {
         if (_piecesSelected < 2)
         {
-        for (int i = 0; i < pieces.Count; i++)
-        {
-            pieces[i].CheckPressed();
-        }
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                pieces[i].CheckPressed();
+            }
         }
         if (_firstPiece >= 0) { pieces[_firstPiece].CheckPressed(); }
         if (_secondPiece >= 0) { pieces[_secondPiece].CheckPressed(); }
@@ -99,48 +99,35 @@ public class MixAndMatch : Canvas
 
     private void checkMatches()
     { 
-      //  Console.WriteLine("loop");
         for(int i = 0; i < pieces.Count; i++)
         {
-            //if (pieces[i] != null)
-            //{
-                if (pieces[i].Pressed)
+            if (pieces[i].Pressed)
+            {
+                if (_firstPiece == -1)
                 {
-                    if (_firstPiece == -1)
-                    {
-                        _firstPiece = i;
-                        _piecesSelected++;
-                        Console.WriteLine("A index = {1}, ID = {0}", pieces[_firstPiece].ID, i);
-                    }
-                    else if (_secondPiece == -1)
-                    {
-                        _secondPiece = i;
-                        _piecesSelected++;
-                        Console.WriteLine("B index = {1}, ID = {0}", pieces[_secondPiece].ID, i);
-                    }
-
-                    Console.WriteLine("Pressed"+i);
+                    _firstPiece = i;
+                    _piecesSelected++;
+                    Console.WriteLine("A index = {1}, ID = {0}", pieces[_firstPiece].ID, i);
                 }
-            //}
+                else if (_secondPiece == -1)
+                {
+                    _secondPiece = i;
+                    _piecesSelected++;
+                    Console.WriteLine("B index = {1}, ID = {0}", pieces[_secondPiece].ID, i);
+                }
+
+                //Console.WriteLine("Pressed"+i);
+            }
         }
 
         if (_firstPiece != -1 && _secondPiece != -1)
         {
             if (pieces[_firstPiece].ID == pieces[_secondPiece].ID)
             {
-                //pieces[_firstPiece].Pressed = false;
-                //pieces[_secondPiece].Pressed = false;
-                //Console.WriteLine("made false");
                 ClickablePiece firstPiece = pieces[_firstPiece];
                 ClickablePiece secondPiece = pieces[_secondPiece];
 
-                //pieces[_firstPiece].SelfDestroy();
-                //pieces[_secondPiece].SelfDestroy();
-                if (_doOnce)
-                {
-                    _collection.Collected(firstPiece.ID);
-                    _doOnce = false;
-                }
+                _collection.Collected(firstPiece.ID);
 
                 _firstPiece = -1;
                 _secondPiece = -1;
@@ -148,35 +135,36 @@ public class MixAndMatch : Canvas
                 pieces.Remove(secondPiece);
                 firstPiece.SelfDestroy();
                 secondPiece.SelfDestroy();
-                
-                resetChoices();
+
+                _reset = true;
             }
             else
             {
-                resetChoices();
+                _reset = true;
             }
         }
     }
 
     private void resetChoices()
     {
-        int time = 1000;
-        timeDelta += Time.deltaTime;
-        if (timeDelta > time)
+        if (_reset)
         {
-            timeDelta = 0;
-            for (int i = 0; i < pieces.Count; i++)
+            int time = 1000;
+            timeDelta += Time.deltaTime;
+            if (timeDelta > time)
             {
-                //Console.WriteLine("index = {0} Cleared!", i);
-                pieces[i].clearSelection();
-            }
+                timeDelta = 0;
+                for (int i = 0; i < pieces.Count; i++)
+                {
+                    //Console.WriteLine("index = {0} Cleared!", i);
+                    pieces[i].clearSelection();
+                }
 
-            //pieces[_firstPiece] = null;
-            //pieces[_secondPiece] = null;
-            _firstPiece = -1;
-            _secondPiece = -1;
-            _piecesSelected = 0;
-            _doOnce = true;
+                _firstPiece = -1;
+                _secondPiece = -1;
+                _piecesSelected = 0;
+                _reset = false;
+            }
         }
     }
 }

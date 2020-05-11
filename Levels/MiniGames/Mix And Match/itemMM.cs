@@ -27,21 +27,14 @@ public class ItemMM : AnimSprite
         }
     }
 
-    public ItemMM(Vec2 position, Vec2 target, int ID) : base("memoryTiles.png", 9, 1) 
+    public ItemMM(Vec2 position, Vec2 target, int ID) : this(position, ID)
     {
-        _position = position;
         _target = target;
         _velocity = _target - _position;
         _dist = _velocity.Length();
         _velocity.Normalize();
         _velocity *= _speed;
-        _id = ID;
-
-        _orgSize = new Vec2(width, height);
-        Console.WriteLine(_orgSize);
-
-        SetFrame(ID + 1);
-        updatePosition();
+        scale = 1.0f;
     }
 
     public ItemMM(Vec2 position, int ID) : base("memoryTiles.png", 9, 1)
@@ -50,9 +43,8 @@ public class ItemMM : AnimSprite
         _target = position;
         _id = ID;
         SetFrame(ID + 1);
+        updatePosition();
         _orgSize = new Vec2(width, height);
-        Console.WriteLine(_orgSize);
-
 
         scale -= _deltaScale;
     }
@@ -81,13 +73,11 @@ public class ItemMM : AnimSprite
 
 
             Vector2 checkPoint = InverseTransformPoint(Input.mouseX, Input.mouseY);
-            Console.WriteLine(checkPoint);
+            //Console.WriteLine(checkPoint);
 
             if (checkPoint.x > 0 && checkPoint.x <= _orgSize.x &&
                 checkPoint.y > 0 && checkPoint.y <= _orgSize.y)
             {
-                Console.WriteLine("BP");
-
                 pressed = true;
             } else
             {

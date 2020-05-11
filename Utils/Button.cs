@@ -72,7 +72,6 @@ public class Button : AnimSprite
 
     protected void startAnimation()
     {
-        Console.WriteLine(StartAnimation);
         if (_hover && Input.GetMouseButtonDown(0))
         { StartAnimation = true; }
         else if (currentFrame == lastFrame)
