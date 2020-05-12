@@ -86,6 +86,8 @@
     <Compile Include="Levels\MiniGames\Puzzle drag and drop\Information.cs" />
     <Compile Include="Levels\MiniGames\Puzzle drag and drop\Jigsaw.cs" />
     <Compile Include="Levels\MiniGames\Puzzle drag and drop\Pieces.cs" />
+    <Compile Include="Levels\MiniGames\Quizzes\Answers.cs" />
+    <Compile Include="Levels\MiniGames\Quizzes\Quiz.cs" />
     <Compile Include="Menu\Collections\Collections.cs" />
     <Compile Include="Menu\Menu Screens\Menu.cs" />
     <Compile Include="Menu\ScreenHandler.cs" />

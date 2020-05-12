@@ -58,7 +58,9 @@ public class Button : AnimSprite
         }
     }
 
-    private void animation()
+    //plaats pressed niet in update, laat het updaten door moederklas // show alles
+
+    protected void animation()
     {
         if(StartAnimation)
         { 

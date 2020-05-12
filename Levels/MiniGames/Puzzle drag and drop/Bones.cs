@@ -30,10 +30,6 @@ public class Bones : AnimSprite
         _velocity *= _speed;
 
         SetOrigin(width / 2, height / 2);
-
-        Console.WriteLine(_position);
-        Console.WriteLine(_target);
-        Console.WriteLine(_velocity);
     }
 
     public void Update()

@@ -17,16 +17,20 @@ public class Jigsaw : GameObject
     static private int _amountTargets = 3;
 
     private bool _isFinished;
-
-    private bool _isBoneColl;
+    private bool _doOnce = true;
+    private bool _showBetweenText = false;
 
     private Sprite _background;
-    
+
+    private Sprite _jigsawDoneText;
+
     Vec2[] points = new Vec2[_amountOfPieces];
     Vec2[] targetPoints = new Vec2[_amountTargets];
     Pieces[] piece = new Pieces[_amountOfPieces];
 
     Bones _bone1, _bone2, _bone3;
+
+    Button _buttonJigsawDone;
 
     Information _info;
 
@@ -42,7 +46,7 @@ public class Jigsaw : GameObject
         createPoints(_amountPiecesX, _amountPiecesY);
         createTargetPoints();
         createBones();
-
+        
     }
 
     public void Update()
@@ -51,6 +55,17 @@ public class Jigsaw : GameObject
         checkPuzzleSucceeded();
         noOverlapPieces();
         showCorrectInfo();
+
+
+
+        if (_doOnce && _isFinished == true && Input.GetMouseButtonDown(0) && _showBetweenText == true && _buttonJigsawDone._hover)
+        {
+            _buttonJigsawDone.LateDestroy();
+            Console.WriteLine("DOEDOE");
+            createQuiz();
+            _doOnce = false;            
+        }          
+            
     }
 
     private void createBackground()
@@ -67,7 +82,7 @@ public class Jigsaw : GameObject
         
         for (int i = 0; i < piece.Length; i++)
         {
-            Pieces _piece = new Pieces("testpuzzle.png", new Vec2((_offset + _distance * i), 650), i, _amountPiecesX, _amountPiecesY);
+            Pieces _piece = new Pieces("puzzleeasy.png", new Vec2((_offset + _distance * i), 650), i, _amountPiecesX, _amountPiecesY);
             AddChild(_piece);
             piece[i] = _piece;
         }        
@@ -75,10 +90,8 @@ public class Jigsaw : GameObject
 
     private void createInfo()
     {
-
         _info = new Information("testinfojigsaw.png", new Vec2(675, 35), 3, 1);
         AddChild(_info);
-
     }
 
     private void createBones()
@@ -123,10 +136,20 @@ public class Jigsaw : GameObject
             {
                 targetPoints[i] = new Vec2(x, 457);
                 i++;
-            }
-        
+            }   
     }
 
+    private void createQuiz()
+    {
+            Quiz quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25));
+            AddChild(quiz);
+    }
+
+    private void quizDoneText()
+    {
+        _buttonJigsawDone = new Button("jigsawdone.png", new Vec2(500,350), 1,1);
+        AddChild(_buttonJigsawDone);
+    }
 
     private void noOverlapPieces()
     {
@@ -157,6 +180,7 @@ public class Jigsaw : GameObject
             if (points[i] == piece[i]._position)
             {
                 piece[i].PieceInRightPlace = true;
+                
             }
         }
 
@@ -165,13 +189,18 @@ public class Jigsaw : GameObject
             if (points[j] == piece[j]._position)
             {
                 _isFinished = true;
-                
             }
             else
             {
                 _isFinished = false;
                 return;
             }
+        }
+
+        if (_isFinished == true && _showBetweenText == false)
+        {
+            quizDoneText();
+            _showBetweenText = true;
         }
     }
 
@@ -235,15 +264,16 @@ public class Jigsaw : GameObject
 
     private void showCorrectInfo()
     {
-        if (_bone1._isPressed)
+        //alleen als zze op de juiste plek staan
+        if (_bone1._isPressed && _bone1._position == targetPoints[0])
         {
             _info._whichInfo = 0;
         }
-        if (_bone2._isPressed)
+        if (_bone2._isPressed && _bone2._position == targetPoints[1])
         {
             _info._whichInfo = 1;
         }
-        if (_bone3._isPressed)
+        if (_bone3._isPressed && _bone3._position == targetPoints[2])
         {
             _info._whichInfo = 2;
         }
