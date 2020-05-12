@@ -73,6 +73,7 @@
     <Compile Include="GXPEngine\Utils\MouseHandler.cs" />
     <Compile Include="GXPEngine\Utils\Time.cs" />
     <Compile Include="GXPEngine\Utils\Utils.cs" />
+    <Compile Include="Levels\MiniGames\Puzzle drag and drop\Bones.cs" />
     <Compile Include="Levels\Easy\Level1Easy.cs" />
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\LevelHUD.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Levels\MiniGames\Mix And Match\CollectedMM.cs" />
     <Compile Include="Levels\MiniGames\Mix And Match\ItemMM.cs" />
     <Compile Include="Levels\MiniGames\Mix And Match\MixAndMatch.cs" />
+    <Compile Include="Levels\MiniGames\Puzzle drag and drop\Information.cs" />
     <Compile Include="Levels\MiniGames\Puzzle drag and drop\Jigsaw.cs" />
     <Compile Include="Levels\MiniGames\Puzzle drag and drop\Pieces.cs" />
     <Compile Include="Menu\Collections\Collections.cs" />

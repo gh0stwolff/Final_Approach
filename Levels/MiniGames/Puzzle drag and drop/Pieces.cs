@@ -8,19 +8,26 @@ public class Pieces : AnimSprite
 {
     public Vec2 _position;
 
+    public Vec2 _originalPosition;
+
     public bool _isSelected;
 
     private bool _isMouseOnPiece;
 
+
     public bool PieceInRightPlace = false;
 
-    public Pieces(string fileName, Vec2 position, int puzzleID) : base(fileName, 2, 2)
+    public Pieces(string fileName, Vec2 position, int puzzleID, int cols, int rows) : base(fileName, cols, rows)
     {
         _position = position;
 
+        _originalPosition = _position;
+        
         SetFrame(puzzleID);
 
         SetOrigin(width / 2, height / 2);
+
+        scale = 0.6f;
 
         x = position.x;
         y = position.y;
@@ -43,6 +50,11 @@ public class Pieces : AnimSprite
         }
     }
 
+    public void SetOriginalPosition()
+    {
+        _position = _originalPosition;
+    }
+
     private void mouseOnPiece()
     {
         if (Mathf.Abs(x - Input.mouseX) <= width / 2 &&
@@ -58,16 +70,32 @@ public class Pieces : AnimSprite
     private void selectPiece()
     {
 
-        if (_isSelected == false && _isMouseOnPiece && Input.GetMouseButtonDown(0) && PieceInRightPlace == false)
+        if (scale >= 1)
+        { 
+            if (_isSelected == false && _isMouseOnPiece && Input.GetMouseButtonDown(0) && PieceInRightPlace == false)
+            {
+            
+                _isSelected = true;
+                scale = 1.2f;
+            } 
+            else if (Input.GetMouseButtonDown(0))
+            {
+                _isSelected = false;
+                scale = 1f;
+            }
+        } else
         {
-            _isSelected = true;
-            scale = 1.2f;
-        } 
-        else if (Input.GetMouseButtonDown(0))
-        {
-            _isSelected = false;
-            scale = 1f;
+            if (_isSelected == false && _isMouseOnPiece && Input.GetMouseButtonDown(0) && PieceInRightPlace == false)
+            {
+
+                _isSelected = true;
+                scale = 0.7f;
+            }
+            else if (Input.GetMouseButtonDown(0))
+            {
+                _isSelected = false;
+                scale = 0.6f;
+            }
         }
-        
     }
 }
