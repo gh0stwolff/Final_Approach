@@ -13,7 +13,7 @@ public class MixAndMatch : Canvas
 
     private int _startXGrid = 100;
     private int _startYGrid = 100;
-    private int _distanceBetweenPieces = 20;
+    private int _distanceBetweenPieces = 5;
 
     private int _firstPiece = -1;
     private int _secondPiece = -1;

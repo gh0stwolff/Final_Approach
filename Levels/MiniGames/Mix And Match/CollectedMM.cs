@@ -35,7 +35,7 @@ class CollectedMM : Canvas
     {
         for (int i = 0; i < collectionPoints.Length; i++)
         {
-            collectionPoints[i] = new Vec2((width / collectionPoints.Length * i) + _offset, pointsY);
+            collectionPoints[i] = new Vec2(((width - _offset) / collectionPoints.Length * i) + _offset, pointsY);
         }
     }
 

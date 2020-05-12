@@ -8,21 +8,22 @@ class BoneSlide : Canvas
 {
     private int _amountOfBlocks = 5;
 
+    private Sprite _background;
+
     private List<BlockBS> blocks = new List<BlockBS>();
     private List<Vec2> positions = new List<Vec2>();
 
     public BoneSlide(int width, int height) : base(width, height)
     {
-        //BlockBS block = new BlockBS("colors.png", new Vec2(200, 200), true);
-        //AddChild(block);
-        //BlockBS block2 = new BlockBS("checkers.png", new Vec2(400, 400), false);
-        //AddChild(block2);
+        _background = new Sprite("backgroundBS.png");
+        AddChild(_background);
+        _background.SetXY(100, 100);
         setupList();
     }
 
     private void setupList()
     {
-        positions.Add(new Vec2(100, 100));
+        positions.Add(new Vec2(200, 200));
         positions.Add(new Vec2(300, 300));
         positions.Add(new Vec2(600, 200));
 
@@ -32,7 +33,7 @@ class BoneSlide : Canvas
             AddChild(block);
             blocks.Add(block);
         }
-        BlockBS goal = new BlockBS("colors.png", new Vec2(200, 200), true);
+        BlockBS goal = new BlockBS("colors.png", new Vec2(400, 300), true);
         AddChild(goal);
         blocks.Add(goal);
     }
@@ -46,20 +47,52 @@ class BoneSlide : Canvas
     {
         for (int i = 0; i < blocks.Count; i++)
         {
-            for (int j = 0; j < blocks.Count; j++)
+            if (blocks[i].Holding)
             {
-                BlockBS thisBlock = blocks[i];
-                BlockBS otherBlock = blocks[j];
-
-                if (thisBlock != otherBlock)
+                for (int j = 0; j < blocks.Count; j++)
                 {
-                    if (Mathf.Abs(otherBlock.Position.x - thisBlock.Position.x) <= thisBlock.radiusX + otherBlock.radiusX &&
-                        Mathf.Abs(otherBlock.Position.y - thisBlock.Position.y) <= thisBlock.radiusY + otherBlock.radiusY)
+                    BlockBS thisBlock = blocks[i];
+                    BlockBS otherBlock = blocks[j];
+
+                    if (thisBlock != otherBlock)
                     {
-                        handleCollisions(thisBlock, otherBlock);
+                        if (Mathf.Abs(otherBlock.Position.x - thisBlock.Position.x) <= thisBlock.radiusX + otherBlock.radiusX &&
+                            Mathf.Abs(otherBlock.Position.y - thisBlock.Position.y) <= thisBlock.radiusY + otherBlock.radiusY)
+                        {
+                            handleCollisions(thisBlock, otherBlock);
+                        }
                     }
                 }
+                handleBoundaryCollisions(blocks[i]);
             }
+        }
+    }
+
+    private void handleBoundaryCollisions(BlockBS block)
+    {
+        if(block.Position.x - block.radiusX < _background.x)
+        {
+            Vec2 barrier = new Vec2(_background.x + block.radiusX, 0);
+            Vec2 newPos = Vec2.PointOfImpact(block._position, block.Velocity, barrier);
+            block._position.x = newPos.x;
+        }
+        else if (block.Position.x + block.radiusX > _background.x + _background.width)
+        {
+            Vec2 barrier = new Vec2(_background.x + _background.width - block.radiusX, 0);
+            Vec2 newPos = Vec2.PointOfImpact(block._position, block.Velocity, barrier);
+            block._position.x = newPos.x;
+        }
+        else if (block.Position.y - block.radiusY < _background.y)
+        {
+            Vec2 barrier = new Vec2(0, _background.y + block.radiusY);
+            Vec2 newPos = Vec2.PointOfImpact(block._position, block.Velocity, barrier);
+            block._position.y = newPos.y;
+        }
+        else if (block.Position.y + block.radiusY > _background.y + _background.height)
+        {
+            Vec2 barrier = new Vec2(0, _background.y + _background.height - block.radiusY);
+            Vec2 newPos = Vec2.PointOfImpact(block._position, block.Velocity, barrier);
+            block._position.y = newPos.y;
         }
     }
 
@@ -69,17 +102,15 @@ class BoneSlide : Canvas
 
         CollisionInfo info = timeOfImpact(thisBlock._oldPosition, thisBlock.radiusX, thisBlock.radiusY, thisBlock.Velocity, otherBlock.Position, otherBlock.radiusX, otherBlock.radiusY);
 
-        //thisBlock._position = thisBlock.Position + thisBlock.Velocity * info.timeOfImpact;
-
         Vec2 point;
 
-        if(info.horizontal)
+        if(!thisBlock.CanMoveHorizontal)
         {
             float delta1Y = (otherBlock.Position.y + otherBlock.radiusY + thisBlock.radiusY) - thisBlock.Position.y;
             float delta2Y = (otherBlock.Position.y - otherBlock.radiusY - thisBlock.radiusY) - thisBlock.Position.y;
 
-            if (Mathf.Abs(delta1Y) < Mathf.Abs(delta2Y)) { point = new Vec2(0, otherBlock.Position.y + otherBlock.radiusY + thisBlock.radiusY); }
-            else { point = new Vec2(0, otherBlock.Position.y - otherBlock.radiusY - thisBlock.radiusY); }
+            if (Mathf.Abs(delta1Y) < Mathf.Abs(delta2Y)) { point = new Vec2(0, otherBlock.Position.y + otherBlock.radiusY + thisBlock.radiusY + 1); }
+            else { point = new Vec2(0, otherBlock.Position.y - otherBlock.radiusY - thisBlock.radiusY - 1); }
 
             Vec2 newPos = Vec2.PointOfImpact(thisBlock._oldPosition, thisBlock.Velocity, point);
             thisBlock._position.y = newPos.y;
@@ -89,8 +120,8 @@ class BoneSlide : Canvas
             float delta1X = (otherBlock.Position.x + otherBlock.radiusX + thisBlock.radiusX) - thisBlock.Position.x;
             float delta2X = (otherBlock.Position.x - otherBlock.radiusX - thisBlock.radiusX) - thisBlock.Position.x;
 
-            if(Mathf.Abs(delta1X) < Mathf.Abs(delta2X)) { point = new Vec2(otherBlock.Position.x + otherBlock.radiusX + thisBlock.radiusX, 0); }
-            else { point = new Vec2(otherBlock.Position.x - otherBlock.radiusX - thisBlock.radiusX, 0); }
+            if(Mathf.Abs(delta1X) < Mathf.Abs(delta2X)) { point = new Vec2(otherBlock.Position.x + otherBlock.radiusX + thisBlock.radiusX + 1, 0); }
+            else { point = new Vec2(otherBlock.Position.x - otherBlock.radiusX - thisBlock.radiusX - 1, 0); }
 
             Vec2 newPos = Vec2.PointOfImpact(thisBlock._oldPosition, thisBlock.Velocity, point);
             thisBlock._position.x = newPos.x;

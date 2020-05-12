@@ -42,6 +42,7 @@ public class ItemMM : AnimSprite
         _position = position;
         _target = position;
         _id = ID;
+        SetOrigin(width / 2, 0);
         SetFrame(ID + 1);
         updatePosition();
         _orgSize = new Vec2(width, height);
@@ -73,9 +74,8 @@ public class ItemMM : AnimSprite
 
 
             Vector2 checkPoint = InverseTransformPoint(Input.mouseX, Input.mouseY);
-            //Console.WriteLine(checkPoint);
 
-            if (checkPoint.x > 0 && checkPoint.x <= _orgSize.x &&
+            if (checkPoint.x > -_orgSize.x/2 && checkPoint.x <= _orgSize.x/2 &&
                 checkPoint.y > 0 && checkPoint.y <= _orgSize.y)
             {
                 pressed = true;

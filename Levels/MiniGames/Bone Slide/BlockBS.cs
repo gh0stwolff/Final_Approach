@@ -9,7 +9,7 @@ class BlockBS : Sprite
     public int radiusX;
     public int radiusY;
 
-    private bool _holding = false;
+    private bool _holding;
     private bool _doOnce = true;
     private bool _movingHorizontal;
 
@@ -28,7 +28,15 @@ class BlockBS : Sprite
         get { return _position; }
     }
 
-    
+    public bool Holding
+    {
+        get { return _holding; }
+    }
+
+    public bool CanMoveHorizontal
+    {
+        get { return _movingHorizontal; }
+    }
 
     public BlockBS(string filename, Vec2 position, bool movingHorizontal) : base(filename)
     {
@@ -76,10 +84,9 @@ class BlockBS : Sprite
 
     private void movement()
     {
-        _oldPosition = _position;
-
         if (_holding)
         {
+            _oldPosition = _position;
             Vec2 MousePos = new Vec2(Input.mouseX, Input.mouseY);
             if (_movingHorizontal)
             {
@@ -95,7 +102,7 @@ class BlockBS : Sprite
             }
             Console.WriteLine(Position);
         }
-        _velocity = _position - _oldPosition;
+        //_velocity = _position - _oldPosition;
     }
 
 }
