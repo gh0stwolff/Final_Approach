@@ -69,7 +69,7 @@ class Menu : Sprite
 
     protected void animation()
     {
-            float _frameIntervalAF = 80f;
+            float _frameIntervalAF = 70f;
 
             _animationTimer += Time.deltaTime;
             int currentFrame = (int)(_animationTimer / _frameIntervalAF) % numberOfFrames + startFrame;

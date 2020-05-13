@@ -9,44 +9,41 @@ class BoneSlide : Canvas
     private int _amountOfBlocks = 5;
 
     private Sprite _background;
-
-    Button _buttonBoneSDone;
+    private Sprite _exit;
+    private BlockBS _goal;
+    private Button _buttonBoneSDone;
 
     private bool _showDoneText = false;
     private bool _createQuizonce = true;
 
     private List<BlockBS> blocks = new List<BlockBS>();
-    private List<Vec2> positions = new List<Vec2>();
 
     public BoneSlide(int width, int height) : base(width, height)
     {
         _background = new Sprite("backgroundBS.png");
         AddChild(_background);
         _background.SetXY(100, 100);
+        _exit = new Sprite("exit.png");
+        AddChild(_exit);
+        _exit.SetXY(_background.x + _background.width - _exit.width/2, _background.y + _background.height/6 * 2);
         setupList();
     }
 
     private void setupList()
     {
-        positions.Add(new Vec2(200, 200));
-        positions.Add(new Vec2(300, 300));
-        positions.Add(new Vec2(600, 200));
+        BlockBS block1 = new BlockBS("checkers.png", new Vec2(400, 400), false);
+        AddChild(block1);
+        blocks.Add(block1);
 
-        for (int i = 0; i < positions.Count; i++)
-        {
-            BlockBS block = new BlockBS("checkers.png", positions[i], false);
-            AddChild(block);
-            blocks.Add(block);
-        }
-        BlockBS goal = new BlockBS("colors.png", new Vec2(400, 300), true);
-        AddChild(goal);
-        blocks.Add(goal);
+        _goal = new BlockBS("colors.png", new Vec2(400, 300), true);
+        AddChild(_goal);
+        blocks.Add(_goal);
     }
 
     public void Update()
     {
-        checkCollisions();
         checkIfDone();
+        checkCollisions();
         // when text done pops up en you click on it, delete it and make quiz once
         if (_createQuizonce && _showDoneText == true && Input.GetMouseButtonDown(0) && _buttonBoneSDone._hover)
         {
@@ -58,12 +55,15 @@ class BoneSlide : Canvas
 
     private void checkIfDone()
     {
-        //when boneslide is done, show button is going to be text popup if (puzzle is done){
-            if (_showDoneText == false)
+        if (Mathf.Abs(_goal.x - _exit.x) <= _goal.radiusX &&
+            _goal.y - _exit.y < _goal.radiusY * 2)
+        {
+            if (!_showDoneText)
             {
                 BoneSlideDoneButton();
                 _showDoneText = true;
             }
+        }
     }
 
     private void createQuiz()

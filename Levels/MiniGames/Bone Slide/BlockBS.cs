@@ -100,7 +100,6 @@ class BlockBS : Sprite
 
                 _position.y = _velocity.y;
             }
-            Console.WriteLine(Position);
         }
         //_velocity = _position - _oldPosition;
     }

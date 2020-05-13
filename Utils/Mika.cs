@@ -40,7 +40,6 @@ class Mika : AnimSprite
     {
         handleAnimation();
         playAnimtion();
-        Console.WriteLine(currentFrame);
     }
 
     private void handleAnimation()

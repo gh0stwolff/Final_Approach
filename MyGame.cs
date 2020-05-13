@@ -9,8 +9,8 @@ public class MyGame : Game
 
 	public MyGame () : base(1024, 768, false,false)
 	{
-        ScreenHandler screenHandler = new ScreenHandler();
-        AddChild(screenHandler);
+        //ScreenHandler screenHandler = new ScreenHandler();
+        //AddChild(screenHandler);
 
         //Jigsaw jigsaw = new Jigsaw();
         //AddChild(jigsaw);
@@ -21,8 +21,8 @@ public class MyGame : Game
         //MixAndMatch mix = new MixAndMatch(width, height);
         //AddChild(mix);
 
-        //BoneSlide slide = new BoneSlide(width, height);
-        //AddChild(slide);
+        BoneSlide slide = new BoneSlide(width, height);
+        AddChild(slide);
 
         _mika = new Mika();
         AddChild(_mika);
