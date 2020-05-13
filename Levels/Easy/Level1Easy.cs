@@ -7,6 +7,8 @@ using GXPEngine;
 public class Level1Easy : GameObject
 {
     Diggingsite _ds1, ds2, ds3, ds4;
+
+    BoneSlide boneslide;
     
     public Level1Easy() : base()
     {
@@ -20,6 +22,12 @@ public class Level1Easy : GameObject
     {
         _ds1 = new Diggingsite("diggingsite1.png", 1, 1);
         AddChild(_ds1);
+    }
+
+    private void createBoneSlide()
+    {
+        boneslide = new BoneSlide(((MyGame)game).width, ((MyGame)game).height);
+        AddChild(boneslide);
     }
 
 }
