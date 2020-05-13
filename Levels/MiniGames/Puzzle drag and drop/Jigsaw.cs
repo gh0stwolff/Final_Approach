@@ -57,11 +57,9 @@ public class Jigsaw : GameObject
         showCorrectInfo();
 
 
-
         if (_doOnce && _isFinished == true && Input.GetMouseButtonDown(0) && _showBetweenText == true && _buttonJigsawDone._hover)
         {
             _buttonJigsawDone.LateDestroy();
-            Console.WriteLine("DOEDOE");
             createQuiz();
             _doOnce = false;            
         }          
@@ -141,11 +139,11 @@ public class Jigsaw : GameObject
 
     private void createQuiz()
     {
-            Quiz quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25));
+            Quiz quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
             AddChild(quiz);
     }
 
-    private void quizDoneText()
+    private void jigsawDoneButton()
     {
         _buttonJigsawDone = new Button("jigsawdone.png", new Vec2(500,350), 1,1);
         AddChild(_buttonJigsawDone);
@@ -199,7 +197,7 @@ public class Jigsaw : GameObject
 
         if (_isFinished == true && _showBetweenText == false)
         {
-            quizDoneText();
+            jigsawDoneButton();
             _showBetweenText = true;
         }
     }

@@ -10,6 +10,11 @@ class BoneSlide : Canvas
 
     private Sprite _background;
 
+    Button _buttonBoneSDone;
+
+    private bool _showDoneText = false;
+    private bool _createQuizonce = true;
+
     private List<BlockBS> blocks = new List<BlockBS>();
     private List<Vec2> positions = new List<Vec2>();
 
@@ -41,6 +46,36 @@ class BoneSlide : Canvas
     public void Update()
     {
         checkCollisions();
+        checkIfDone();
+        // when text done pops up en you click on it, delete it and make quiz once
+        if (_createQuizonce && _showDoneText == true && Input.GetMouseButtonDown(0) && _buttonBoneSDone._hover)
+        {
+            _buttonBoneSDone.LateDestroy();
+            createQuiz();
+            _createQuizonce = false;
+        }
+    }
+
+    private void checkIfDone()
+    {
+        //when boneslide is done, show button is going to be text popup if (puzzle is done){
+            if (_showDoneText == false)
+            {
+                BoneSlideDoneButton();
+                _showDoneText = true;
+            }
+    }
+
+    private void createQuiz()
+    {
+        Quiz quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
+        AddChild(quiz);
+    }
+
+    private void BoneSlideDoneButton()
+    {
+        _buttonBoneSDone = new Button("jigsawdone.png", new Vec2(500, 350), 1, 1);
+        AddChild(_buttonBoneSDone);
     }
 
     private void checkCollisions()

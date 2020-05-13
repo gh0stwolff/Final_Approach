@@ -6,15 +6,20 @@ using GXPEngine;
 
 class ScreenHandler : GameObject
 {
-    Button _buttonPlay;
+    
     Menu _menu;
+    Difficulties _difficulties;
+    Level1Easy _level1easy;
     Collections _collect;
+
 
 
     enum Scene
     {
         MENU,
         COLLECTIONS,
+        DIFFICULTIES,
+        LEVEL1EASY,
     }
 
     private Scene _scene;
@@ -43,6 +48,14 @@ class ScreenHandler : GameObject
             case Scene.COLLECTIONS:
                 handleCollectionsScene();
                 break;
+
+            case Scene.DIFFICULTIES:
+                handleDifficultiesScene();
+                break;
+
+            case Scene.LEVEL1EASY:
+                handleLevel1EasyScene();
+                break;
         }
     }
 
@@ -61,27 +74,65 @@ class ScreenHandler : GameObject
         {
             _menu = new Menu();
             AddChild(_menu);
-
-            Vec2 myVec = new Vec2(512, 384);
-
-            _buttonPlay = new Button("playbuttonL.png", myVec, 8, 1);
-            AddChild(_buttonPlay);
+            
         }
 
-        if (_buttonPlay.Pressed)
+        if (_menu._buttonPressed)
         {
             { 
-                setScene(Scene.COLLECTIONS);
+                setScene(Scene.DIFFICULTIES);
                 if (_menu != null)
                 {
                     _menu.LateDestroy();
-                    _buttonPlay.LateDestroy();
                     _menu = null;
                 }
             }
         }
     }
 
+    private void handleDifficultiesScene()
+    {
+        if (_difficulties == null)
+        {
+            _difficulties = new Difficulties();
+            AddChild(_difficulties);
+
+        }
+
+        if (_difficulties.EasyIsSelected)
+        {
+            {
+                setScene(Scene.LEVEL1EASY);
+                if (_difficulties != null)
+                {
+                    _difficulties.LateDestroy();
+                    _difficulties = null;
+                }
+            }
+        }
+    }
+
+    private void handleLevel1EasyScene()
+    {
+        if (_level1easy == null)
+        {
+            _level1easy = new Level1Easy();
+            AddChild(_level1easy);
+
+        }
+
+        //if (_difficulties.EasyIsSelected)
+        //{
+        //    {
+        //        setScene(Scene.LEVEL1EASY);
+        //        if (_difficulties != null)
+        //        {
+        //            _difficulties.LateDestroy();
+        //            _difficulties = null;
+        //        }
+        //    }
+        //}
+    }
     private void handleCollectionsScene()
     {
         if (_collect == null)
@@ -100,4 +151,6 @@ class ScreenHandler : GameObject
             }
         }
     }
+
+
 }

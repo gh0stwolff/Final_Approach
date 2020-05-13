@@ -73,9 +73,9 @@
     <Compile Include="GXPEngine\Utils\MouseHandler.cs" />
     <Compile Include="GXPEngine\Utils\Time.cs" />
     <Compile Include="GXPEngine\Utils\Utils.cs" />
+    <Compile Include="Levels\MiniGames\Diggingsite.cs" />
     <Compile Include="Levels\MiniGames\Puzzle drag and drop\Bones.cs" />
     <Compile Include="Levels\Easy\Level1Easy.cs" />
-    <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\LevelHUD.cs" />
     <Compile Include="Levels\MiniGames\Bone Slide\BlockBS.cs" />
     <Compile Include="Levels\MiniGames\Bone Slide\BoneSlide.cs" />
@@ -89,6 +89,7 @@
     <Compile Include="Levels\MiniGames\Quizzes\Answers.cs" />
     <Compile Include="Levels\MiniGames\Quizzes\Quiz.cs" />
     <Compile Include="Menu\Collections\Collections.cs" />
+    <Compile Include="Menu\Menu Screens\Difficulties.cs" />
     <Compile Include="Menu\Menu Screens\Menu.cs" />
     <Compile Include="Menu\ScreenHandler.cs" />
     <Compile Include="MyGame.cs" />
