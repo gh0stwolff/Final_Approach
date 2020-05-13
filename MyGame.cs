@@ -24,8 +24,7 @@ public class MyGame : Game
         BoneSlide slide = new BoneSlide(width, height);
         AddChild(slide);
 
-        _mika = new Mika();
-        AddChild(_mika);
+
     }
 
     public void Update()

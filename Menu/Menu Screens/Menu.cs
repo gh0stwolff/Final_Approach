@@ -69,6 +69,7 @@ class Menu : Sprite
 
     protected void animation()
     {
+        //IF THERE IS TIME, TIMER
             float _frameIntervalAF = 70f;
 
             _animationTimer += Time.deltaTime;

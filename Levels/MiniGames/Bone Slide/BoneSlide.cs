@@ -13,8 +13,10 @@ class BoneSlide : Canvas
     private BlockBS _goal;
     private Button _buttonBoneSDone;
 
+    Quiz quiz;
     private bool _showDoneText = false;
     private bool _createQuizonce = true;
+    public bool _IsGameFinished = false;
 
     private List<BlockBS> blocks = new List<BlockBS>();
 
@@ -51,6 +53,13 @@ class BoneSlide : Canvas
             createQuiz();
             _createQuizonce = false;
         }
+        if (quiz != null)
+        {
+            if (quiz._isQuizDone)
+            {
+                _IsGameFinished = true;
+            }
+        }
     }
 
     private void checkIfDone()
@@ -68,7 +77,7 @@ class BoneSlide : Canvas
 
     private void createQuiz()
     {
-        Quiz quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
+        quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
         AddChild(quiz);
     }
 

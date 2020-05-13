@@ -80,6 +80,7 @@ public class Button : AnimSprite
         { StartAnimation = false; }
     }
 
+
     virtual protected void pressed()
     {
         if (currentFrame == lastFrame)

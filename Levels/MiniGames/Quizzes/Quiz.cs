@@ -28,6 +28,8 @@ public class Quiz : AnimSprite
     public bool _isQ3Answered = false;
     public bool _isQ4Answered = false;
 
+    public bool _isQuizDone = false;
+
     Answers _Q1A1, _Q1A2, _Q1A3, _Q1A4;
     Answers _Q2A1, _Q2A2, _Q2A3, _Q2A4;
     Answers _Q3A1, _Q3A2, _Q3A3, _Q3A4;
@@ -179,6 +181,12 @@ public class Quiz : AnimSprite
                 //make continue dissapear
                 
                 _continue.alpha = 0.0f;
+
+                //if the last question is answerd game is done
+                if (nextframe == 4 && _isQ4Answered == true)
+                {
+                    _isQuizDone = true;
+                }
                 
                 //next answers, delete old answes
                 // antwoord 1gedaan maak vraag 2
