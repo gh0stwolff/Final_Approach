@@ -12,19 +12,20 @@ public class MyGame : Game
         //ScreenHandler screenHandler = new ScreenHandler();
         //AddChild(screenHandler);
 
+        ////puzzle minigame \/
         //Jigsaw jigsaw = new Jigsaw();
         //AddChild(jigsaw);
 
-        //BoneSlide slide = new BoneSlide(width, height);
-        //AddChild(slide);
-
-        //MixAndMatch mix = new MixAndMatch(width, height);
-        //AddChild(mix);
-
+        ////boneslide minigame \/
         BoneSlide slide = new BoneSlide(width, height);
         AddChild(slide);
 
+        //memory minigame \/
+        //MixAndMatch mix = new MixAndMatch(width, height);
+        //AddChild(mix);
 
+        _mika = new Mika();
+        AddChild(_mika);
     }
 
     public void Update()
