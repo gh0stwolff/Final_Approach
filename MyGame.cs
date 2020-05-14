@@ -16,7 +16,7 @@ public class MyGame : Game
         //Jigsaw jigsaw = new Jigsaw();
         //AddChild(jigsaw);
 
-        ////boneslide minigame \/
+        ////boneslide minigame \/                     \/ change this number to 1 - easy 2 - meduim 3 - hard
         BoneSlide slide = new BoneSlide(width, height, 1);
         AddChild(slide);
 
