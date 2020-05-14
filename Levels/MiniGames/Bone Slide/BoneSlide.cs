@@ -10,8 +10,15 @@ class BoneSlide : Canvas
     private Sprite _backgroundHitBox;
     private Sprite _background;
     private Sprite _exit;
+    private AnimSprite _infoBoard;
     private BlockBS _goal;
     private Button _buttonBoneSDone;
+
+    private Bones bone1, bone2, bone3;
+
+    private int _distbetweenPoints = 100;
+    private int _offsetX = 720;
+    private int _offsetY = 600;
 
     Quiz quiz;
     private bool _showDoneText = false;
@@ -19,6 +26,8 @@ class BoneSlide : Canvas
     public bool _IsGameFinished = false;
 
     private List<BlockBS> blocks = new List<BlockBS>();
+    private List<Bones> bones = new List<Bones>();
+    private Vec2[] targetPoints = new Vec2[3];
 
     public BoneSlide(int width, int height, int difficulty) : base(width, height)
     {
@@ -37,7 +46,8 @@ class BoneSlide : Canvas
         _exit = new Sprite("exit.png");
         AddChild(_exit);
         _exit.SetXY(_background.x + _background.width - _exit.width, _background.y + _background.height/6 * 2);
-        
+
+        createTargetPoints();
         setupList(difficulty);
     }
 
@@ -47,7 +57,15 @@ class BoneSlide : Canvas
         else if (difficulty == 2) { load2(); }
         else if (difficulty == 3) { load3(); }
     }
-    ///////////////////////reset alle blokken zodat ze weer goed staan
+
+    private void createTargetPoints()
+    {
+        for (int i = 0; i < targetPoints.Length; i++)
+        {
+            targetPoints[i] = new Vec2(_offsetX + _distbetweenPoints * i, _offsetY);
+        }
+    }
+
     private void load1()
     {
         BlockBS block1 = new BlockBS("stone3V.png", new Vec2(434, 347), false);
@@ -66,6 +84,16 @@ class BoneSlide : Canvas
         _goal = new BlockBS("bigBone.png", new Vec2(240, 347), true);
         AddChild(_goal);
         blocks.Add(_goal);
+
+        bone1 = new Bones("collectBone.png", new Vec2(100, 100), targetPoints[0]);
+        AddChild(bone1);
+        bones.Add(bone1);
+        bone2 = new Bones("collectBone.png", new Vec2(200, 100), targetPoints[1]);
+        AddChild(bone2);
+        bones.Add(bone2);
+        bone3 = new Bones("collectBone.png", new Vec2(300, 100), targetPoints[2]);
+        AddChild(bone3);
+        bones.Add(bone3);
     }
 
     private void load2()
@@ -92,6 +120,16 @@ class BoneSlide : Canvas
         _goal = new BlockBS("bigBone.png", new Vec2(240, 347), true);
         AddChild(_goal);
         blocks.Add(_goal);
+
+        bone1 = new Bones("collectBone.png", new Vec2(100, 100), targetPoints[0]);
+        AddChild(bone1);
+        bones.Add(bone1);
+        bone2 = new Bones("collectBone.png", new Vec2(200, 100), targetPoints[1]);
+        AddChild(bone2);
+        bones.Add(bone2);
+        bone3 = new Bones("collectBone.png", new Vec2(300, 100), targetPoints[2]);
+        AddChild(bone3);
+        bones.Add(bone3);
     }
 
     private void load3()
@@ -127,12 +165,23 @@ class BoneSlide : Canvas
         _goal = new BlockBS("bigBone.png", new Vec2(191, 347), true);
         AddChild(_goal);
         blocks.Add(_goal);
+
+        bone1 = new Bones("collectBone.png", new Vec2(100, 100), targetPoints[0]);
+        AddChild(bone1);
+        bones.Add(bone1);
+        bone2 = new Bones("collectBone.png", new Vec2(200, 100), targetPoints[1]);
+        AddChild(bone2);
+        bones.Add(bone2);
+        bone3 = new Bones("collectBone.png", new Vec2(300, 100), targetPoints[2]);
+        AddChild(bone3);
+        bones.Add(bone3);
     }
 
     public void Update()
     {
         checkIfDone();
         checkCollisions();
+        checkBoneCollection();
         // when text done pops up en you click on it, delete it and make quiz once
         if (_createQuizonce && _showDoneText == true && Input.GetMouseButtonDown(0) && _buttonBoneSDone._hover)
         {
@@ -158,6 +207,26 @@ class BoneSlide : Canvas
             {
                 BoneSlideDoneButton();
                 _showDoneText = true;
+            }
+        }
+    }
+
+    private void checkBoneCollection()
+    {
+        foreach(Bones bone in bones)
+        {
+            if (bone._isPressed)
+            {
+                bone._isBoneMoving = true;
+                if (_infoBoard == null)
+                {
+                    _infoBoard = new AnimSprite("testinfojigsaw.png", 3, 1);
+                    AddChild(_infoBoard);
+                    _infoBoard.SetXY(700, 100);
+                }
+                if (bone == bone1) { _infoBoard.SetFrame(0); }
+                else if (bone == bone2) { _infoBoard.SetFrame(1); }
+                else if (bone == bone3) { _infoBoard.SetFrame(2); }
             }
         }
     }
