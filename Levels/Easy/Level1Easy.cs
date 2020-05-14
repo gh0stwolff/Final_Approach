@@ -116,7 +116,7 @@ class Level1Easy : GameObject
 
         if (_boneslide == null)
         {
-            _boneslide = new BoneSlide(((MyGame)game).width, ((MyGame)game).height);
+            _boneslide = new BoneSlide(((MyGame)game).width, ((MyGame)game).height, 1);
             AddChild(_boneslide);
         }
 

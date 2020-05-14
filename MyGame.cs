@@ -9,15 +9,15 @@ public class MyGame : Game
 
 	public MyGame () : base(1024, 768, false,false)
 	{
-        ScreenHandler screenHandler = new ScreenHandler();
-        AddChild(screenHandler);
+        //ScreenHandler screenHandler = new ScreenHandler();
+        //AddChild(screenHandler);
 
         ////puzzle minigame \/
         //Jigsaw jigsaw = new Jigsaw();
         //AddChild(jigsaw);
 
         ////boneslide minigame \/
-        BoneSlide slide = new BoneSlide(width, height);
+        BoneSlide slide = new BoneSlide(width, height, 1);
         AddChild(slide);
 
         //memory minigame \/
@@ -33,7 +33,11 @@ public class MyGame : Game
         if (Input.GetKeyDown(Key.ONE)) { _mika.GoodJob();
             Console.WriteLine("thumbs");
         }
-        if (Input.GetKeyDown(Key.TWO)) { _mika.Talking();
+        if (Input.GetKeyDown(Key.TWO)) 
+        { 
+            _mika.Talking();
+            _mika.TextBalloon("textJigsaw.png");
+            _mika.Play("Put.wav");
             Console.WriteLine("talking...");
         }
         if (Input.GetKeyDown(Key.THREE)) { _mika.Down();

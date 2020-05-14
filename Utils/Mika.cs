@@ -23,11 +23,15 @@ class Mika : AnimSprite
     private int frameInterval = 100;
     private int _animationTimer;
 
-    private AnimSprite _text;
+    private uint _channelID = 0;
 
     private bool _doOnce = true;
     private bool _doOnce2 = true;
 
+    private List<Sprite> textBalloon = new List<Sprite>();
+    private List<SoundChannel> channels = new List<SoundChannel>();
+    private string[] goodjob = new string[4] { "Good.wav", "Great.wav", "Nice.wav", "Well.wav"};
+    
     private enum actions { Talking, ThumbsUp, Gone, Down, Up}
     actions state = actions.Gone;
 
@@ -61,6 +65,7 @@ class Mika : AnimSprite
                 if (_doOnce)
                 {
                     PopsUp();
+                    playRandom();
                     _doOnce = false;
                 }
                 if (currentFrame == _endFrame && _doOnce2)
@@ -74,7 +79,15 @@ class Mika : AnimSprite
                 }
                 break;
             case actions.Down:
-
+                if (textBalloon.Count != 0)
+                {
+                    foreach (Sprite text in textBalloon)
+                    {
+                        text.LateDestroy();
+                    }
+                    textBalloon.Clear();
+                }
+                StopSounds();
                 if (currentFrame == _endFrame) 
                 {
                     state = actions.Gone;
@@ -129,11 +142,39 @@ class Mika : AnimSprite
         state = actions.Talking;
     }
 
-    public void TextBalloon(int number)
+    public void TextBalloon(string fileName)
     {
-        string fileName = "textBalloon" + number + ".png";
-        _text = new AnimSprite(fileName, 1, 1);
+        Sprite _text = new Sprite(fileName);
         AddChild(_text);
+        _text.SetXY(420, 420);
+        textBalloon.Add(_text);
+    }
+
+    public void Play(string fileName)
+    {
+        Sound sound = new Sound(fileName, false, true);
+        SoundChannel channel = new SoundChannel(_channelID);
+        channel = sound.Play();
+        channels.Add(channel);
+        _channelID++;
+    }
+
+    public void StopSounds()
+    {
+        if (channels.Count != 0)
+        {
+            foreach (SoundChannel sound in channels)
+            {
+                sound.Stop();
+            }
+            channels.Clear();
+        }
+    }
+
+    private void playRandom()
+    {
+        Sound sound = new Sound(goodjob[Utils.Random(0, 4)], false, true);
+        sound.Play();
     }
 
 }

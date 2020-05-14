@@ -20,24 +20,101 @@ class BoneSlide : Canvas
 
     private List<BlockBS> blocks = new List<BlockBS>();
 
-    public BoneSlide(int width, int height) : base(width, height)
+    public BoneSlide(int width, int height, int difficulty) : base(width, height)
     {
         _background = new Sprite("backgroundBS.png");
         AddChild(_background);
-        _background.SetXY(100, 100);
+        _background.SetXY(20, 20);
         _exit = new Sprite("exit.png");
         AddChild(_exit);
-        _exit.SetXY(_background.x + _background.width - _exit.width/2, _background.y + _background.height/6 * 2);
-        setupList();
+        _exit.SetXY(_background.x + _background.width - _exit.width, _background.y + _background.height/6 * 2);
+        setupList(difficulty);
     }
 
-    private void setupList()
+    private void setupList(int difficulty)
     {
-        BlockBS block1 = new BlockBS("checkers.png", new Vec2(400, 400), false);
+        if (difficulty == 1) { load1(); }
+        else if (difficulty == 2) { load2(); }
+        else if (difficulty == 3) { load3(); }
+    }
+
+    private void load1()
+    {
+        BlockBS block1 = new BlockBS("stone3V.png", new Vec2(359, 262), false);
         AddChild(block1);
         blocks.Add(block1);
+        BlockBS block2 = new BlockBS("stone2.png", new Vec2(116, 359), true);
+        AddChild(block2);
+        blocks.Add(block2);
+        BlockBS block3 = new BlockBS("stone2V.png", new Vec2(68, 504), false);
+        AddChild(block3);
+        blocks.Add(block3);
+        BlockBS block4 = new BlockBS("stone3.png", new Vec2(262, 553), true);
+        AddChild(block4);
+        blocks.Add(block4);
 
-        _goal = new BlockBS("colors.png", new Vec2(400, 300), true);
+        _goal = new BlockBS("bigBone.png", new Vec2(165, 262), true);
+        AddChild(_goal);
+        blocks.Add(_goal);
+    }
+
+    private void load2()
+    {
+        BlockBS block1 = new BlockBS("stone3.png", new Vec2(456, 68), true);
+        AddChild(block1);
+        blocks.Add(block1);
+        BlockBS block2 = new BlockBS("stone2V.png", new Vec2(359, 213), false);
+        AddChild(block2);
+        blocks.Add(block2);
+        BlockBS block3 = new BlockBS("stone3V.png", new Vec2(553, 359), false);
+        AddChild(block3);
+        blocks.Add(block3);
+        BlockBS block4 = new BlockBS("stone2.png", new Vec2(116, 359), true);
+        AddChild(block4);
+        blocks.Add(block4);
+        BlockBS block5 = new BlockBS("stone2V.png", new Vec2(165, 505), false);
+        AddChild(block5);
+        blocks.Add(block5);
+        BlockBS block6 = new BlockBS("stone4.png", new Vec2(407, 553), true);
+        AddChild(block6);
+        blocks.Add(block6);
+
+        _goal = new BlockBS("bigBone.png", new Vec2(165, 262), true);
+        AddChild(_goal);
+        blocks.Add(_goal);
+    }
+
+    private void load3()
+    {
+        BlockBS block1 = new BlockBS("stone3.png", new Vec2(456, 68), true);
+        AddChild(block1);
+        blocks.Add(block1);
+        BlockBS block2 = new BlockBS("stone3V.png", new Vec2(262, 165), false);
+        AddChild(block2);
+        blocks.Add(block2);
+        BlockBS block3 = new BlockBS("stone2.png", new Vec2(407, 165), true);
+        AddChild(block3);
+        blocks.Add(block3);
+        BlockBS block4 = new BlockBS("stone2V.png", new Vec2(553, 213), false);
+        AddChild(block4);
+        blocks.Add(block4);
+        BlockBS block5 = new BlockBS("stone3.png", new Vec2(165, 359), true);
+        AddChild(block5);
+        blocks.Add(block5);
+        BlockBS block6 = new BlockBS("stone2V.png", new Vec2(456, 408), false);
+        AddChild(block6);
+        blocks.Add(block6);
+        BlockBS block7 = new BlockBS("stone2v.png", new Vec2(68, 505), false);
+        AddChild(block7);
+        blocks.Add(block7);
+        BlockBS block8 = new BlockBS("stone2V.png", new Vec2(359, 505), false);
+        AddChild(block8);
+        blocks.Add(block8);
+        BlockBS block9 = new BlockBS("stone2.png", new Vec2(505, 553), true);
+        AddChild(block9);
+        blocks.Add(block9);
+
+        _goal = new BlockBS("bigBone.png", new Vec2(116, 262), true);
         AddChild(_goal);
         blocks.Add(_goal);
     }
