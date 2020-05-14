@@ -73,6 +73,7 @@
     <Compile Include="GXPEngine\Utils\MouseHandler.cs" />
     <Compile Include="GXPEngine\Utils\Time.cs" />
     <Compile Include="GXPEngine\Utils\Utils.cs" />
+    <Compile Include="Levels\MiniGames\Bone Slide\collectedBS.cs" />
     <Compile Include="Levels\MiniGames\Diggingsite.cs" />
     <Compile Include="Levels\MiniGames\Puzzle drag and drop\Bones.cs" />
     <Compile Include="Levels\Easy\Level1Easy.cs" />

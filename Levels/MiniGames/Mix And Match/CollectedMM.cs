@@ -10,7 +10,8 @@ class CollectedMM : Canvas
 
     private int pointsY;
 
-    private int _offset = 100;
+    private int _offsetX = 150;
+    private int _offsetY = 150;
 
     private int _active = -1;
 
@@ -19,23 +20,23 @@ class CollectedMM : Canvas
     private Vec2[] collectionPoints;
     private List<ItemMM> items = new List<ItemMM>();
 
-    public CollectedMM(Vec2 position, int width, int height, int Matches) : base(width, height)
+    public CollectedMM(Vec2 position, int width, int height, int Matches, string fileNameInfo) : base(width, height)
     {
         x = position.x;
         y = position.y;
         _spawnPoint = new Vec2(width / 2, height / 2);
-        pointsY = height - _offset;
+        pointsY = height - _offsetY;
         collectionPoints = new Vec2[Matches];
         setCollectionPoints();
         silhouette();
-        setupInfoBoard();
+        setupInfoBoard(fileNameInfo, Matches);
     }
 
     private void setCollectionPoints()
     {
         for (int i = 0; i < collectionPoints.Length; i++)
         {
-            collectionPoints[i] = new Vec2(((width - _offset) / collectionPoints.Length * i) + _offset, pointsY);
+            collectionPoints[i] = new Vec2(((width - _offsetX) / collectionPoints.Length * i) + _offsetX, pointsY);
         }
     }
 
@@ -43,13 +44,13 @@ class CollectedMM : Canvas
     {
         for (int i = 0; i < collectionPoints.Length; i++)
         {
-            ItemMM item = new ItemMM(collectionPoints[i], i);
+            ItemMM item = new ItemMM(collectionPoints[i], i, "silhuetes.png");
             AddChild(item);
         }
     }
-    private void setupInfoBoard()
+    private void setupInfoBoard(string fileName, int amountInfo)
     {
-        _infoBoard = new AnimSprite("memoryTiles.png", 9, 1);
+        _infoBoard = new AnimSprite(fileName, amountInfo, 1);
         AddChild(_infoBoard);
         _infoBoard.SetXY(800, 200);
         _infoBoard.alpha = 0.0f;
@@ -62,7 +63,7 @@ class CollectedMM : Canvas
 
     public void Collected(int ID)
     {
-        ItemMM item = new ItemMM(_spawnPoint, collectionPoints[ID], ID);
+        ItemMM item = new ItemMM(_spawnPoint, collectionPoints[ID], ID, "skin.png");
         AddChild(item);
         items.Add(item);
     }

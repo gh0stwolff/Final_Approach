@@ -29,7 +29,6 @@ class ClickablePiece : Button
     public ClickablePiece(string fileName, Vec2 position, int ID) : base(fileName, position, 9, 1)
     {
         _id = ID;
-
         _selection = new EasyDraw(width + _selectionStrokeWidth * 2, height + _selectionStrokeWidth * 2);
         AddChild(_selection);
         _selection.SetOrigin(width / 2, height / 2);
@@ -88,7 +87,7 @@ class ClickablePiece : Button
 
         if (_active)
         { 
-            selection();
+            //selection();
             SetFrame(_id + 1);
         } else
         {

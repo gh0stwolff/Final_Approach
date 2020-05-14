@@ -169,7 +169,7 @@ class Level1Easy : GameObject
 
         if (_mixandmatch == null)
         {
-            _mixandmatch = new MixAndMatch(((MyGame)game).width, ((MyGame)game).height);
+            _mixandmatch = new MixAndMatch(((MyGame)game).width, ((MyGame)game).height, 8);
             AddChild(_mixandmatch);
         }
 

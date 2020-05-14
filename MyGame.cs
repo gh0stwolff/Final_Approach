@@ -21,7 +21,7 @@ public class MyGame : Game
         AddChild(slide);
 
         //memory minigame \/
-        //MixAndMatch mix = new MixAndMatch(width, height);
+        //MixAndMatch mix = new MixAndMatch(width, height, 16);
         //AddChild(mix);
 
         _mika = new Mika();

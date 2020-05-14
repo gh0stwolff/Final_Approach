@@ -27,7 +27,7 @@ public class ItemMM : AnimSprite
         }
     }
 
-    public ItemMM(Vec2 position, Vec2 target, int ID) : this(position, ID)
+    public ItemMM(Vec2 position, Vec2 target, int ID, string fileName) : this(position, ID, fileName)
     {
         _target = target;
         _velocity = _target - _position;
@@ -37,13 +37,13 @@ public class ItemMM : AnimSprite
         scale = 1.0f;
     }
 
-    public ItemMM(Vec2 position, int ID) : base("memoryTiles.png", 9, 1)
+    public ItemMM(Vec2 position, int ID, string fileName) : base(fileName, 8, 1)
     {
         _position = position;
         _target = position;
         _id = ID;
         SetOrigin(width / 2, 0);
-        SetFrame(ID + 1);
+        SetFrame(ID);
         updatePosition();
         _orgSize = new Vec2(width, height);
 

@@ -7,12 +7,12 @@ using GXPEngine;
 
 public class MixAndMatch : Canvas
 {
-    static private int _amountOfPieces = 16;
-    private int _horizontalPieces = 4;
-    private int _verticalPieces = 4;
+    private int _amountOfPieces = 16;
+    static private int _horizontalPieces = 4;
+    static private int _verticalPieces = 4;
 
-    private int _startXGrid = 100;
-    private int _startYGrid = 100;
+    private int _startXGrid = 175;
+    private int _startYGrid = 175;
     private int _distanceBetweenPieces = 5;
 
     private int _firstPiece = -1;
@@ -30,16 +30,29 @@ public class MixAndMatch : Canvas
     Quiz quiz;
 
     List<ClickablePiece> pieces = new List<ClickablePiece>();
-    int[] IDs = new int[_amountOfPieces];
+    int[] IDs;
+    Vec2[] points = new Vec2[_horizontalPieces * _verticalPieces];
 
     ClickablePiece click1;
     CollectedMM _collection;
 
-    public MixAndMatch(int width, int height) : base(width, height)
+    public MixAndMatch(int width, int height, int pieceCount) : base(width, height)
     {
+        Sprite background = new Sprite("mixMatchFrame.png");
+        AddChild(background);
+        _amountOfPieces = pieceCount;
+        IDs = new int[_amountOfPieces];
+
         click1 = new ClickablePiece("memoryTiles.png", new Vec2(0, 0), 0);
+
         loadPieces(_horizontalPieces, _verticalPieces);
-        _collection = new CollectedMM(new Vec2(0, 0), ((MyGame)game).width, ((MyGame)game).height, _amountOfPieces / 2);
+
+        string fileNameInfo = "memoryTiles.png";
+        if (pieceCount <= 8) { fileNameInfo = "memoryTiles.png"; }
+        else if (pieceCount > 8 && pieceCount <= 12) { fileNameInfo = "memoryTiles.png"; }
+        else if (pieceCount > 12) { fileNameInfo = "memoryTiles.png"; }
+
+        _collection = new CollectedMM(new Vec2(0, 0), ((MyGame)game).width, ((MyGame)game).height, _amountOfPieces / 2, fileNameInfo);
         AddChild(_collection);
     }
 
@@ -54,18 +67,24 @@ public class MixAndMatch : Canvas
             IDs[j] = j / 2;
         }
 
-        Randomizer.Randomize(IDs);
-
         for (int x = _startXGrid; x < _startXGrid + pieceWidth * colmns; x += pieceWidth)
         {
             for (int y = _startYGrid; y < _startYGrid + pieceHeight * rows; y += pieceHeight)
             {
-                ClickablePiece click = new ClickablePiece("memoryTiles.png", new Vec2(x, y), IDs[i]);
-                AddChild(click);
-                pieces.Add(click);
-                Console.WriteLine("i = {0}, ID = {1}", i, IDs[i]);
+                points[i] = new Vec2(x, y);
                 i++;
             }
+        }
+
+        Randomizer.Randomize(points);
+        Randomizer.Randomize(IDs);
+
+        for (int l = 0; l < _amountOfPieces; l++)
+        {
+            ClickablePiece click = new ClickablePiece("memoryTiles.png", points[l], IDs[l]);
+            AddChild(click);
+            pieces.Add(click);
+            Console.WriteLine("i = {0}, ID = {1}", l, IDs[l]);
         }
     }
 
@@ -73,7 +92,7 @@ public class MixAndMatch : Canvas
     {
         handlePresses();
         checkMatches();
-        debug();
+        //debug();
         resetChoices();
         checkIfDone();
 
@@ -155,7 +174,7 @@ public class MixAndMatch : Canvas
                     _piecesSelected++;
                     Console.WriteLine("A index = {1}, ID = {0}", pieces[_firstPiece].ID, i);
                 }
-                else if (_secondPiece == -1)
+                else if (_secondPiece == -1 && i != _firstPiece)
                 {
                     _secondPiece = i;
                     _piecesSelected++;
