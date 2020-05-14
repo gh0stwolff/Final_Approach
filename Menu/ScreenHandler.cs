@@ -10,8 +10,9 @@ class ScreenHandler : GameObject
     Menu _menu;
     Difficulties _difficulties;
     Level1Easy _level1easy;
+    Level1Medium _level1medium;
+    Level1Hard _level1hard;
     Collections _collect;
-
 
 
     enum Scene
@@ -20,6 +21,8 @@ class ScreenHandler : GameObject
         COLLECTIONS,
         DIFFICULTIES,
         LEVEL1EASY,
+        LEVEL1MEDIUM,
+        LEVEL1HARD,
     }
 
     private Scene _scene;
@@ -55,6 +58,14 @@ class ScreenHandler : GameObject
 
             case Scene.LEVEL1EASY:
                 handleLevel1EasyScene();
+                break;
+
+            case Scene.LEVEL1MEDIUM:
+                handleLevel1MediumScene();
+                break;
+
+            case Scene.LEVEL1HARD:
+                handleLevel1HardScene();
                 break;
         }
     }
@@ -110,6 +121,30 @@ class ScreenHandler : GameObject
                 }
             }
         }
+
+        else if (_difficulties.MediumIsSelected)
+        {
+            {
+                setScene(Scene.LEVEL1MEDIUM);
+                if (_difficulties != null)
+                {
+                    _difficulties.LateDestroy();
+                    _difficulties = null;
+                }
+            }
+        }
+
+        else if (_difficulties.HardIsSelected)
+        {
+            {
+                setScene(Scene.LEVEL1HARD);
+                if (_difficulties != null)
+                {
+                    _difficulties.LateDestroy();
+                    _difficulties = null;
+                }
+            }
+        }
     }
 
     private void handleLevel1EasyScene()
@@ -133,6 +168,28 @@ class ScreenHandler : GameObject
         //    }
         //}
     }
+
+    private void handleLevel1MediumScene()
+    {
+        if (_level1medium == null)
+        {
+            _level1medium = new Level1Medium();
+            AddChild(_level1medium);
+
+        }
+    }
+
+    private void handleLevel1HardScene()
+    {
+        if (_level1hard == null)
+        {
+            _level1hard = new Level1Hard();
+            AddChild(_level1hard);
+
+        }
+    }
+
+
     private void handleCollectionsScene()
     {
         if (_collect == null)

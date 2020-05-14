@@ -88,6 +88,8 @@ class Level1Easy : GameObject
 
     private void handleIntroScene()
     {
+        //((MyGame)game).Talk();
+        //((MyGame)game).Play("Hello.wav");
 
         //here mica pops up says something. You click it away and then Boneslide starts
         if (_buttonStartBS == null)
@@ -96,6 +98,9 @@ class Level1Easy : GameObject
             AddChild(_buttonStartBS);
         }
 
+        
+        // when hello is finished
+        // ((MyGame)game).Play("Intro.wav");
 
         if (_buttonStartBS.Pressed)
         {
@@ -222,7 +227,7 @@ class Level1Easy : GameObject
 
         if (_jigsaw == null)
         {
-            _jigsaw = new Jigsaw();
+            _jigsaw = new Jigsaw(1);
             AddChild(_jigsaw);
            
         }
