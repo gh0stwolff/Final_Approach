@@ -9,8 +9,8 @@ public class MyGame : Game
 
 	public MyGame () : base(1024, 768, false,false)
 	{
-        //ScreenHandler screenHandler = new ScreenHandler();
-        //AddChild(screenHandler);
+        ScreenHandler screenHandler = new ScreenHandler();
+        AddChild(screenHandler);
 
         ////puzzle minigame \/
         //Jigsaw jigsaw = new Jigsaw();

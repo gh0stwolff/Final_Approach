@@ -19,6 +19,7 @@ public class Jigsaw : GameObject
     private bool _isFinished;
     private bool _doOnce = true;
     private bool _showBetweenText = false;
+    public bool _IsGameFinished = false;
 
     private Sprite _background;
 
@@ -31,6 +32,8 @@ public class Jigsaw : GameObject
     Bones _bone1, _bone2, _bone3;
 
     Button _buttonJigsawDone;
+
+    Quiz quiz;
 
     Information _info;
 
@@ -62,8 +65,16 @@ public class Jigsaw : GameObject
             _buttonJigsawDone.LateDestroy();
             createQuiz();
             _doOnce = false;            
-        }          
-            
+        }
+
+        if (quiz != null)
+        {
+            if (quiz._isQuizDone)
+            {
+                _IsGameFinished = true;
+            }
+        }
+
     }
 
     private void createBackground()
@@ -139,7 +150,7 @@ public class Jigsaw : GameObject
 
     private void createQuiz()
     {
-            Quiz quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
+            quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
             AddChild(quiz);
     }
 

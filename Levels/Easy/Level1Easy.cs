@@ -6,11 +6,13 @@ using GXPEngine;
 
 class Level1Easy : GameObject
 {
-    Diggingsite _ds0, _ds1;
+    Diggingsite _ds0, _ds1, _ds2, _ds3;
 
-    Button _buttonStartBS;
+    Button _buttonStartBS, _buttonStartMAM, _buttonStartJig;
 
     BoneSlide _boneslide;
+    MixAndMatch _mixandmatch;
+    Jigsaw _jigsaw;
 
 
 
@@ -19,6 +21,10 @@ class Level1Easy : GameObject
         INTRO,
         BONESLIDE,
         DIGGING1,
+        MIXANDMATCH,
+        DIGGING2,
+        JIGSAW,
+        DIGGING3,
     }
 
     private Scene _scene;
@@ -50,6 +56,22 @@ class Level1Easy : GameObject
 
             case Scene.DIGGING1:
                 handleDigging1Scene();
+                break;
+
+            case Scene.MIXANDMATCH:
+                handleMixAndMatchScene();
+                break;
+
+            case Scene.DIGGING2:
+                handleDigging2Scene();
+                break;
+
+            case Scene.JIGSAW:
+                handleJigsawScene();
+                break;
+
+            case Scene.DIGGING3:
+                handleDigging3Scene();
                 break;
 
         }
@@ -121,15 +143,129 @@ class Level1Easy : GameObject
             AddChild(_ds1);
         }
 
+        //here mica pops up says something there is site uncovered. You click it away and then MAM starts
+        if (_buttonStartMAM == null)
+        {
+            _buttonStartMAM = new Button("playbutton.png", new Vec2(50, 50), 7, 1);
+            AddChild(_buttonStartMAM);
+        }
 
-        //if (_boneslide._IsGameFinished)
+
+        if (_buttonStartMAM.Pressed)
+        {
+            {
+                setScene(Scene.MIXANDMATCH);
+                if (_buttonStartMAM != null)
+                {
+                    _buttonStartMAM.LateDestroy();
+                    _buttonStartMAM = null;
+                }
+            }
+        }
+    }
+
+    private void handleMixAndMatchScene()
+    {
+
+        if (_mixandmatch == null)
+        {
+            _mixandmatch = new MixAndMatch(((MyGame)game).width, ((MyGame)game).height);
+            AddChild(_mixandmatch);
+        }
+
+
+        if (_mixandmatch._IsGameFinished)
+        {
+            {
+                setScene(Scene.DIGGING2);
+                if (_mixandmatch != null)
+                {
+                    _mixandmatch.LateDestroy();
+                    _mixandmatch = null;
+                }
+            }
+        }
+    }
+
+    private void handleDigging2Scene()
+    {
+
+        if (_ds2 == null)
+        {
+            _ds2 = new Diggingsite("diggingsite2easy.png", 23, 1);
+            AddChild(_ds2);
+        }
+
+        //here mica pops up says something there is site uncovered. You click it away and then MAM starts
+        if (_buttonStartJig == null)
+        {
+            _buttonStartJig = new Button("playbutton.png", new Vec2(50, 50), 7, 1);
+            AddChild(_buttonStartJig);
+        }
+
+
+        if (_buttonStartJig.Pressed)
+        {
+            {
+                setScene(Scene.JIGSAW);
+                if (_buttonStartJig != null)
+                {
+                    _buttonStartJig.LateDestroy();
+                    _buttonStartJig = null;
+                }
+            }
+        }
+    }
+
+    private void handleJigsawScene()
+    {
+
+        if (_jigsaw == null)
+        {
+            _jigsaw = new Jigsaw();
+            AddChild(_jigsaw);
+           
+        }
+
+
+        if (_jigsaw._IsGameFinished)
+        {
+            {
+                setScene(Scene.DIGGING3);
+                if (_jigsaw != null)
+                {
+                    _jigsaw.LateDestroy();
+                    _jigsaw = null;
+                }
+            }
+        }
+    }
+
+    private void handleDigging3Scene()
+    {
+
+        if (_ds3 == null)
+        {
+            _ds3 = new Diggingsite("diggingsite3easy.png", 23, 1);
+            AddChild(_ds3);
+        }
+
+        ////here mica pops up says something there is site uncovered. You click it away and then MAM starts
+        //if (_buttonStartJig == null)
+        //{
+        //    _buttonStartJig = new Button("playbutton.png", new Vec2(50, 50), 7, 1);
+        //    AddChild(_buttonStartJig);
+        //}
+
+
+        //if (_buttonStartJig.Pressed)
         //{
         //    {
-        //        setScene(Scene.BONESLIDE);
-        //        if (_buttonStartBS != null)
+        //        setScene(Scene.JIGSAW);
+        //        if (_buttonStartJig != null)
         //        {
-        //            _buttonStartBS.LateDestroy();
-        //            _buttonStartBS = null;
+        //            _buttonStartJig.LateDestroy();
+        //            _buttonStartJig = null;
         //        }
         //    }
         //}
