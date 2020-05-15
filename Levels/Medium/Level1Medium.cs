@@ -110,7 +110,7 @@ class Level1Medium : GameObject
         if (_startHelloText)
         {
             ((MyGame)game).Talk();
-            ((MyGame)game).Play("Hello.wav");
+            ((MyGame)game).Play("Hello.wav", 7000);
             _startHelloText = false;
             Console.WriteLine("1");
         }
@@ -121,7 +121,7 @@ class Level1Medium : GameObject
         if (Input.GetMouseButtonDown(0) && _startHelloText != true && _startIntroText)
         {
             ((MyGame)game).StopSound();
-            ((MyGame)game).Play("Intro.wav");
+            ((MyGame)game).Play("Intro.wav", 45000);
             _startIntroText = false;
             Console.WriteLine("2");
         }
@@ -131,7 +131,7 @@ class Level1Medium : GameObject
         if (Input.GetMouseButtonDown(0) && _startIntroText != true && _startHeyText)
         {
             ((MyGame)game).StopSound();
-            ((MyGame)game).Play("Hey.wav");
+            ((MyGame)game).Play("Hey.wav", 6000);
             _startHeyText = false;
             Console.WriteLine("3");
 
@@ -157,7 +157,7 @@ class Level1Medium : GameObject
         if (_startClearText)
         {
             ((MyGame)game).Talk();
-            ((MyGame)game).Play("Clear.wav");
+            ((MyGame)game).Play("Clear.wav", 5000);
             ((MyGame)game).Textbaloon("textBoneSlide.png");
 
             _startClearText = false;
@@ -214,7 +214,7 @@ class Level1Medium : GameObject
         if (_startLetsText)
         {
             ((MyGame)game).Talk();
-            ((MyGame)game).Play("Lets.wav");
+            ((MyGame)game).Play("Lets.wav", 12000);
             ((MyGame)game).Textbaloon("textMemory.png");
 
             _startLetsText = false;
@@ -252,7 +252,7 @@ class Level1Medium : GameObject
         {
             ((MyGame)game).StopSound();
             ((MyGame)game).Talk();
-            ((MyGame)game).Play("It_looks.wav");
+            ((MyGame)game).Play("It_looks.wav", 11000);
             _startItLooksText = false;
         }
         else if (_startItLooksText != true && Input.GetMouseButtonDown(0))
@@ -285,7 +285,7 @@ class Level1Medium : GameObject
         if (_startPutText)
         {
             ((MyGame)game).Talk();
-            ((MyGame)game).Play("Put.wav");
+            ((MyGame)game).Play("Put.wav", 6000);
             ((MyGame)game).Textbaloon("textJigsaw.png");
 
             _startPutText = false;
