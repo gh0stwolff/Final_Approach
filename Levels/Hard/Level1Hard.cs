@@ -245,7 +245,7 @@ class Level1Hard : GameObject
 
         if (_ds1 == null)
         {
-            _ds1 = new Diggingsite("diggingsite1hard.png", 23, 1);
+            _ds1 = new Diggingsite("diggingsite1hard.png", 23, 3);
             AddChild(_ds1);
         }
 

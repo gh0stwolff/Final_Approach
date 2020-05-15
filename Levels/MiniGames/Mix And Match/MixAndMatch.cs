@@ -47,9 +47,9 @@ public class MixAndMatch : Canvas
         loadPieces(_horizontalPieces, _verticalPieces);
 
         string fileNameInfo = "memoryTiles.png";
-        if (pieceCount <= 8) { fileNameInfo = "memoryTiles.png"; }
-        else if (pieceCount > 8 && pieceCount <= 12) { fileNameInfo = "memoryTiles.png"; }
-        else if (pieceCount > 12) { fileNameInfo = "memoryTiles.png"; }
+        if (pieceCount <= 8) { fileNameInfo = "INFOeasyMixmatch.png"; }
+        else if (pieceCount > 8 && pieceCount <= 12) { fileNameInfo = "INFOmediumMixmatch.png"; }
+        else if (pieceCount > 12) { fileNameInfo = "INFOhardMixmatch.png"; }
 
         _collection = new CollectedMM(new Vec2(0, 0), ((MyGame)game).width, ((MyGame)game).height, _amountOfPieces / 2, fileNameInfo);
         AddChild(_collection);
@@ -95,11 +95,6 @@ public class MixAndMatch : Canvas
         resetChoices();
         checkIfDone();
 
-        //if (targetTime < Time.time && targetTime != 0)
-        //{
-        //    _IsGameFinished = true;
-        //    targetTime = 0;
-        //}
 
         if (_showDoneText && _buttonMemmDone.Pressed)
         {

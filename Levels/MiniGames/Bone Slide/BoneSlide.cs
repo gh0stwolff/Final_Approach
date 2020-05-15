@@ -101,10 +101,10 @@ class BoneSlide : Canvas
         bone3.SetOrigin(bone3.width / 2, bone3.height / 2);
         bones.Add(bone3);
 
-        _infoBoard = new AnimSprite("testinfojigsaw.png", 3, 1);
+        _infoBoard = new AnimSprite("INFOeasyBoneslider.png", 3, 1);
         AddChild(_infoBoard);
         _infoBoard.alpha = 0.0f;
-        _infoBoard.SetXY(700, 100);
+        _infoBoard.SetXY(705, 90);
     }
 
     private void load2()
@@ -145,10 +145,10 @@ class BoneSlide : Canvas
         bone3.SetOrigin(bone3.width / 2, bone3.height / 2);
         bones.Add(bone3);
 
-        _infoBoard = new AnimSprite("testinfojigsaw.png", 3, 1);
+        _infoBoard = new AnimSprite("INFOmediumBoneslider.png", 3, 1);
         AddChild(_infoBoard);
         _infoBoard.alpha = 0.0f;
-        _infoBoard.SetXY(700, 100);
+        _infoBoard.SetXY(705, 90);
     }
 
     private void load3()
@@ -198,10 +198,10 @@ class BoneSlide : Canvas
         bone3.SetOrigin(bone3.width / 2, bone3.height / 2);
         bones.Add(bone3);
 
-        _infoBoard = new AnimSprite("testinfojigsaw.png", 3, 1);
+        _infoBoard = new AnimSprite("INFOhardBoneslider.png", 3, 1);
         AddChild(_infoBoard);
         _infoBoard.alpha = 0.0f;
-        _infoBoard.SetXY(700, 100);
+        _infoBoard.SetXY(705, 90);
     }
 
     public void Update()

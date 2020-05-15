@@ -52,7 +52,7 @@ class CollectedMM : Canvas
     {
         _infoBoard = new AnimSprite(fileName, amountInfo, 1);
         AddChild(_infoBoard);
-        _infoBoard.SetXY(800, 200);
+        _infoBoard.SetXY(600, 125);
         _infoBoard.alpha = 0.0f;
     }
 

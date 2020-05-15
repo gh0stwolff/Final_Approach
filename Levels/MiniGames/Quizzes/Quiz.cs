@@ -11,7 +11,7 @@ public class Quiz : AnimSprite
 {
     public Vec2 _position;
 
-    private int _puzzleID;
+    private int _puzzleID = 1;
 
     public int _whichquestion = 0;
     public int nextframe = 0;
@@ -122,19 +122,19 @@ public class Quiz : AnimSprite
     //------------------------------
     private void createAnswersQ1()
     {
-        _Q1A1 = new Answers("Q1AnswA"+_puzzleID+".png", new Vec2(170, 330), 2, 1);
+        _Q1A1 = new Answers("Q1AnswA"+_puzzleID+".png", new Vec2(225, 390), 2, 1);
         AddChild(_Q1A1);
         answersQ1[0] = _Q1A1;
 
-        _Q1A2 = new Answers("Q1AnswB"+_puzzleID+".png", new Vec2(490, 330), 2, 1);
+        _Q1A2 = new Answers("Q1AnswB"+_puzzleID+".png", new Vec2(490, 390), 2, 1);
         AddChild(_Q1A2);
         answersQ1[1] = _Q1A2;
 
-        _Q1A3 = new Answers("Q1AnswC"+_puzzleID+".png", new Vec2(170, 530), 2, 1);
+        _Q1A3 = new Answers("Q1AnswC"+_puzzleID+".png", new Vec2(225, 590), 2, 1);
         AddChild(_Q1A3);
         answersQ1[2] = _Q1A3;
 
-        _Q1A4 = new Answers("Q1AnswD"+_puzzleID+".png", new Vec2(490, 530), 2, 1);
+        _Q1A4 = new Answers("Q1AnswD"+_puzzleID+".png", new Vec2(490, 590), 2, 1);
         AddChild(_Q1A4);
         answersQ1[3] = _Q1A4;
     }
@@ -162,7 +162,7 @@ public class Quiz : AnimSprite
             //onderstaande zin is voor alpha, van 0 naar 1
             _infoQ1._isCollected = true;
 
-            _infoQ1._whichInfo = 1;
+            _infoQ1._whichInfo = 0;
 
             _isQ1Answered = true;
 
@@ -171,21 +171,30 @@ public class Quiz : AnimSprite
 
             Console.WriteLine("question1 right!");
         }
-        else if ((answersQ1[1]._hover || answersQ1[2]._hover || answersQ1[3]._hover) &&
-        Input.GetMouseButtonDown(0) && _infoQ1._isCollected == false)
-        {
-
-            _infoQ1._isCollected = true;
-
-            _infoQ1._whichInfo = 0;
-
-            _isQ1Answered = true;
-
-            Sound effect = new Sound("False.wav");
-            effect.Play();
-
-            Console.WriteLine("question1 wrong");
+        else if ((answersQ1[1]._hover || answersQ1[2]._hover || answersQ1[3]._hover) &&
+        Input.GetMouseButtonDown(0) && _infoQ1._isCollected == false)
+        {
+
+            _infoQ1._isCollected = true;
+
+            _infoQ1._whichInfo = 0;
+
+            _isQ1Answered = true;
+
+            Sound effect = new Sound("False.wav");
+            effect.Play();
+
+            Console.WriteLine("question1 wrong");
         }
+
+              _infoQ1._isCollected = true;
+
+              _infoQ1._whichInfo = 1;
+
+              _isQ1Answered = true;
+            
+              Console.WriteLine("question1 wrong");
+             }
 
         if ( _isQ1Answered && _doOnceCreateContinueButt1)
         {
@@ -271,19 +280,19 @@ public class Quiz : AnimSprite
     //------------------------------
     private void createAnswersQ2()
     {
-        _Q2A1 = new Answers("Q1AnswA" + _puzzleID + ".png", new Vec2(170, 330), 2, 1);
+        _Q2A1 = new Answers("Q2AnswA" + _puzzleID + ".png", new Vec2(225, 390), 2, 1);
         AddChild(_Q2A1);
         answersQ2[0] = _Q2A1;
 
-        _Q2A2 = new Answers("Q1AnswB" + _puzzleID + ".png", new Vec2(490, 330), 2, 1);
+        _Q2A2 = new Answers("Q2AnswB" + _puzzleID + ".png", new Vec2(490, 390), 2, 1);
         AddChild(_Q2A2);
         answersQ2[1] = _Q2A2;
 
-        _Q2A3 = new Answers("Q1AnswC" + _puzzleID + ".png", new Vec2(170, 530), 2, 1);
+        _Q2A3 = new Answers("Q2AnswC" + _puzzleID + ".png", new Vec2(225, 590), 2, 1);
         AddChild(_Q2A3);
         answersQ2[2] = _Q2A3;
 
-        _Q2A4 = new Answers("Q1AnswD" + _puzzleID + ".png", new Vec2(490, 530), 2, 1);
+        _Q2A4 = new Answers("Q2AnswD" + _puzzleID + ".png", new Vec2(490, 590), 2, 1);
         AddChild(_Q2A4);
         answersQ2[3] = _Q2A4;
     }
@@ -303,7 +312,7 @@ public class Quiz : AnimSprite
                 //onderstaande zin is voor alpha, van 0 naar 1
                 _infoQ2._isCollected = true;
 
-                _infoQ2._whichInfo = 1;
+                _infoQ2._whichInfo = 0;
 
                 _isQ2Answered = true;
 
@@ -318,7 +327,7 @@ public class Quiz : AnimSprite
 
                 _infoQ2._isCollected = true;
 
-                _infoQ2._whichInfo = 0;
+                _infoQ2._whichInfo = 1;
 
                 _isQ2Answered = true;
 
@@ -346,19 +355,19 @@ public class Quiz : AnimSprite
     //------------------------------
     private void createAnswersQ3()
     {
-        _Q3A1 = new Answers("Q1AnswA" + _puzzleID + ".png", new Vec2(170, 330), 2, 1);
+        _Q3A1 = new Answers("Q3AnswA" + _puzzleID + ".png", new Vec2(225, 390), 2, 1);
         AddChild(_Q3A1);
         answersQ3[0] = _Q3A1;
 
-        _Q3A2 = new Answers("Q1AnswB" + _puzzleID + ".png", new Vec2(490, 330), 2, 1);
+        _Q3A2 = new Answers("Q3AnswB" + _puzzleID + ".png", new Vec2(490, 390), 2, 1);
         AddChild(_Q3A2);
         answersQ3[1] = _Q3A2;
 
-        _Q3A3 = new Answers("Q1AnswC" + _puzzleID + ".png", new Vec2(170, 530), 2, 1);
+        _Q3A3 = new Answers("Q3AnswC" + _puzzleID + ".png", new Vec2(225, 590), 2, 1);
         AddChild(_Q3A3);
         answersQ3[2] = _Q3A3;
 
-        _Q3A4 = new Answers("Q1AnswD" + _puzzleID + ".png", new Vec2(490, 530), 2, 1);
+        _Q3A4 = new Answers("Q3AnswD" + _puzzleID + ".png", new Vec2(490, 590), 2, 1);
         AddChild(_Q3A4);
         answersQ3[3] = _Q3A4;
     }
@@ -378,7 +387,7 @@ public class Quiz : AnimSprite
                 //onderstaande zin is voor alpha, van 0 naar 1
                 _infoQ3._isCollected = true;
 
-                _infoQ3._whichInfo = 1;
+                _infoQ3._whichInfo = 0;
 
                 _isQ3Answered = true;
 
@@ -388,20 +397,27 @@ public class Quiz : AnimSprite
                 Console.WriteLine("question3 right!");
             }
             else if ((answersQ3[0]._hover || answersQ3[2]._hover || answersQ3[3]._hover) &&
-                    Input.GetMouseButtonDown(0) && _infoQ3._isCollected == false)
-            {
-
-                _infoQ3._isCollected = true;
-
-                _infoQ3._whichInfo = 0;
-
+                    Input.GetMouseButtonDown(0) && _infoQ3._isCollected == false)
+            {
+
+                _infoQ3._isCollected = true;
+
+                _infoQ3._whichInfo = 0;
+
                 _isQ3Answered = true;
 
-                Sound effect = new Sound("False.wav");
-                effect.Play();
-
-                Console.WriteLine("question3 wrong");
+                Sound effect = new Sound("False.wav");
+                effect.Play();
+
+                Console.WriteLine("question3 wrong");
             }
+
+                    _infoQ3._whichInfo = 1;
+
+                    _isQ3Answered = true;
+
+                    Console.WriteLine("question3 wrong");
+                 }
 
             if (_isQ3Answered && _doOnceCreateContinueButt3)
             {

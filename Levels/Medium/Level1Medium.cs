@@ -370,7 +370,7 @@ class Level1Medium : GameObject
 
         if (_ds3 == null)
         {
-            _ds3 = new Diggingsite("diggingsite3medium.png", 23, 1);
+            _ds3 = new Diggingsite("diggingsite3medium.png", 23, 2);
             AddChild(_ds3);
         }
 

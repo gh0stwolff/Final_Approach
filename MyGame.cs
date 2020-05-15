@@ -16,10 +16,10 @@ public class MyGame : Game
         AddChild(screenHandler);
 
         //puzzle minigame easy \/
-        //Jigsaw jigsaw = new Jigsaw(1);
+        //Jigsaw jigsaw = new Jigsaw(2);
         //AddChild(jigsaw);
 
-        //Quiz _quiz = new Quiz("quizquesttest1easy.png", new Vec2(0, 0), 2);
+        //Quiz _quiz = new Quiz("quizquesttest1easy.png", new Vec2(0, 0), 3);
         //AddChild(_quiz);
 
         ////boneslide minigame \/                     \/ change this number to 1 - easy 2 - meduim 3 - hard

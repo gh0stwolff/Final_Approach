@@ -78,7 +78,7 @@ public class Jigsaw : GameObject
         piece = new Pieces[_amountOfPieces];
 
 
-        createInfo("testinfojigsaw.png");
+        createInfo("INFOeasyJigsaw.png");
 
         createPiece("jigsaweasy.png", _amountPiecesX, _amountPiecesY, _piece.width/2 +25, _piece.height + 15, 1, 8);
         createPoints(_amountPiecesX, _amountPiecesY, _pWidth, _pHeight);
@@ -106,7 +106,7 @@ public class Jigsaw : GameObject
         points = new Vec2[_amountOfPieces];
         piece = new Pieces[_amountOfPieces];
 
-        createInfo("INFOMEDIUM.png");
+        createInfo("INFOmediumJigsaw.png");
 
         createPiece("jigsawmedium.png", _amountPiecesX, _amountPiecesY, _piece.width/2 +25, _piece.height/ 2 +15, 2, 6);
         createPoints(_amountPiecesX, _amountPiecesY, _pWidth, _pHeight, 15);
@@ -133,7 +133,7 @@ public class Jigsaw : GameObject
         points = new Vec2[_amountOfPieces];
         piece = new Pieces[_amountOfPieces];
 
-        createInfo("INFOHARD.png");
+        createInfo("INFOhardJigsaw.png");
 
         createPiece("jigsawhard.png", _amountPiecesX, _amountPiecesY, _piece.width/2 + 15, _piece.height/2 + 15, 2, 8);
         createPoints(_amountPiecesX, _amountPiecesY, _pWidth, _pHeight);
@@ -203,7 +203,7 @@ public class Jigsaw : GameObject
 
     private void createInfo(string filename)
     {
-        _info = new Information(filename, new Vec2(675, 35), 3, 1);
+        _info = new Information(filename, new Vec2(650, 105), 3, 1);
         AddChild(_info);
     }
 
