@@ -12,6 +12,9 @@ class Mika : AnimSprite
     private int _talkStartFrame = 19;
     private int _talkEndFrame = 28;
 
+    private int _idleStartFrame = 41;
+    private int _idleEndFrame = 50;
+
     private int _thumbStartFrame = 6;
     private int _thumbEndFrame = 12;
 
@@ -32,7 +35,7 @@ class Mika : AnimSprite
     private List<SoundChannel> channels = new List<SoundChannel>();
     private string[] goodjob = new string[4] { "Good.wav", "Great.wav", "Nice.wav", "Well.wav"};
     
-    private enum actions { Talking, ThumbsUp, Gone, Down, Up}
+    private enum actions { Talking, Idle, ThumbsUp, Gone, Down, Up}
     actions state = actions.Gone;
 
     public Mika() : base("mikaSpriteSheet.png", 19, 3)
@@ -140,6 +143,14 @@ class Mika : AnimSprite
         _endFrame = _talkEndFrame;
         _animationTimer = 0;
         state = actions.Talking;
+    }
+
+    public void Idle()
+    {
+        _startFrame = _idleStartFrame;
+        _endFrame = _idleEndFrame;
+        _animationTimer = 0;
+        state = actions.Idle;
     }
 
     public void TextBalloon(string fileName)

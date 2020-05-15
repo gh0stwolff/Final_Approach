@@ -10,8 +10,8 @@ public class MyGame : Game
 
 	public MyGame () : base(1024, 768, false,false)
 	{
-        ScreenHandler screenHandler = new ScreenHandler();
-        AddChild(screenHandler);
+        //ScreenHandler screenHandler = new ScreenHandler();
+        //AddChild(screenHandler);
 
         ////puzzle minigame easy \/
         //Jigsaw jigsaw = new Jigsaw(2);
@@ -43,6 +43,11 @@ public class MyGame : Game
         }
         if (Input.GetKeyDown(Key.THREE)) { _mika.Down();
             Console.WriteLine("*disapears");
+        }
+        if (Input.GetKeyDown(Key.FOUR))
+        {
+            _mika.Idle();
+            Console.WriteLine("*idle");
         }
     }
 
