@@ -39,7 +39,7 @@ public class Quiz : AnimSprite
     Answers _Q1A1, _Q1A2, _Q1A3, _Q1A4;
     Answers _Q2A1, _Q2A2, _Q2A3, _Q2A4;
     Answers _Q3A1, _Q3A2, _Q3A3, _Q3A4;
-   // Answers _Q4A1, _Q4A2, _Q4A3, _Q4A4;
+    // Answers _Q4A1, _Q4A2, _Q4A3, _Q4A4;
 
     Button _continue;
     Button _lastDiggingbutton;
@@ -61,7 +61,7 @@ public class Quiz : AnimSprite
         y = position.y;
 
 
-        
+
 
         createAnswersQ1();
         createInfoQ1();
@@ -76,7 +76,7 @@ public class Quiz : AnimSprite
         SetFrame(nextframe);
 
         updatePos();
-        
+
         nextQuestion();
         if (nextframe == 0)
         {
@@ -99,8 +99,8 @@ public class Quiz : AnimSprite
         //}
 
         if (_lastDiggingbutton != null)
-        { 
-        if (_lastDiggingbutton.Pressed && _doOnce)
+        {
+            if (_lastDiggingbutton.Pressed && _doOnce)
             {
                 Console.WriteLine("done");
                 _lastDiggingbutton.LateDestroy();
@@ -122,19 +122,19 @@ public class Quiz : AnimSprite
     //------------------------------
     private void createAnswersQ1()
     {
-        _Q1A1 = new Answers("Q1AnswA"+_puzzleID+".png", new Vec2(225, 390), 2, 1);
+        _Q1A1 = new Answers("Q1AnswA" + _puzzleID + ".png", new Vec2(225, 390), 2, 1);
         AddChild(_Q1A1);
         answersQ1[0] = _Q1A1;
 
-        _Q1A2 = new Answers("Q1AnswB"+_puzzleID+".png", new Vec2(490, 390), 2, 1);
+        _Q1A2 = new Answers("Q1AnswB" + _puzzleID + ".png", new Vec2(490, 390), 2, 1);
         AddChild(_Q1A2);
         answersQ1[1] = _Q1A2;
 
-        _Q1A3 = new Answers("Q1AnswC"+_puzzleID+".png", new Vec2(225, 590), 2, 1);
+        _Q1A3 = new Answers("Q1AnswC" + _puzzleID + ".png", new Vec2(225, 590), 2, 1);
         AddChild(_Q1A3);
         answersQ1[2] = _Q1A3;
 
-        _Q1A4 = new Answers("Q1AnswD"+_puzzleID+".png", new Vec2(490, 590), 2, 1);
+        _Q1A4 = new Answers("Q1AnswD" + _puzzleID + ".png", new Vec2(490, 590), 2, 1);
         AddChild(_Q1A4);
         answersQ1[3] = _Q1A4;
     }
@@ -146,7 +146,7 @@ public class Quiz : AnimSprite
         _continue.alpha = 0.0f;
     }
 
-    
+
     private void createInfoQ1()
     {
         _infoQ1 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(655, 105), 2, 1);
@@ -154,7 +154,7 @@ public class Quiz : AnimSprite
 
     }
 
-    
+
     private void checkAnswerQ1()
     {
         if (answersQ1[0]._hover && Input.GetMouseButtonDown(0) && _infoQ1._isCollected == false)
@@ -171,36 +171,39 @@ public class Quiz : AnimSprite
 
             Console.WriteLine("question1 right!");
         }
-        else if ((answersQ1[1]._hover || answersQ1[2]._hover || answersQ1[3]._hover) &&
-        Input.GetMouseButtonDown(0) && _infoQ1._isCollected == false)
-        {
-
-            _infoQ1._isCollected = true;
-
-            _infoQ1._whichInfo = 0;
-
-            _isQ1Answered = true;
-
-            Sound effect = new Sound("False.wav");
-            effect.Play();
-
-            Console.WriteLine("question1 wrong");
+        else if ((answersQ1[1]._hover || answersQ1[2]._hover || answersQ1[3]._hover) &&                Input.GetMouseButtonDown(0) && _infoQ1._isCollected == false)
+
+        {
+
+
+
+            _infoQ1._isCollected = true;
+
+
+
+            _infoQ1._whichInfo = 0;
+
+
+
+            _isQ1Answered = true;
+
+
+
+            Sound effect = new Sound("False.wav");
+
+            effect.Play();
+
+
+
+            Console.WriteLine("question1 wrong");
+
         }
 
-              _infoQ1._isCollected = true;
-
-              _infoQ1._whichInfo = 1;
-
-              _isQ1Answered = true;
-            
-              Console.WriteLine("question1 wrong");
-             }
-
-        if ( _isQ1Answered && _doOnceCreateContinueButt1)
+        if (_isQ1Answered && _doOnceCreateContinueButt1)
         {
             _continue.alpha = 1f;
             _doOnceCreateContinueButt1 = false;
-            
+
             for (int i = 0; i <= 3; i++)
             {
                 answersQ1[i].SetFrame(1);
@@ -208,70 +211,82 @@ public class Quiz : AnimSprite
         }
     }
 
+    //    if ( _isQ1Answered && _doOnceCreateContinueButt1)
+    //    {
+    //        _continue.alpha = 1f;
+    //        _doOnceCreateContinueButt1 = false;
+
+    //        for (int i = 0; i <= 3; i++)
+    //        {
+    //            answersQ1[i].SetFrame(1);
+    //        }
+    //    }
+    //}
+
     private void nextQuestion()
     {
-            if(_continue._hover && Input.GetMouseButtonDown(0) && _continue.alpha == 1f)
+        if (_continue._hover && Input.GetMouseButtonDown(0) && _continue.alpha == 1f)
+        {
+            //next question
+            nextframe += 1;
+
+            //make continue dissapear
+
+            _continue.alpha = 0.0f;
+
+            //if the last question is answerd game is done //als er iets stuk gaat nextframe was eerst 3
+            if (nextframe == 2 && _isQ3Answered == true)
             {
-                //next question
-                nextframe += 1;
-
-                //make continue dissapear
-                
-                _continue.alpha = 0.0f;
-
-                //if the last question is answerd game is done //als er iets stuk gaat nextframe was eerst 3
-                if (nextframe == 2 && _isQ3Answered == true)
-                {
-                    _isQuizDone = true;
-                }
-                
-                //next answers, delete old answes
-                // antwoord 1gedaan maak vraag 2
-                if (_doOnceCreateAnswers2 && _isQ1Answered)
-                {
-                    _infoQ1.LateDestroy();
-                    //delete old answers
-                for (int i = 0; i <= 3; i++)
-                    {
-                        answersQ1[i].LateDestroy();
-                        Console.WriteLine("Answers 1 gone");
-                    }
-                        Console.WriteLine("answers2 are now there");
-                        createAnswersQ2();
-                        _doOnceCreateAnswers2 = false;
-                }
-                // antwoord 2 gedaan maak vraag 3
-                if (_doOnceCreateAnswers3 && _isQ2Answered)
-                {
-                    _infoQ2.LateDestroy();
-                    for (int i = 0; i <= 3; i++)
-                    {
-                        answersQ2[i].LateDestroy();
-                        Console.WriteLine("Answers 2 gone");
-                    }
-
-                    createAnswersQ3();
-                    _doOnceCreateAnswers3 = false;
-                    Console.WriteLine("answers3 are now there");
-                }
-                   //antwoord 3 gedaan maak vraag 4(laatste)
-                //if (_doOnceCreateAnswers4 && _isQ3Answered)
-                //{
-                //    _infoQ3.LateDestroy();
-
-                //    for (int i = 0; i <= 3; i++)
-                //    {
-                //        answersQ3[i].LateDestroy();
-                //        Console.WriteLine("Answers 3 gone");
-                //    }
-
-                //    createAnswersQ4();
-                //    _doOnceCreateAnswers4 = false;
-                //    Console.WriteLine("answers4 are now there");
-                //}
-
+                _isQuizDone = true;
             }
-        
+
+            //next answers, delete old answes
+            // antwoord 1gedaan maak vraag 2
+            if (_doOnceCreateAnswers2 && _isQ1Answered)
+            {
+                _infoQ1.LateDestroy();
+                //delete old answers
+                for (int i = 0; i <= 3; i++)
+                {
+                    answersQ1[i].LateDestroy();
+                    Console.WriteLine("Answers 1 gone");
+                }
+                Console.WriteLine("answers2 are now there");
+                createAnswersQ2();
+                _doOnceCreateAnswers2 = false;
+            }
+            // antwoord 2 gedaan maak vraag 3
+            if (_doOnceCreateAnswers3 && _isQ2Answered)
+            {
+                _infoQ2.LateDestroy();
+                for (int i = 0; i <= 3; i++)
+                {
+                    answersQ2[i].LateDestroy();
+                    Console.WriteLine("Answers 2 gone");
+                }
+
+                createAnswersQ3();
+                _doOnceCreateAnswers3 = false;
+                Console.WriteLine("answers3 are now there");
+            }
+            //antwoord 3 gedaan maak vraag 4(laatste)
+            //if (_doOnceCreateAnswers4 && _isQ3Answered)
+            //{
+            //    _infoQ3.LateDestroy();
+
+            //    for (int i = 0; i <= 3; i++)
+            //    {
+            //        answersQ3[i].LateDestroy();
+            //        Console.WriteLine("Answers 3 gone");
+            //    }
+
+            //    createAnswersQ4();
+            //    _doOnceCreateAnswers4 = false;
+            //    Console.WriteLine("answers4 are now there");
+            //}
+
+        }
+
     }
 
 
@@ -299,7 +314,7 @@ public class Quiz : AnimSprite
 
     private void createInfoQ2()
     {
-        _infoQ2 = new Information("infoQ1"+ _puzzleID +".png", new Vec2(655, 105), 2, 1);
+        _infoQ2 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(655, 105), 2, 1);
         AddChild(_infoQ2);
     }
 
@@ -397,7 +412,8 @@ public class Quiz : AnimSprite
                 Console.WriteLine("question3 right!");
             }
             else if ((answersQ3[0]._hover || answersQ3[2]._hover || answersQ3[3]._hover) &&
-                    Input.GetMouseButtonDown(0) && _infoQ3._isCollected == false)
+                    Input.GetMouseButtonDown(0) && _infoQ3._isCollected == false)
+
             {
 
                 _infoQ3._isCollected = true;
@@ -409,15 +425,9 @@ public class Quiz : AnimSprite
                 Sound effect = new Sound("False.wav");
                 effect.Play();
 
-                Console.WriteLine("question3 wrong");
+                Console.WriteLine("question3 wrong");
+
             }
-
-                    _infoQ3._whichInfo = 1;
-
-                    _isQ3Answered = true;
-
-                    Console.WriteLine("question3 wrong");
-                 }
 
             if (_isQ3Answered && _doOnceCreateContinueButt3)
             {
@@ -433,6 +443,7 @@ public class Quiz : AnimSprite
             }
         }
     }
-
 }
+
+
 
