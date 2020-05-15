@@ -41,7 +41,7 @@ class Menu : Sprite
 
     public void CreatePlayButton()
     {
-        Vec2 myVec = new Vec2(361, 550);
+        Vec2 myVec = new Vec2(501, 530);
 
         _buttonPlay = new Button("playbutton.png", myVec, 7, 1);
         AddChild(_buttonPlay);

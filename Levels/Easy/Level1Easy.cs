@@ -37,6 +37,8 @@ class Level1Easy : GameObject
     private bool _textOnce3 = true;
     private bool _textOnce4 = true;
 
+    private bool _showtaptocont = true;
+
     public bool _isGoBackMenuPressed = false;
     public bool _makeLastButtonOnce = true;
     int deltaTime = 1000;
@@ -51,7 +53,7 @@ class Level1Easy : GameObject
     Jigsaw _jigsaw;
     Quiz _quiz;
 
-
+    private Sprite _taptocontinue;
 
     enum Scene
     {
@@ -142,7 +144,10 @@ class Level1Easy : GameObject
             ((MyGame)game).Textbaloon("introtext1.png");
             _startHelloText = false;
             Console.WriteLine("1");
-            _targetTime1 = Time.time + 7500;  
+            _targetTime1 = Time.time + 7500;
+            _taptocontinue = new Sprite("taptocontinue.png");
+            AddChild(_taptocontinue);
+            _taptocontinue.SetXY(650, 690);
         } else
         {
             if ((_targetTime1 < Time.time && _textOnce1 && _targetTime1 != 0) || Input.GetMouseButtonDown(0) && _startIntroText)
@@ -209,6 +214,7 @@ class Level1Easy : GameObject
         {
             {
                 targetTime = 0;
+                _taptocontinue.LateDestroy();
                 setScene(Scene.BONESLIDE);
             }
         }
@@ -257,10 +263,14 @@ class Level1Easy : GameObject
         {
             _ds1 = new Diggingsite("diggingsite1easy.png", 23, 1);
             AddChild(_ds1);
+            _taptocontinue = new Sprite("taptocontinue.png");
+            AddChild(_taptocontinue);
+            _taptocontinue.SetXY(650, 690);
         }
 
         if (Input.GetMouseButtonDown(0))
         {
+            _taptocontinue.LateDestroy();
             setScene(Scene.MIXANDMATCH);
         }
     }
@@ -311,8 +321,10 @@ class Level1Easy : GameObject
         {
             _ds2 = new Diggingsite("diggingsite2easy.png", 23, 1);
             AddChild(_ds2);
+            _taptocontinue = new Sprite("taptocontinue.png");
+            AddChild(_taptocontinue);
+            _taptocontinue.SetXY(650, 690);
 
-            
         }
 
         if (_startItLooksText)
@@ -334,6 +346,7 @@ class Level1Easy : GameObject
         {
             {
                 targetTime = 0;
+                _taptocontinue.LateDestroy();
                 setScene(Scene.JIGSAW);
             }
         }
@@ -408,6 +421,9 @@ class Level1Easy : GameObject
         {
             _ds3 = new Diggingsite("diggingsite3easy.png", 23, 1);
             AddChild(_ds3);
+            _taptocontinue = new Sprite("taptocontinue.png");
+            AddChild(_taptocontinue);
+            _taptocontinue.SetXY(650, 690);
         }
 
 
@@ -451,6 +467,8 @@ class Level1Easy : GameObject
                 _isGoBackMenuPressed = true;
                 if (_ds3 != null)
                 {
+
+                    _taptocontinue.LateDestroy();
                     _ds3.LateDestroy();
                     _ds3 = null;
                 }

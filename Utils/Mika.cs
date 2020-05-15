@@ -182,7 +182,7 @@ class Mika : AnimSprite
     {
         Sprite _text = new Sprite(fileName);
         AddChild(_text);
-        _text.SetXY(420, 420);
+        _text.SetXY(420, 400);
         textBalloon.Add(_text);
     }
 

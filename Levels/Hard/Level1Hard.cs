@@ -49,7 +49,7 @@ class Level1Hard : GameObject
     MixAndMatch _mixandmatch;
     Jigsaw _jigsaw;
 
-
+    private Sprite _taptocontinue;
 
     enum Scene
     {
@@ -132,6 +132,9 @@ class Level1Hard : GameObject
             _startHelloText = false;
             Console.WriteLine("1");
             _targetTime1 = Time.time + 7500;
+            _taptocontinue = new Sprite("taptocontinue.png");
+            AddChild(_taptocontinue);
+            _taptocontinue.SetXY(650, 690);
         }
         else
         {
@@ -247,10 +250,14 @@ class Level1Hard : GameObject
         {
             _ds1 = new Diggingsite("diggingsite1hard.png", 23, 3);
             AddChild(_ds1);
+            _taptocontinue = new Sprite("taptocontinue.png");
+            AddChild(_taptocontinue);
+            _taptocontinue.SetXY(650, 690);
         }
 
         if (Input.GetMouseButtonDown(0))
         {
+            _taptocontinue.LateDestroy();
             setScene(Scene.MIXANDMATCH);
         }
     }
@@ -299,7 +306,9 @@ class Level1Hard : GameObject
         {
             _ds2 = new Diggingsite("diggingsite2hard.png", 23, 1);
             AddChild(_ds2);
-
+            _taptocontinue = new Sprite("taptocontinue.png");
+            AddChild(_taptocontinue);
+            _taptocontinue.SetXY(650, 690);
 
         }
 
@@ -321,6 +330,7 @@ class Level1Hard : GameObject
         if (targetTime < Time.time && targetTime != 0)
         {
             {
+                _taptocontinue.LateDestroy();
                 targetTime = 0;
                 setScene(Scene.JIGSAW);
             }
@@ -372,6 +382,9 @@ class Level1Hard : GameObject
         {
             _ds3 = new Diggingsite("diggingsite3hard.png", 23, 2);
             AddChild(_ds3);
+            _taptocontinue = new Sprite("taptocontinue.png");
+            AddChild(_taptocontinue);
+            _taptocontinue.SetXY(650, 690);
         }
 
         if (_startAmazingText)
@@ -414,6 +427,7 @@ class Level1Hard : GameObject
                 _isGoBackMenuPressed = true;
                 if (_ds3 != null)
                 {
+                    _taptocontinue.LateDestroy();
                     _ds3.LateDestroy();
                     _ds3 = null;
                 }
