@@ -73,8 +73,7 @@ public class Pieces : AnimSprite
         if (scale >= 1)
         { 
             if (_isSelected == false && _isMouseOnPiece && Input.GetMouseButtonDown(0) && PieceInRightPlace == false)
-            {
-            
+            {            
                 _isSelected = true;
                 scale = 1.2f;
             } 
@@ -87,7 +86,6 @@ public class Pieces : AnimSprite
         {
             if (_isSelected == false && _isMouseOnPiece && Input.GetMouseButtonDown(0) && PieceInRightPlace == false)
             {
-
                 _isSelected = true;
                 scale = 0.7f;
             }

@@ -73,6 +73,9 @@
     <Compile Include="GXPEngine\Utils\MouseHandler.cs" />
     <Compile Include="GXPEngine\Utils\Time.cs" />
     <Compile Include="GXPEngine\Utils\Utils.cs" />
+    <Compile Include="Levels\Hard\Level1Hard.cs" />
+    <Compile Include="Levels\Medium\Level1Medium.cs" />
+    <Compile Include="Levels\MiniGames\Bone Slide\collectedBS.cs" />
     <Compile Include="Levels\MiniGames\Diggingsite.cs" />
     <Compile Include="Levels\MiniGames\Puzzle drag and drop\Bones.cs" />
     <Compile Include="Levels\Easy\Level1Easy.cs" />
@@ -100,8 +103,5 @@
     <Compile Include="Utils\Timer.cs" />
     <Compile Include="Utils\Vec2.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Levels\Hard\" />
-    <Folder Include="Levels\Medium\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

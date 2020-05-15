@@ -6,14 +6,15 @@ using System.Collections.Generic;
 public class MyGame : Game
 {
     Mika _mika;
+    
 
 	public MyGame () : base(1024, 768, false,false)
 	{
         ScreenHandler screenHandler = new ScreenHandler();
         AddChild(screenHandler);
 
-        ////puzzle minigame \/
-        //Jigsaw jigsaw = new Jigsaw();
+        ////puzzle minigame easy \/
+        //Jigsaw jigsaw = new Jigsaw(2);
         //AddChild(jigsaw);
 
         ////boneslide minigame \/                     \/ change this number to 1 - easy 2 - meduim 3 - hard
@@ -48,5 +49,25 @@ public class MyGame : Game
     static void Main()
     {
         new MyGame().Start();
+    }
+
+    public void Play(string filename)
+    {
+        _mika.Play(filename);
+    }
+
+    public void Talk()
+    {
+        _mika.Talking();
+    }
+
+    public void Textbaloon(string filename)
+    {
+        _mika.TextBalloon(filename);
+    }
+
+    public void Down()
+    {
+        _mika.Down();
     }
 }

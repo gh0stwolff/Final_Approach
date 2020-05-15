@@ -23,11 +23,9 @@ public class MixAndMatch : Canvas
 
     private bool _reset = false;
     private bool _showDoneText = false;
-    private bool _createQuizonce = true;
     public bool _IsGameFinished = false;
 
     Button _buttonMemmDone;
-    Quiz quiz;
 
     List<ClickablePiece> pieces = new List<ClickablePiece>();
     int[] IDs;
@@ -96,19 +94,12 @@ public class MixAndMatch : Canvas
         resetChoices();
         checkIfDone();
 
-        if (_createQuizonce && _showDoneText == true && Input.GetMouseButtonDown(0) && _buttonMemmDone._hover)
+        if (_showDoneText == true && Input.GetMouseButtonDown(0) && _buttonMemmDone._hover)
         {
             _buttonMemmDone.LateDestroy();
-            createQuiz();
-            _createQuizonce = false;
+            _IsGameFinished = true;
         }
-        if (quiz != null)
-        {
-            if (quiz._isQuizDone)
-            {
-                _IsGameFinished = true;
-            }
-        }
+
     }
 
     private void checkIfDone()
@@ -124,11 +115,6 @@ public class MixAndMatch : Canvas
         }
     }
 
-    private void createQuiz()
-    {
-        quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
-        AddChild(quiz);
-    }
 
     private void memmDoneButton()
     {

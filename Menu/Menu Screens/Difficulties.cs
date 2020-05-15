@@ -9,6 +9,8 @@ class Difficulties : Sprite
     Button _buttonEasy, _buttonMedium, _buttonHard;
 
     public bool EasyIsSelected = false;
+    public bool MediumIsSelected = false;
+    public bool HardIsSelected = false;
 
     public Difficulties() : base("MenuBackground.png")
     {
@@ -40,6 +42,16 @@ class Difficulties : Sprite
         {
             EasyIsSelected = true;
         }
+        if (_buttonMedium.Pressed)
+        {
+            MediumIsSelected = true;
+        }
+        if (_buttonHard.Pressed)
+        {
+            HardIsSelected = true;
+        }
+
+
 
     }
 }
