@@ -12,7 +12,8 @@ class ScreenHandler : GameObject
     Level1Easy _level1easy;
     Collections _collect;
 
-
+    private Sound _backgroundMusic;
+    private SoundChannel _backgroundMusicChannel;
 
     enum Scene
     {
@@ -28,8 +29,15 @@ class ScreenHandler : GameObject
 
     public ScreenHandler() : base()
     {
+        setupSound();
+    }
 
-
+    private void setupSound()
+    {
+        _backgroundMusic = new Sound("Background_music.mp3", true, true);
+        _backgroundMusicChannel = new SoundChannel(1);
+        _backgroundMusicChannel = _backgroundMusic.Play();
+        _backgroundMusicChannel.Volume = 0.5f;
     }
 
     public void Update()

@@ -9,16 +9,16 @@ public class MyGame : Game
 
 	public MyGame () : base(1024, 768, false,false)
 	{
-        //ScreenHandler screenHandler = new ScreenHandler();
-        //AddChild(screenHandler);
+        ScreenHandler screenHandler = new ScreenHandler();
+        AddChild(screenHandler);
 
         ////puzzle minigame \/
         //Jigsaw jigsaw = new Jigsaw();
         //AddChild(jigsaw);
 
         ////boneslide minigame \/                     \/ change this number to 1 - easy 2 - meduim 3 - hard
-        BoneSlide slide = new BoneSlide(width, height, 1);
-        AddChild(slide);
+        //BoneSlide slide = new BoneSlide(width, height, 1);
+        //AddChild(slide);
 
         //memory minigame \/
         //MixAndMatch mix = new MixAndMatch(width, height, 16);
