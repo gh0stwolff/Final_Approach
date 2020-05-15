@@ -21,13 +21,20 @@ class Level1Medium : GameObject
     private bool _doOnce1 = true;
     private bool _doOnce2 = true;
     private bool _doOnce3 = true;
+    private bool _startAmazingText = true;
+    private bool _startWellText = true;
+    private bool _startItWasNiceText = true;
+
+    public bool _isGoBackMenuPressed = false;
+
+    public bool _makeLastButtonOnce = true;
 
     int deltaTime = 1000;
     int targetTime = 0;
 
     Diggingsite _ds0, _ds1, _ds2, _ds3;
 
-    Button _buttonStartBS, _buttonStartMAM, _buttonStartJig;
+    Button _goBackMenu;
 
     BoneSlide _boneslide;
     MixAndMatch _mixandmatch;
@@ -324,7 +331,52 @@ class Level1Medium : GameObject
         }
 
 
-      
+        if (_startAmazingText)
+        {
+            ((MyGame)game).Talk();
+            ((MyGame)game).Play("Amazing.wav");
+            _startAmazingText = false;
+        }
+        else if (Input.GetMouseButtonDown(0) && _startAmazingText != true && _startWellText)
+        {
+            ((MyGame)game).StopSound();
+            ((MyGame)game).Play("Well.wav");
+            _startWellText = false;
+        }
+        else
+
+
+        if (Input.GetMouseButtonDown(0) && _startWellText != true && _startItWasNiceText)
+        {
+            ((MyGame)game).StopSound();
+            ((MyGame)game).Play("It_was_nice.wav");
+            _startItWasNiceText = false;
+
+        }
+        else if (_startItWasNiceText != true && Input.GetMouseButtonDown(0) && _makeLastButtonOnce)
+        {
+
+            ((MyGame)game).StopSound();
+            ((MyGame)game).Down();
+            _goBackMenu = new Button("arrowL_spritesheet_2.png", new Vec2(900, 700), 7, 1);
+            AddChild(_goBackMenu);
+            _makeLastButtonOnce = false;
+        }
+
+        if (_goBackMenu != null)
+        {
+            if (_goBackMenu.Pressed && _isGoBackMenuPressed != true)
+            {
+
+                _isGoBackMenuPressed = true;
+                if (_ds3 != null)
+                {
+                    _ds3.LateDestroy();
+                    _ds3 = null;
+                }
+            }
+        }
+
 
 
     }

@@ -5,6 +5,8 @@ using System.Text;
 using GXPEngine;
 using System.Drawing;
 
+//puzzle id geeft aan difficulty, 0 = easy, 1= med, 2= hard
+
 public class Quiz : AnimSprite
 {
     public Vec2 _position;
@@ -59,13 +61,13 @@ public class Quiz : AnimSprite
         y = position.y;
 
 
-        createContinueButton();
+        
 
         createAnswersQ1();
         createInfoQ1();
         createInfoQ2();
         createInfoQ3();
-        //createInfoQ4();
+        createContinueButton();
 
     }
 
@@ -96,11 +98,15 @@ public class Quiz : AnimSprite
         //    _doOnce = false;
         //}
 
-        if (_isQuizDone && _lastDiggingbutton.Pressed && _doOnce)
-        {
-            _lastDiggingbutton.LateDestroy();
-            _isGameFinished = true;
-            _doOnce = false;
+        if (_lastDiggingbutton != null)
+        { 
+        if (_lastDiggingbutton.Pressed && _doOnce)
+            {
+                Console.WriteLine("done");
+                _lastDiggingbutton.LateDestroy();
+                _isGameFinished = true;
+                _doOnce = false;
+            }
         }
 
     }
@@ -135,14 +141,15 @@ public class Quiz : AnimSprite
 
     private void createContinueButton()
     {
-        _continue = new Button("testbutton.png", new Vec2(790, 590), 1,1);
+        _continue = new Button("arrowR_spritesheet_2.png", new Vec2(900, 700), 7, 1);
         AddChild(_continue);
         _continue.alpha = 0.0f;
     }
 
+    
     private void createInfoQ1()
     {
-        _infoQ1 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(675, 35), 2, 1);
+        _infoQ1 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(655, 105), 2, 1);
         AddChild(_infoQ1);
 
     }
@@ -155,7 +162,7 @@ public class Quiz : AnimSprite
             //onderstaande zin is voor alpha, van 0 naar 1
             _infoQ1._isCollected = true;
 
-            _infoQ1._whichInfo = 0;
+            _infoQ1._whichInfo = 1;
 
             _isQ1Answered = true;
 
@@ -167,7 +174,7 @@ public class Quiz : AnimSprite
 
               _infoQ1._isCollected = true;
 
-              _infoQ1._whichInfo = 1;
+              _infoQ1._whichInfo = 0;
 
               _isQ1Answered = true;
             
@@ -197,8 +204,8 @@ public class Quiz : AnimSprite
                 
                 _continue.alpha = 0.0f;
 
-                //if the last question is answerd game is done
-                if (nextframe == 3 && _isQ3Answered == true)
+                //if the last question is answerd game is done //als er iets stuk gaat nextframe was eerst 3
+                if (nextframe == 2 && _isQ3Answered == true)
                 {
                     _isQuizDone = true;
                 }
@@ -277,7 +284,7 @@ public class Quiz : AnimSprite
 
     private void createInfoQ2()
     {
-        _infoQ2 = new Information("infoQ1"+ _puzzleID +".png", new Vec2(675, 35), 2, 1);
+        _infoQ2 = new Information("infoQ1"+ _puzzleID +".png", new Vec2(655, 105), 2, 1);
         AddChild(_infoQ2);
     }
 
@@ -290,7 +297,7 @@ public class Quiz : AnimSprite
                 //onderstaande zin is voor alpha, van 0 naar 1
                 _infoQ2._isCollected = true;
 
-                _infoQ2._whichInfo = 0;
+                _infoQ2._whichInfo = 1;
 
                 _isQ2Answered = true;
 
@@ -302,7 +309,7 @@ public class Quiz : AnimSprite
 
                 _infoQ2._isCollected = true;
 
-                _infoQ2._whichInfo = 1;
+                _infoQ2._whichInfo = 0;
 
                 _isQ2Answered = true;
 
@@ -346,7 +353,7 @@ public class Quiz : AnimSprite
 
     private void createInfoQ3()
     {
-        _infoQ3 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(675, 35), 2, 1);
+        _infoQ3 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(655, 105), 2, 1);
         AddChild(_infoQ3);
     }
 
@@ -359,7 +366,7 @@ public class Quiz : AnimSprite
                 //onderstaande zin is voor alpha, van 0 naar 1
                 _infoQ3._isCollected = true;
 
-                _infoQ3._whichInfo = 0;
+                _infoQ3._whichInfo = 1;
 
                 _isQ3Answered = true;
 
@@ -371,7 +378,7 @@ public class Quiz : AnimSprite
 
                     _infoQ3._isCollected = true;
 
-                    _infoQ3._whichInfo = 1;
+                    _infoQ3._whichInfo = 0;
 
                     _isQ3Answered = true;
 

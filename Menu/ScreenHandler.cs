@@ -162,20 +162,19 @@ class ScreenHandler : GameObject
         {
             _level1easy = new Level1Easy();
             AddChild(_level1easy);
-
+            
         }
 
-        //if (_difficulties.EasyIsSelected)
-        //{
-        //    {
-        //        setScene(Scene.LEVEL1EASY);
-        //        if (_difficulties != null)
-        //        {
-        //            _difficulties.LateDestroy();
-        //            _difficulties = null;
-        //        }
-        //    }
-        //}
+        if (_level1easy._isGoBackMenuPressed)
+        {
+            
+                setScene(Scene.MENU);
+                if (_level1easy != null)
+                {
+                    _level1easy.LateDestroy();
+                    _level1easy = null;
+                }
+        }
     }
 
     private void handleLevel1MediumScene()
@@ -186,6 +185,18 @@ class ScreenHandler : GameObject
             AddChild(_level1medium);
 
         }
+
+        if (_level1medium._isGoBackMenuPressed)
+        {
+
+            setScene(Scene.MENU);
+            if (_level1medium != null)
+            {
+                _level1medium.LateDestroy();
+                _level1medium = null;
+            }
+
+        }
     }
 
     private void handleLevel1HardScene()
@@ -194,6 +205,18 @@ class ScreenHandler : GameObject
         {
             _level1hard = new Level1Hard();
             AddChild(_level1hard);
+
+        }
+
+        if (_level1hard._isGoBackMenuPressed)
+        {
+
+            setScene(Scene.MENU);
+            if (_level1hard != null)
+            {
+                _level1hard.LateDestroy();
+                _level1hard = null;
+            }
 
         }
     }

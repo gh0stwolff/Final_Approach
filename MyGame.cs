@@ -17,8 +17,8 @@ public class MyGame : Game
         //Jigsaw jigsaw = new Jigsaw(1);
         //AddChild(jigsaw);
 
-        //Quiz _quiz = new Quiz("quizquesttest1.png", new Vec2 (0,0), 0);
-        //AddChild(_quiz);
+        Quiz _quiz = new Quiz("quizquesttest1easy.png", new Vec2(0, 0), 2);
+        AddChild(_quiz);
 
         ////boneslide minigame \/                     \/ change this number to 1 - easy 2 - meduim 3 - hard
         BoneSlide slide = new BoneSlide(width, height, 1);

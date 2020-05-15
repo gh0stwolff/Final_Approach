@@ -27,12 +27,14 @@ class Level1Easy : GameObject
     private bool _doOnce2 = true;
     private bool _doOnce3 = true;
 
+    public bool _isGoBackMenuPressed = false;
+    public bool _makeLastButtonOnce = true;
     int deltaTime = 1000;
     int targetTime = 0;
 
     Diggingsite _ds0, _ds1, _ds2, _ds3;
 
-    Button _buttonStartBS, _buttonStartMAM, _buttonStartJig;
+    Button _goBackMenu;
 
     BoneSlide _boneslide;
     MixAndMatch _mixandmatch;
@@ -334,7 +336,7 @@ class Level1Easy : GameObject
     {
         if (_quiz == null)
         {
-            _quiz = new Quiz("quizquesttest1.png", new Vec2(0,0), 1);
+            _quiz = new Quiz("quizquesttest1easy.png", new Vec2(0,0), 0);
             AddChild(_quiz);
         }
 
@@ -377,7 +379,7 @@ class Level1Easy : GameObject
         }
         else
 
-        //When clicked again hey.wav starts
+
         if (Input.GetMouseButtonDown(0) && _startWellText != true && _startItWasNiceText)
         {
             ((MyGame)game).StopSound();
@@ -385,21 +387,30 @@ class Level1Easy : GameObject
             _startItWasNiceText = false;
 
         }
-        else if (_startItWasNiceText != true && Input.GetMouseButtonDown(0))
+        else if (_startItWasNiceText != true && Input.GetMouseButtonDown(0) && _makeLastButtonOnce)
         {
-            targetTime = Time.time + deltaTime;
+            
             ((MyGame)game).StopSound();
             ((MyGame)game).Down();
+            _goBackMenu = new Button("arrowL_spritesheet_2.png", new Vec2(900, 700), 7, 1);
+            AddChild(_goBackMenu);
+            _makeLastButtonOnce = false;
         }
 
-
-        if (targetTime < Time.time && targetTime != 0)
-        {
+        if (_goBackMenu != null) 
+        { 
+            if (_goBackMenu.Pressed && _isGoBackMenuPressed != true)
             {
-                targetTime = 0;
-                //setScene(Scene.BONESLIDE);
+
+                _isGoBackMenuPressed = true;
+                if (_ds3 != null)
+                {
+                    _ds3.LateDestroy();
+                    _ds3 = null;
+                }
             }
         }
+
     }
 
 
