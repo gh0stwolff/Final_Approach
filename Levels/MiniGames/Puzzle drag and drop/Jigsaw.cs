@@ -20,6 +20,9 @@ public class Jigsaw : GameObject
     private int _pWidth;
     private int _pHeight;
 
+    int deltaTime = 2000;
+    int targetTime = 0;
+
     static private int _amountTargets = 3;
 
     private bool _isFinished;
@@ -145,12 +148,18 @@ public class Jigsaw : GameObject
         showCorrectInfo();
 
 
-        if (_isFinished == true && Input.GetMouseButtonDown(0) && _showBetweenText == true && _buttonJigsawDone._hover)
+        //if (_isFinished == true && Input.GetMouseButtonDown(0) && _showBetweenText == true && _buttonJigsawDone._hover)
+        //{
+        //    _buttonJigsawDone.LateDestroy();
+        //    _IsGameFinished = true;
+        //}
+
+        if (targetTime < Time.time && targetTime != 0)
         {
-            _buttonJigsawDone.LateDestroy();
             _IsGameFinished = true;
+            targetTime = 0;
         }
-        
+
     }
 
     private void createBackground()
@@ -284,6 +293,7 @@ public class Jigsaw : GameObject
         {
             if (points[j] == piece[j]._position)
             {
+                
                 _isFinished = true;
             }
             else
@@ -295,8 +305,9 @@ public class Jigsaw : GameObject
 
         if (_isFinished == true && _showBetweenText == false)
         {
-            jigsawDoneButton();
             _showBetweenText = true;
+            ((MyGame)game).GoodJob();
+            targetTime = Time.time + deltaTime;
         }
     }
 

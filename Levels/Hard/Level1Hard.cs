@@ -6,6 +6,21 @@ using GXPEngine;
 
 class Level1Hard : GameObject
 {
+    private bool _startHelloText = true;
+    private bool _startIntroText = true;
+    private bool _startHeyText = true;
+
+    private bool _startClearText = true;
+
+    private bool _startLetsText = true;
+
+    private bool _startItLooksText = true;
+
+    private bool _startPutText = true;
+
+    int deltaTime = 1000;
+    int targetTime = 0;
+
     Diggingsite _ds0, _ds1, _ds2, _ds3;
 
     Button _buttonStartBS, _buttonStartMAM, _buttonStartJig;
@@ -88,31 +103,68 @@ class Level1Hard : GameObject
 
     private void handleIntroScene()
     {
-
-        //here mica pops up says something. You click it away and then Boneslide starts
-        if (_buttonStartBS == null)
+        //when intro first speak hello.
+        if (_startHelloText)
         {
-            _buttonStartBS = new Button("playbutton.png", new Vec2(50, 50), 7, 1);
-            AddChild(_buttonStartBS);
+            ((MyGame)game).Talk();
+            ((MyGame)game).Play("Hello.wav");
+            _startHelloText = false;
+            Console.WriteLine("1");
+        }
+        else
+        //click and then
+        //maybe do use the timer to time talking part?
+        //When clicked start intro
+        if (Input.GetMouseButtonDown(0) && _startHelloText != true && _startIntroText)
+        {
+            ((MyGame)game).StopSound();
+            ((MyGame)game).Play("Intro.wav");
+            _startIntroText = false;
+            Console.WriteLine("2");
+        }
+        else
+
+        //When clicked again hey.wav starts
+        if (Input.GetMouseButtonDown(0) && _startIntroText != true && _startHeyText)
+        {
+            ((MyGame)game).StopSound();
+            ((MyGame)game).Play("Hey.wav");
+            _startHeyText = false;
+            Console.WriteLine("3");
+
+        }
+        else if (_startHeyText != true && Input.GetMouseButtonDown(0))
+        {
+            targetTime = Time.time + deltaTime;
+            ((MyGame)game).StopSound();
+            ((MyGame)game).Down();
         }
 
 
-        if (_buttonStartBS.Pressed)
+        if (targetTime < Time.time && targetTime != 0)
         {
-            Console.WriteLine("pressed bs button");
             {
                 setScene(Scene.BONESLIDE);
-                if (_buttonStartBS != null)
-                {
-                    _buttonStartBS.LateDestroy();
-                    _buttonStartBS = null;
-                }
             }
         }
     }
 
     private void handleBoneSlideScene()
     {
+        //when intro first speak hello.
+        if (_startClearText)
+        {
+            ((MyGame)game).Talk();
+            ((MyGame)game).Play("Clear.wav");
+            ((MyGame)game).Textbaloon("textBoneSlide.png");
+
+            _startClearText = false;
+        }
+        else if (_startClearText != true && Input.GetMouseButtonDown(0))
+        {
+            ((MyGame)game).Down();
+        }
+
 
         if (_boneslide == null)
         {
@@ -143,24 +195,9 @@ class Level1Hard : GameObject
             AddChild(_ds1);
         }
 
-        //here mica pops up says something there is site uncovered. You click it away and then MAM starts
-        if (_buttonStartMAM == null)
+        if (Input.GetMouseButtonDown(0))
         {
-            _buttonStartMAM = new Button("playbutton.png", new Vec2(50, 50), 7, 1);
-            AddChild(_buttonStartMAM);
-        }
-
-
-        if (_buttonStartMAM.Pressed)
-        {
-            {
-                setScene(Scene.MIXANDMATCH);
-                if (_buttonStartMAM != null)
-                {
-                    _buttonStartMAM.LateDestroy();
-                    _buttonStartMAM = null;
-                }
-            }
+            setScene(Scene.MIXANDMATCH);
         }
     }
 
@@ -171,6 +208,19 @@ class Level1Hard : GameObject
         {
             _mixandmatch = new MixAndMatch(((MyGame)game).width, ((MyGame)game).height, 16);
             AddChild(_mixandmatch);
+        }
+
+        if (_startLetsText)
+        {
+            ((MyGame)game).Talk();
+            ((MyGame)game).Play("Lets.wav");
+            ((MyGame)game).Textbaloon("textMemory.png");
+
+            _startLetsText = false;
+        }
+        else if (_startLetsText != true && Input.GetMouseButtonDown(0))
+        {
+            ((MyGame)game).Down();
         }
 
 
@@ -194,25 +244,30 @@ class Level1Hard : GameObject
         {
             _ds2 = new Diggingsite("diggingsite2hard.png", 23, 1);
             AddChild(_ds2);
+
+
         }
 
-        //here mica pops up says something there is site uncovered. You click it away and then MAM starts
-        if (_buttonStartJig == null)
+        if (_startItLooksText)
         {
-            _buttonStartJig = new Button("playbutton.png", new Vec2(50, 50), 7, 1);
-            AddChild(_buttonStartJig);
+            ((MyGame)game).StopSound();
+            ((MyGame)game).Talk();
+            ((MyGame)game).Play("It_looks.wav");
+            _startItLooksText = false;
+        }
+        else if (_startItLooksText != true && Input.GetMouseButtonDown(0))
+        {
+            targetTime = Time.time + deltaTime;
+            ((MyGame)game).StopSound();
+            ((MyGame)game).Down();
         }
 
 
-        if (_buttonStartJig.Pressed)
+        if (targetTime < Time.time && targetTime != 0)
         {
             {
+                targetTime = 0;
                 setScene(Scene.JIGSAW);
-                if (_buttonStartJig != null)
-                {
-                    _buttonStartJig.LateDestroy();
-                    _buttonStartJig = null;
-                }
             }
         }
     }
@@ -225,6 +280,19 @@ class Level1Hard : GameObject
             _jigsaw = new Jigsaw(3);
             AddChild(_jigsaw);
 
+        }
+
+        if (_startPutText)
+        {
+            ((MyGame)game).Talk();
+            ((MyGame)game).Play("Put.wav");
+            ((MyGame)game).Textbaloon("textJigsaw.png");
+
+            _startPutText = false;
+        }
+        else if (_startPutText != true && Input.GetMouseButtonDown(0))
+        {
+            ((MyGame)game).Down();
         }
 
 

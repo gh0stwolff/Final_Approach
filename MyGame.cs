@@ -46,7 +46,7 @@ public class MyGame : Game
         }
     }
 
-    static void Main()
+    static void Main()
     {
         new MyGame().Start();
     }
@@ -54,6 +54,11 @@ public class MyGame : Game
     public void Play(string filename)
     {
         _mika.Play(filename);
+    }
+
+    public void StopSound()
+    {
+        _mika.StopSounds();
     }
 
     public void Talk()
@@ -64,6 +69,11 @@ public class MyGame : Game
     public void Textbaloon(string filename)
     {
         _mika.TextBalloon(filename);
+    }
+
+    public void GoodJob()
+    {
+        _mika.GoodJob();
     }
 
     public void Down()

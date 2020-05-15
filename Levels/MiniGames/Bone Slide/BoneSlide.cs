@@ -20,6 +20,9 @@ class BoneSlide : Canvas
     private int _offsetX = 720;
     private int _offsetY = 600;
 
+    int deltaTime = 2000;
+    int targetTime = 0;
+
     Quiz quiz;
     private bool _showDoneText = false;
     private bool _createQuizonce = true;
@@ -202,11 +205,11 @@ class BoneSlide : Canvas
     {
         checkIfDone();
         checkCollisions();
-        // when text done pops up en you click on it, delete it and make quiz once
-        if (_showDoneText == true && Input.GetMouseButtonDown(0) && _buttonBoneSDone._hover)
+
+        if (targetTime < Time.time && targetTime != 0)
         {
-            _buttonBoneSDone.LateDestroy();
             _IsGameFinished = true;
+            targetTime = 0;
         }
 
     }
@@ -218,7 +221,8 @@ class BoneSlide : Canvas
         {
             if (!_showDoneText)
             {
-                BoneSlideDoneButton();
+                ((MyGame)game).GoodJob();
+                targetTime = Time.time + deltaTime;
                 _showDoneText = true;
             }
         }
