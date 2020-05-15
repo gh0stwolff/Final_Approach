@@ -20,8 +20,6 @@ class BoneSlide : Canvas
     private int _offsetX = 720;
     private int _offsetY = 600;
 
-    int deltaTime = 2000;
-    int targetTime = 0;
 
     Quiz quiz;
     private bool _showDoneText = false;
@@ -205,11 +203,11 @@ class BoneSlide : Canvas
     {
         checkIfDone();
         checkCollisions();
-
-        if (targetTime < Time.time && targetTime != 0)
+        if (_showDoneText && _buttonBoneSDone.Pressed)
         {
+            _buttonBoneSDone.LateDestroy();
             _IsGameFinished = true;
-            targetTime = 0;
+            _showDoneText = false;
         }
 
     }
@@ -222,7 +220,7 @@ class BoneSlide : Canvas
             if (!_showDoneText)
             {
                 ((MyGame)game).GoodJob();
-                targetTime = Time.time + deltaTime;
+                BoneSlideDoneButton();
                 _showDoneText = true;
             }
         }
@@ -236,7 +234,7 @@ class BoneSlide : Canvas
 
     private void BoneSlideDoneButton()
     {
-        _buttonBoneSDone = new Button("jigsawdone.png", new Vec2(500, 350), 1, 1);
+        _buttonBoneSDone = new Button("arrowR_spritesheet_2.png", new Vec2(900, 700), 7, 1);
         AddChild(_buttonBoneSDone);
     }
 

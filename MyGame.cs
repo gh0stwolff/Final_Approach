@@ -13,9 +13,9 @@ public class MyGame : Game
         //ScreenHandler screenHandler = new ScreenHandler();
         //AddChild(screenHandler);
 
-        ////puzzle minigame easy \/
-        //Jigsaw jigsaw = new Jigsaw(2);
-        //AddChild(jigsaw);
+        //puzzle minigame easy \/
+        Jigsaw jigsaw = new Jigsaw(1);
+        AddChild(jigsaw);
 
         ////boneslide minigame \/                     \/ change this number to 1 - easy 2 - meduim 3 - hard
         //BoneSlide slide = new BoneSlide(width, height, 1);

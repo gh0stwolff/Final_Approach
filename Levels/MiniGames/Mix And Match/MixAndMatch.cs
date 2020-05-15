@@ -19,9 +19,6 @@ public class MixAndMatch : Canvas
     private int _secondPiece = -1;
     private int _piecesSelected = 0;
 
-    int deltaTime = 2000;
-    int targetTime = 0;
-
     private float timeDelta = 0;
 
     private bool _reset = false;
@@ -97,10 +94,17 @@ public class MixAndMatch : Canvas
         resetChoices();
         checkIfDone();
 
-        if (targetTime < Time.time && targetTime != 0)
+        //if (targetTime < Time.time && targetTime != 0)
+        //{
+        //    _IsGameFinished = true;
+        //    targetTime = 0;
+        //}
+
+        if (_showDoneText && _buttonMemmDone.Pressed)
         {
+            _buttonMemmDone.LateDestroy();
             _IsGameFinished = true;
-            targetTime = 0;
+            _showDoneText = false;
         }
 
     }
@@ -112,7 +116,7 @@ public class MixAndMatch : Canvas
             if ( _showDoneText == false)
             {
                 ((MyGame)game).GoodJob();
-                targetTime = Time.time + deltaTime;
+                memmDoneButton();
                 _showDoneText = true;
             }
 
@@ -122,7 +126,7 @@ public class MixAndMatch : Canvas
 
     private void memmDoneButton()
     {
-        _buttonMemmDone = new Button("jigsawdone.png", new Vec2(500, 350), 1, 1);
+        _buttonMemmDone = new Button("arrowR_spritesheet_2.png", new Vec2(900, 700), 7, 1);
         AddChild(_buttonMemmDone);
     }
 

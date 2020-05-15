@@ -28,6 +28,7 @@ public class Jigsaw : GameObject
     private bool _isFinished;
     private bool _showBetweenText = false;
     public bool _IsGameFinished = false;
+    private bool _doOnce = true;
 
     private Sprite _background;
 
@@ -143,22 +144,18 @@ public class Jigsaw : GameObject
     public void Update()
     {
         checkClickingPoints();
-        checkPuzzleSucceeded();
         noOverlapPieces();
+        checkPuzzleSucceeded();
         showCorrectInfo();
-
-
-        //if (_isFinished == true && Input.GetMouseButtonDown(0) && _showBetweenText == true && _buttonJigsawDone._hover)
-        //{
-        //    _buttonJigsawDone.LateDestroy();
-        //    _IsGameFinished = true;
-        //}
-
-        if (targetTime < Time.time && targetTime != 0)
+        
+        if (_doOnce && _isFinished && _buttonJigsawDone.Pressed)
         {
+            _buttonJigsawDone.LateDestroy();
             _IsGameFinished = true;
-            targetTime = 0;
+            _doOnce = false;
         }
+
+
 
     }
 
@@ -252,7 +249,7 @@ public class Jigsaw : GameObject
 
     private void jigsawDoneButton()
     {
-        _buttonJigsawDone = new Button("jigsawdone.png", new Vec2(500,350), 1,1);
+        _buttonJigsawDone = new Button("arrowR_spritesheet_2.png", new Vec2(900, 700), 7, 1);
         AddChild(_buttonJigsawDone);
     }
 
@@ -268,7 +265,7 @@ public class Jigsaw : GameObject
                     if (piece[i]._isSelected && piece[j]._position == piece[i]._position)
                     {
                         Console.WriteLine("pos taken");
-
+                        piece[i].scale = 0.6f;
                         piece[i].SetOriginalPosition();
 
                     }
@@ -307,6 +304,7 @@ public class Jigsaw : GameObject
         {
             _showBetweenText = true;
             ((MyGame)game).GoodJob();
+            jigsawDoneButton();
             targetTime = Time.time + deltaTime;
         }
     }
