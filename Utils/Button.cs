@@ -80,7 +80,11 @@ public class Button : AnimSprite
     protected void startAnimation()
     {
         if (_hover && Input.GetMouseButtonDown(0))
-        { StartAnimation = true; }
+        { 
+            StartAnimation = true;
+            Sound effect = new Sound("Button_click.wav");
+            effect.Play();
+        }
         else if (currentFrame == lastFrame)
         { StartAnimation = false; }
     }

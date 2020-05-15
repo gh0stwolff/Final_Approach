@@ -29,6 +29,7 @@ public class Jigsaw : GameObject
     private bool _showBetweenText = false;
     public bool _IsGameFinished = false;
     private bool _doOnce = true;
+    private bool _doOnce2 = true;
 
     private Sprite _background;
 
@@ -302,6 +303,12 @@ public class Jigsaw : GameObject
 
         if (_isFinished == true && _showBetweenText == false)
         {
+            if (_doOnce2)
+            {
+                Sound effect = new Sound("Minigame_end.wav");
+                effect.Play();
+                _doOnce2 = false;
+            }
             _showBetweenText = true;
             ((MyGame)game).GoodJob();
             jigsawDoneButton();
@@ -325,6 +332,9 @@ public class Jigsaw : GameObject
                     {
                         piece[j]._position = points[i];
                         piece[j].updatePos();
+
+                        Sound effect = new Sound("Puzzle_zap.wav");
+                        effect.Play();
 
                         piece[j].scale = 1f;
 

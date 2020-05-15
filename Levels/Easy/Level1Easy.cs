@@ -23,6 +23,10 @@ class Level1Easy : GameObject
     private bool _startWellText = true;
     private bool _startItWasNiceText = true;
 
+    private bool _doOnce1 = true;
+    private bool _doOnce2 = true;
+    private bool _doOnce3 = true;
+
     int deltaTime = 1000;
     int targetTime = 0;
 
@@ -173,9 +177,10 @@ class Level1Easy : GameObject
 
             _startClearText = false;
         }
-        else if(_startClearText != true && Input.GetMouseButtonDown(0))
+        else if(_startClearText != true && Input.GetMouseButtonDown(0) && _doOnce1)
         {
             ((MyGame)game).Down();
+            _doOnce1 = false;
         }
 
 
@@ -188,14 +193,11 @@ class Level1Easy : GameObject
 
         if (_boneslide._IsGameFinished)
         {
-            
+            setScene(Scene.DIGGING1);
+            if (_boneslide != null)
             {
-                setScene(Scene.DIGGING1);
-                if (_boneslide != null)
-                {
-                    _boneslide.LateDestroy();
-                    _boneslide= null;
-                }
+                _boneslide.LateDestroy();
+                _boneslide = null;
             }
         }
     }
@@ -233,9 +235,10 @@ class Level1Easy : GameObject
 
             _startLetsText = false;
         }
-        else if (_startLetsText != true && Input.GetMouseButtonDown(0))
+        else if (_startLetsText != true && Input.GetMouseButtonDown(0) && _doOnce2)
         {
             ((MyGame)game).Down();
+            _doOnce2 = false;
         }
 
 
@@ -307,9 +310,10 @@ class Level1Easy : GameObject
 
             _startPutText = false;
         }
-        else if (_startPutText != true && Input.GetMouseButtonDown(0))
+        else if (_startPutText != true && Input.GetMouseButtonDown(0) && _doOnce3)
         {
             ((MyGame)game).Down();
+            _doOnce3 = false;
         }
 
 

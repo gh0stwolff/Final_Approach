@@ -18,7 +18,9 @@ class Level1Medium : GameObject
 
     private bool _startPutText = true;
 
-    
+    private bool _doOnce1 = true;
+    private bool _doOnce2 = true;
+    private bool _doOnce3 = true;
 
     int deltaTime = 1000;
     int targetTime = 0;
@@ -162,9 +164,10 @@ class Level1Medium : GameObject
 
             _startClearText = false;
         }
-        else if (_startClearText != true && Input.GetMouseButtonDown(0))
+        else if (_startClearText != true && Input.GetMouseButtonDown(0) && _doOnce1)
         {
             ((MyGame)game).Down();
+            _doOnce1 = false;
         }
 
         if (_boneslide == null)
@@ -219,9 +222,10 @@ class Level1Medium : GameObject
 
             _startLetsText = false;
         }
-        else if (_startLetsText != true && Input.GetMouseButtonDown(0))
+        else if (_startLetsText != true && Input.GetMouseButtonDown(0) && _doOnce2)
         {
             ((MyGame)game).Down();
+            _doOnce2 = false;
         }
 
         if (_mixandmatch._IsGameFinished)
@@ -290,9 +294,10 @@ class Level1Medium : GameObject
 
             _startPutText = false;
         }
-        else if (_startPutText != true && Input.GetMouseButtonDown(0))
+        else if (_startPutText != true && Input.GetMouseButtonDown(0) && _doOnce3)
         {
             ((MyGame)game).Down();
+            _doOnce3 = false;
         }
 
 

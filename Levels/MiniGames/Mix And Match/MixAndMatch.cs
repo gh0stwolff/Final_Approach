@@ -24,6 +24,7 @@ public class MixAndMatch : Canvas
     private bool _reset = false;
     private bool _showDoneText = false;
     public bool _IsGameFinished = false;
+    private bool _doOnce = true;
 
     Button _buttonMemmDone;
 
@@ -117,6 +118,12 @@ public class MixAndMatch : Canvas
             {
                 ((MyGame)game).GoodJob();
                 memmDoneButton();
+                if (_doOnce)
+                {
+                    Sound effect = new Sound("Minigame_end.wav");
+                    effect.Play();
+                    _doOnce = false;
+                }
                 _showDoneText = true;
             }
 

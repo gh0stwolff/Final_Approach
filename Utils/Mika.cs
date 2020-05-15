@@ -64,9 +64,9 @@ class Mika : AnimSprite
                     PopsUp();
                     _effect = new Sound("Mika_up.wav");
                     _effect.Play();
+                    Console.WriteLine("*up");
                     _doOnce = false;
                 }
-                Console.WriteLine("target: {0}, time: {1}", _targetTime, Time.time);
                 if (_targetTime < Time.time && _targetTime != 0)
                 {
                     Console.WriteLine("done");
@@ -84,6 +84,7 @@ class Mika : AnimSprite
                     PopsUp();
                     _effect = new Sound("Mika_up.wav");
                     _effect.Play();
+                    Console.WriteLine("*up");
                     playRandom();
                     _doOnce = false;
                 }
@@ -102,6 +103,7 @@ class Mika : AnimSprite
                 {
                     _effect = new Sound("Mika_down1.wav");
                     _effect.Play();
+                    Console.WriteLine("*down");
                     _doOnceS = false;
                 }
                 if (textBalloon.Count != 0)

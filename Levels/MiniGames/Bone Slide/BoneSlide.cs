@@ -26,6 +26,8 @@ class BoneSlide : Canvas
     private bool _createQuizonce = true;
     public bool _IsGameFinished = false;
 
+    public bool _doOnce = true;
+
     private List<BlockBS> blocks = new List<BlockBS>();
     private List<Bones> bones = new List<Bones>();
     private Vec2[] targetPoints = new Vec2[3];
@@ -217,9 +219,16 @@ class BoneSlide : Canvas
         if (Mathf.Abs(_goal.x - _exit.x) <= _goal.radiusX &&
             _goal.y - _exit.y < _goal.radiusY * 2)
         {
+            if (_doOnce)
+            {
+                Sound effect = new Sound("Minigame_end.wav");
+                effect.Play();
+                _doOnce = false;
+            }
             if (!_showDoneText)
             {
                 ((MyGame)game).GoodJob();
+                
                 BoneSlideDoneButton();
                 _showDoneText = true;
             }
@@ -262,7 +271,6 @@ class BoneSlide : Canvas
                 handleBoundaryCollisions(blocks[i]);
             }
 
-            //Console.WriteLine("Oi");
             foreach (Bones bone in bones)
             {
                 BlockBS block = blocks[i];
@@ -270,7 +278,6 @@ class BoneSlide : Canvas
                 if (Mathf.Abs(block.Position.x - bone.x) <= block.radiusX + bone.width/2 &&
                     Mathf.Abs(block.Position.y - bone.y) <= block.radiusY + bone.height/2)
                 {
-                    Console.WriteLine("hit");
                     bone._isBoneMoving = true;
 
                     if (_infoBoard.alpha < 0.5f)

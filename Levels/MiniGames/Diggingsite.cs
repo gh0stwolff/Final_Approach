@@ -8,6 +8,7 @@ using GXPEngine.Managers;
 
 public class Diggingsite : AnimSprite
 {
+    private SoundChannel _channel;
 
     private float _animationTimer = 0;
 
@@ -18,7 +19,12 @@ public class Diggingsite : AnimSprite
 
     public Diggingsite(string fileName, int cols = 1, int rows = 1) : base(fileName, cols, rows)
     {
-       
+        _channel = new SoundChannel(1);
+        if (cols != 1 || rows != 1)
+        {
+            Sound effect = new Sound("Brush.wav");
+            _channel = effect.Play();
+        }
     }
 
     public void Update()
@@ -30,6 +36,7 @@ public class Diggingsite : AnimSprite
             if (currentFrame == 22)
             {
                 _playAnimation = false;
+                _channel.Stop();
             }
         }
     }

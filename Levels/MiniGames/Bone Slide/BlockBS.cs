@@ -18,6 +18,8 @@ class BlockBS : Sprite
     private Vec2 _velocity;
     private Vec2 _mouseGrabPoint;
 
+    private SoundChannel _channel = new SoundChannel(1);
+
     public Vec2 Velocity
     {
         get { return _velocity; }
@@ -69,6 +71,8 @@ class BlockBS : Sprite
             Mathf.Abs(deltaY) <= height/2 && Input.GetMouseButtonDown(0))
         {
             _holding = true;
+            Sound effect = new Sound("Slide.wav", true);
+            _channel = effect.Play();
             if (_doOnce)
             {
                 _mouseGrabPoint = new Vec2(deltaX, deltaY);
@@ -79,6 +83,7 @@ class BlockBS : Sprite
         {
             _doOnce = true;
             _holding = false;
+            _channel.Stop();
         }
     }
 
