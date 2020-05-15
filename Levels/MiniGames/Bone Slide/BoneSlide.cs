@@ -103,6 +103,7 @@ class BoneSlide : Canvas
 
         _infoBoard = new AnimSprite("testinfojigsaw.png", 3, 1);
         AddChild(_infoBoard);
+        _infoBoard.alpha = 0.0f;
         _infoBoard.SetXY(700, 100);
     }
 
@@ -146,6 +147,7 @@ class BoneSlide : Canvas
 
         _infoBoard = new AnimSprite("testinfojigsaw.png", 3, 1);
         AddChild(_infoBoard);
+        _infoBoard.alpha = 0.0f;
         _infoBoard.SetXY(700, 100);
     }
 
@@ -198,6 +200,7 @@ class BoneSlide : Canvas
 
         _infoBoard = new AnimSprite("testinfojigsaw.png", 3, 1);
         AddChild(_infoBoard);
+        _infoBoard.alpha = 0.0f;
         _infoBoard.SetXY(700, 100);
     }
 
@@ -205,6 +208,7 @@ class BoneSlide : Canvas
     {
         checkIfDone();
         checkCollisions();
+        showCorrectInfo();
         if (_showDoneText && _buttonBoneSDone.Pressed)
         {
             _buttonBoneSDone.LateDestroy();
@@ -386,6 +390,28 @@ class BoneSlide : Canvas
         else
         {
             return new CollisionInfo(false, null, 0);
+        }
+    }
+
+    private void showCorrectInfo()
+    {
+        if (bones[0]._isPressed && bones[0]._position == targetPoints[0])
+        {
+            Console.WriteLine("1");
+            _infoBoard.SetFrame(0);
+            if (_infoBoard.alpha < 0.5f) { _infoBoard.alpha = 1.0f; }
+        }
+        if (bones[1]._isPressed && bones[1]._position == targetPoints[1])
+        {
+            Console.WriteLine("2");
+            _infoBoard.SetFrame(1);
+            if (_infoBoard.alpha < 0.5f) { _infoBoard.alpha = 1.0f; }
+        }
+        if (bones[2]._isPressed && bones[2]._position == targetPoints[2])
+        {
+            Console.WriteLine("3");
+            _infoBoard.SetFrame(2);
+            if (_infoBoard.alpha < 0.5f) { _infoBoard.alpha = 1.0f; }
         }
     }
 

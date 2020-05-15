@@ -283,7 +283,6 @@ public class Jigsaw : GameObject
             if (points[i] == piece[i]._position)
             {
                 piece[i].PieceInRightPlace = true;
-                
             }
         }
 

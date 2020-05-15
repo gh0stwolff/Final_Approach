@@ -14,8 +14,9 @@ public class Pieces : AnimSprite
 
     private bool _isMouseOnPiece;
 
-
     public bool PieceInRightPlace = false;
+
+    private bool _doOnce = true;
 
     public Pieces(string fileName, Vec2 position, int puzzleID, int cols, int rows) : base(fileName, cols, rows)
     {
@@ -38,6 +39,13 @@ public class Pieces : AnimSprite
         mouseOnPiece();
         selectPiece();
         updatePos();
+
+        if (PieceInRightPlace && _doOnce)
+        {
+            Sound effect = new Sound("Correct_sound.wav");
+            effect.Play();
+            _doOnce = false;
+        }
     }
 
     public void updatePos()

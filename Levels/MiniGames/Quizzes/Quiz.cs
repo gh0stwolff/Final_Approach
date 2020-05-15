@@ -157,7 +157,7 @@ public class Quiz : AnimSprite
     
     private void checkAnswerQ1()
     {
-        if ( answersQ1[0]._hover && Input.GetMouseButtonDown(0) && _infoQ1._isCollected == false)
+        if (answersQ1[0]._hover && Input.GetMouseButtonDown(0) && _infoQ1._isCollected == false)
         {
             //onderstaande zin is voor alpha, van 0 naar 1
             _infoQ1._isCollected = true;
@@ -166,20 +166,26 @@ public class Quiz : AnimSprite
 
             _isQ1Answered = true;
 
+            Sound effect = new Sound("Correct_sound.wav");
+            effect.Play();
+
             Console.WriteLine("question1 right!");
         }
-        else if((answersQ1[1]._hover || answersQ1[2]._hover || answersQ1[3]._hover) && 
+        else if ((answersQ1[1]._hover || answersQ1[2]._hover || answersQ1[3]._hover) &&
         Input.GetMouseButtonDown(0) && _infoQ1._isCollected == false)
-             {
+        {
 
-              _infoQ1._isCollected = true;
+            _infoQ1._isCollected = true;
 
-              _infoQ1._whichInfo = 0;
+            _infoQ1._whichInfo = 0;
 
-              _isQ1Answered = true;
-            
-              Console.WriteLine("question1 wrong");
-             }
+            _isQ1Answered = true;
+
+            Sound effect = new Sound("False.wav");
+            effect.Play();
+
+            Console.WriteLine("question1 wrong");
+        }
 
         if ( _isQ1Answered && _doOnceCreateContinueButt1)
         {
@@ -301,6 +307,9 @@ public class Quiz : AnimSprite
 
                 _isQ2Answered = true;
 
+                Sound effect = new Sound("Correct_sound");
+                effect.Play();
+
                 Console.WriteLine("question2 right!");
             }
             else if ((answersQ2[0]._hover || answersQ2[1]._hover || answersQ2[2]._hover) &&
@@ -312,6 +321,9 @@ public class Quiz : AnimSprite
                 _infoQ2._whichInfo = 0;
 
                 _isQ2Answered = true;
+
+                Sound effect = new Sound("False.wav");
+                effect.Play();
 
                 Console.WriteLine("question2 wrong");
             }
@@ -370,20 +382,26 @@ public class Quiz : AnimSprite
 
                 _isQ3Answered = true;
 
+                Sound effect = new Sound("Correct_sound.wav");
+                effect.Play();
+
                 Console.WriteLine("question3 right!");
             }
             else if ((answersQ3[0]._hover || answersQ3[2]._hover || answersQ3[3]._hover) &&
                     Input.GetMouseButtonDown(0) && _infoQ3._isCollected == false)
-                 {
+            {
 
-                    _infoQ3._isCollected = true;
+                _infoQ3._isCollected = true;
 
-                    _infoQ3._whichInfo = 0;
+                _infoQ3._whichInfo = 0;
 
-                    _isQ3Answered = true;
+                _isQ3Answered = true;
 
-                    Console.WriteLine("question3 wrong");
-                 }
+                Sound effect = new Sound("False.wav");
+                effect.Play();
+
+                Console.WriteLine("question3 wrong");
+            }
 
             if (_isQ3Answered && _doOnceCreateContinueButt3)
             {

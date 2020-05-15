@@ -6,23 +6,25 @@ using System.Collections.Generic;
 public class MyGame : Game
 {
     Mika _mika;
+    //Sound _backgroundMusic;
+    //SoundChannel _backgroundMusicChannel;
     
 
 	public MyGame () : base(1024, 768, false,false)
 	{
-        //ScreenHandler screenHandler = new ScreenHandler();
-        //AddChild(screenHandler);
+        ScreenHandler screenHandler = new ScreenHandler();
+        AddChild(screenHandler);
 
         //puzzle minigame easy \/
         //Jigsaw jigsaw = new Jigsaw(1);
         //AddChild(jigsaw);
 
-        Quiz _quiz = new Quiz("quizquesttest1easy.png", new Vec2(0, 0), 2);
-        AddChild(_quiz);
+        //Quiz _quiz = new Quiz("quizquesttest1easy.png", new Vec2(0, 0), 2);
+        //AddChild(_quiz);
 
         ////boneslide minigame \/                     \/ change this number to 1 - easy 2 - meduim 3 - hard
-        BoneSlide slide = new BoneSlide(width, height, 1);
-        AddChild(slide);
+        //BoneSlide slide = new BoneSlide(width, height, 1);
+        //AddChild(slide);
 
         //memory minigame \/
         //MixAndMatch mix = new MixAndMatch(width, height, 16);
@@ -30,6 +32,16 @@ public class MyGame : Game
 
         _mika = new Mika();
         AddChild(_mika);
+
+        setupSound();
+    }
+
+    private void setupSound()
+    {
+        Sound _Music = new Sound("Background_music.mp3", true);
+        SoundChannel _Channel = new SoundChannel(20);
+        _Channel = _Music.Play();
+        _Channel.Volume = 0.3f;
     }
 
     public void Update()

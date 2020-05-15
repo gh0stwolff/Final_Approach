@@ -6,6 +6,11 @@ using GXPEngine;
 
 class Level1Easy : GameObject
 {
+    private int _timer = 0;
+    private int _targetTime1 = 0;
+    private int _targetTime2 = 0;
+    private int _targetTime3 = 0;
+    private int _targetTime4 = 0;
 
     private bool _startHelloText = true;
     private bool _startIntroText = true;
@@ -26,6 +31,11 @@ class Level1Easy : GameObject
     private bool _doOnce1 = true;
     private bool _doOnce2 = true;
     private bool _doOnce3 = true;
+
+    private bool _textOnce1 = true;
+    private bool _textOnce2 = true;
+    private bool _textOnce3 = true;
+    private bool _textOnce4 = true;
 
     public bool _isGoBackMenuPressed = false;
     public bool _makeLastButtonOnce = true;
@@ -129,19 +139,55 @@ class Level1Easy : GameObject
         {
             ((MyGame)game).Talk();
             ((MyGame)game).Play("Hello.wav", 7000);
+            ((MyGame)game).Textbaloon("introtext1.png");
             _startHelloText = false;
             Console.WriteLine("1");
+            _targetTime1 = Time.time + 7500;  
         } else
+        {
+            if ((_targetTime1 < Time.time && _textOnce1 && _targetTime1 != 0) || Input.GetMouseButtonDown(0) && _startIntroText)
+            {
+                ((MyGame)game).StopSound();
+                ((MyGame)game).Play("Intro.wav", 45000);
+                ((MyGame)game).Textbaloon("introtext2.png");
+                _targetTime2 = Time.time + 15100;
+                _targetTime3 = Time.time + 24900;
+                _targetTime4 = Time.time + 37000;
+                _textOnce1 = false;
+                _startIntroText = false;
+                Console.WriteLine("first");
+            }
+
+            if (_targetTime2 < Time.time && _textOnce2 && _targetTime2 != 0)
+            {
+                ((MyGame)game).Textbaloon("introtext3.png");
+                _textOnce2 = false;
+            }
+            if (_targetTime3 < Time.time && _textOnce3 && _targetTime3 != 0)
+            {
+                ((MyGame)game).Textbaloon("introtext4.png");
+                _textOnce3 = false;
+            }
+            if (_targetTime4 < Time.time && _textOnce4 && _targetTime4 != 0)
+            {
+                ((MyGame)game).Textbaloon("introtext5.png");
+                _textOnce4 = false;
+            }
+        }
+
         //click and then
         //maybe do use the timer to time talking part?
         //When clicked start intro
-        if (Input.GetMouseButtonDown(0) && _startHelloText != true && _startIntroText)
-        {
-            ((MyGame)game).StopSound();
-            ((MyGame)game).Play("Intro.wav", 45000);
-            _startIntroText = false;
-            Console.WriteLine("2");
-        } else
+        //if (Input.GetMouseButtonDown(0) && _startHelloText != true && _startIntroText)
+        //{
+        //    ((MyGame)game).StopSound();
+        //    ((MyGame)game).Play("Intro.wav", 45000);
+        //    _startIntroText = false;
+        //    Console.WriteLine("2");
+        //} else
+        //{
+            
+        //}
 
         //When clicked again hey.wav starts
         if (Input.GetMouseButtonDown(0) && _startIntroText != true && _startHeyText)
