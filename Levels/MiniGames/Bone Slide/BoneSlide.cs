@@ -224,15 +224,12 @@ class BoneSlide : Canvas
         }
     }
 
-<<<<<<< HEAD
     private void createQuiz()
     {
         quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
         AddChild(quiz);
     }
 
-=======
->>>>>>> master
     private void BoneSlideDoneButton()
     {
         _buttonBoneSDone = new Button("jigsawdone.png", new Vec2(500, 350), 1, 1);
