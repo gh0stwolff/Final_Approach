@@ -33,6 +33,7 @@ class Level1Easy : GameObject
     BoneSlide _boneslide;
     MixAndMatch _mixandmatch;
     Jigsaw _jigsaw;
+    Quiz _quiz;
 
 
 
@@ -45,6 +46,7 @@ class Level1Easy : GameObject
         DIGGING2,
         JIGSAW,
         DIGGING3,
+        QUIZ,
     }
 
     private Scene _scene;
@@ -91,9 +93,15 @@ class Level1Easy : GameObject
                 handleJigsawScene();
                 break;
 
+            case Scene.QUIZ:
+                handleQuizScene();
+                break;
+
             case Scene.DIGGING3:
                 handleDigging3Scene();
                 break;
+
+            
 
         }
     }
@@ -308,7 +316,7 @@ class Level1Easy : GameObject
         if (_jigsaw._IsGameFinished)
         {
             {
-                setScene(Scene.DIGGING3);
+                setScene(Scene.QUIZ);
                 if (_jigsaw != null)
                 {
                     _jigsaw.LateDestroy();
@@ -316,6 +324,29 @@ class Level1Easy : GameObject
                 }
             }
         }
+    }
+
+    private void handleQuizScene()
+    {
+        if (_quiz == null)
+        {
+            _quiz = new Quiz("quizquesttest1.png", new Vec2(0,0), 1);
+            AddChild(_quiz);
+        }
+
+
+        if (_quiz._isGameFinished)
+        {
+            {
+                setScene(Scene.DIGGING3);
+                if (_quiz != null)
+                {
+                    _quiz.LateDestroy();
+                    _quiz = null;
+                }
+            }
+        }
+
     }
 
     private void handleDigging3Scene()
@@ -366,5 +397,7 @@ class Level1Easy : GameObject
             }
         }
     }
+
+
 
 }

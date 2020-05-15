@@ -10,12 +10,17 @@ public class MyGame : Game
 
 	public MyGame () : base(1024, 768, false,false)
 	{
-        //ScreenHandler screenHandler = new ScreenHandler();
-        //AddChild(screenHandler);
+        ScreenHandler screenHandler = new ScreenHandler();
+        AddChild(screenHandler);
 
         //puzzle minigame easy \/
-        Jigsaw jigsaw = new Jigsaw(1);
-        AddChild(jigsaw);
+        //Jigsaw jigsaw = new Jigsaw(1);
+        //AddChild(jigsaw);
+
+        //Quiz _quiz = new Quiz("quizquesttest1.png", new Vec2 (0,0), 0);
+        //AddChild(_quiz);
+
+
 
         ////boneslide minigame \/                     \/ change this number to 1 - easy 2 - meduim 3 - hard
         //BoneSlide slide = new BoneSlide(width, height, 1);
