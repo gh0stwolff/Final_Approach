@@ -43,7 +43,7 @@ public class MyGame : Game
         { 
             _mika.Talking();
             _mika.TextBalloon("textJigsaw.png");
-            _mika.Play("Put.wav");
+            _mika.Play("Put.wav", 6000);
             Console.WriteLine("talking...");
         }
         if (Input.GetKeyDown(Key.THREE)) { _mika.Down();
@@ -61,9 +61,9 @@ public class MyGame : Game
         new MyGame().Start();
     }
 
-    public void Play(string filename)
+    public void Play(string filename, int time)
     {
-        _mika.Play(filename);
+        _mika.Play(filename, time);
     }
 
     public void StopSound()

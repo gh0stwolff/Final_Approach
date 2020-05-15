@@ -26,10 +26,15 @@ class Mika : AnimSprite
     private int frameInterval = 100;
     private int _animationTimer;
 
+    private int _targetTime = 0;
+
     private uint _channelID = 0;
 
     private bool _doOnce = true;
     private bool _doOnce2 = true;
+    private bool _doOnceS = true;
+
+    private Sound _effect;
 
     private List<Sprite> textBalloon = new List<Sprite>();
     private List<SoundChannel> channels = new List<SoundChannel>();
@@ -57,7 +62,16 @@ class Mika : AnimSprite
                 if (_doOnce)
                 {
                     PopsUp();
+                    _effect = new Sound("Mika_up.wav");
+                    _effect.Play();
                     _doOnce = false;
+                }
+                Console.WriteLine("target: {0}, time: {1}", _targetTime, Time.time);
+                if (_targetTime < Time.time && _targetTime != 0)
+                {
+                    Console.WriteLine("done");
+                    _targetTime = 0;
+                    Idle();
                 }
                 if (currentFrame == _endFrame) 
                 {
@@ -68,6 +82,8 @@ class Mika : AnimSprite
                 if (_doOnce)
                 {
                     PopsUp();
+                    _effect = new Sound("Mika_up.wav");
+                    _effect.Play();
                     playRandom();
                     _doOnce = false;
                 }
@@ -82,6 +98,12 @@ class Mika : AnimSprite
                 }
                 break;
             case actions.Down:
+                if (_doOnceS)
+                {
+                    _effect = new Sound("Mika_down1.wav");
+                    _effect.Play();
+                    _doOnceS = false;
+                }
                 if (textBalloon.Count != 0)
                 {
                     foreach (Sprite text in textBalloon)
@@ -100,6 +122,7 @@ class Mika : AnimSprite
                 alpha = 0.0f;
                 _doOnce = true;
                 _doOnce2 = true;
+                _doOnceS = true;
                 break;
         }
     }
@@ -161,11 +184,13 @@ class Mika : AnimSprite
         textBalloon.Add(_text);
     }
 
-    public void Play(string fileName)
+    public void Play(string fileName, int time)
     {
         Sound sound = new Sound(fileName, false, true);
         SoundChannel channel = new SoundChannel(_channelID);
         channel = sound.Play();
+        _targetTime = time + Time.time;
+        state = actions.Talking;
         channels.Add(channel);
         _channelID++;
     }
