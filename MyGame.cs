@@ -33,6 +33,7 @@ public class MyGame : Game
         _mika = new Mika();
         AddChild(_mika);
 
+
         setupSound();
     }
 

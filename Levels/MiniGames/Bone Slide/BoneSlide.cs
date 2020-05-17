@@ -20,8 +20,6 @@ class BoneSlide : Canvas
     private int _offsetX = 720;
     private int _offsetY = 600;
 
-
-    Quiz quiz;
     private bool _showDoneText = false;
     private bool _createQuizonce = true;
     public bool _IsGameFinished = false;
@@ -237,12 +235,6 @@ class BoneSlide : Canvas
                 _showDoneText = true;
             }
         }
-    }
-
-    private void createQuiz()
-    {
-        quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
-        AddChild(quiz);
     }
 
     private void BoneSlideDoneButton()

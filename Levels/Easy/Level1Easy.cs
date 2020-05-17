@@ -231,7 +231,7 @@ class Level1Easy : GameObject
 
             _startClearText = false;
         }
-        else if(_startClearText != true && Input.GetMouseButtonDown(0) && _doOnce1)
+        else if (_startClearText != true && Input.GetMouseButtonDown(0) && _doOnce1)
         {
             ((MyGame)game).Down();
             _doOnce1 = false;

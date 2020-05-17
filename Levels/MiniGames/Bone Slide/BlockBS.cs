@@ -18,7 +18,7 @@ class BlockBS : Sprite
     private Vec2 _velocity;
     private Vec2 _mouseGrabPoint;
 
-    private SoundChannel _channel = new SoundChannel(1);
+    private SoundChannel _channel = new SoundChannel(15);
 
     public Vec2 Velocity
     {
