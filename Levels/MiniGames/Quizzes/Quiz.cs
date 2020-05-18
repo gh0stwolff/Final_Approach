@@ -12,6 +12,7 @@ public class Quiz : AnimSprite
     public Vec2 _position;
 
     private int _puzzleID = 1;
+    private int _infoID = 1;
 
     public int _whichquestion = 0;
     public int nextframe = 0;
@@ -52,7 +53,7 @@ public class Quiz : AnimSprite
     //Answers[] answersQ4 = new Answers[4];
 
 
-    public Quiz(string fileName, Vec2 position, int puzzleID) : base(fileName, 3, 1)
+    public Quiz(string fileName, string fileNameInfoQ, Vec2 position, int puzzleID) : base(fileName, 3, 1)
     {
         _position = position;
         _puzzleID = puzzleID;
@@ -64,9 +65,9 @@ public class Quiz : AnimSprite
 
 
         createAnswersQ1();
-        createInfoQ1();
-        createInfoQ2();
-        createInfoQ3();
+        createInfoQ1(fileNameInfoQ);
+        createInfoQ2(fileNameInfoQ);
+        createInfoQ3(fileNameInfoQ);
         createContinueButton();
 
     }
@@ -146,10 +147,11 @@ public class Quiz : AnimSprite
         _continue.alpha = 0.0f;
     }
 
+    //JE BENT HIER
 
-    private void createInfoQ1()
+    private void createInfoQ1(string fileNameInfo)
     {
-        _infoQ1 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(655, 105), 2, 1);
+        _infoQ1 = new Information( fileNameInfo + 1 + ".png", new Vec2(655, 105), 2, 1);
         AddChild(_infoQ1);
 
     }
@@ -181,7 +183,7 @@ public class Quiz : AnimSprite
 
 
 
-            _infoQ1._whichInfo = 0;
+            _infoQ1._whichInfo = 1;
 
 
 
@@ -312,9 +314,9 @@ public class Quiz : AnimSprite
         answersQ2[3] = _Q2A4;
     }
 
-    private void createInfoQ2()
+    private void createInfoQ2(string fileNameInfo)
     {
-        _infoQ2 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(655, 105), 2, 1);
+        _infoQ2 = new Information(fileNameInfo + 2 + ".png", new Vec2(655, 105), 2, 1);
         AddChild(_infoQ2);
     }
 
@@ -387,9 +389,9 @@ public class Quiz : AnimSprite
         answersQ3[3] = _Q3A4;
     }
 
-    private void createInfoQ3()
+    private void createInfoQ3(string FileNameInfo)
     {
-        _infoQ3 = new Information("infoQ1" + _puzzleID + ".png", new Vec2(655, 105), 2, 1);
+        _infoQ3 = new Information(FileNameInfo + 3 + ".png", new Vec2(655, 105), 2, 1);
         AddChild(_infoQ3);
     }
 
@@ -418,7 +420,7 @@ public class Quiz : AnimSprite
 
                 _infoQ3._isCollected = true;
 
-                _infoQ3._whichInfo = 0;
+                _infoQ3._whichInfo = 1;
 
                 _isQ3Answered = true;
 

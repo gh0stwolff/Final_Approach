@@ -24,6 +24,8 @@ class Level1Hard : GameObject
 
     private bool _startPutText = true;
 
+    private bool _isDS2Mikadown = false;
+
     private bool _doOnce1 = true;
     private bool _doOnce2 = true;
     private bool _doOnce3 = true;
@@ -48,6 +50,7 @@ class Level1Hard : GameObject
     BoneSlide _boneslide;
     MixAndMatch _mixandmatch;
     Jigsaw _jigsaw;
+    Quiz _quiz;
 
     private Sprite _taptocontinue;
 
@@ -60,6 +63,7 @@ class Level1Hard : GameObject
         DIGGING2,
         JIGSAW,
         DIGGING3,
+        QUIZ,
     }
 
     private Scene _scene;
@@ -103,6 +107,10 @@ class Level1Hard : GameObject
 
             case Scene.JIGSAW:
                 handleJigsawScene();
+                break;
+
+            case Scene.QUIZ:
+                handleQuizScene();
                 break;
 
             case Scene.DIGGING3:
@@ -248,7 +256,7 @@ class Level1Hard : GameObject
 
         if (_ds1 == null)
         {
-            _ds1 = new Diggingsite("diggingsite1hard.png", 23, 3);
+            _ds1 = new Diggingsite("diggingsite1hard.png", 23, 1);
             AddChild(_ds1);
             _taptocontinue = new Sprite("taptocontinue.png");
             AddChild(_taptocontinue);
@@ -324,10 +332,11 @@ class Level1Hard : GameObject
             targetTime = Time.time + deltaTime;
             ((MyGame)game).StopSound();
             ((MyGame)game).Down();
+            _isDS2Mikadown = true;
         }
 
 
-        if (targetTime < Time.time && targetTime != 0)
+        if (targetTime < Time.time && targetTime != 0 && _isDS2Mikadown == true)
         {
             {
                 _taptocontinue.LateDestroy();
@@ -365,7 +374,7 @@ class Level1Hard : GameObject
         if (_jigsaw._IsGameFinished)
         {
             {
-                setScene(Scene.DIGGING3);
+                setScene(Scene.QUIZ);
                 if (_jigsaw != null)
                 {
                     _jigsaw.LateDestroy();
@@ -375,12 +384,35 @@ class Level1Hard : GameObject
         }
     }
 
+    private void handleQuizScene()
+    {
+        if (_quiz == null)
+        {
+            _quiz = new Quiz("quizquesttest3hard.png", "infoQhard", new Vec2(0, 0), 3);
+            AddChild(_quiz);
+        }
+
+
+        if (_quiz._isGameFinished)
+        {
+            {
+                setScene(Scene.DIGGING3);
+                if (_quiz != null)
+                {
+                    _quiz.LateDestroy();
+                    _quiz = null;
+                }
+            }
+        }
+
+    }
+
     private void handleDigging3Scene()
     {
 
         if (_ds3 == null)
         {
-            _ds3 = new Diggingsite("diggingsite3hard.png", 23, 2);
+            _ds3 = new Diggingsite("diggingsite3hard.png", 23, 1);
             AddChild(_ds3);
             _taptocontinue = new Sprite("taptocontinue.png");
             AddChild(_taptocontinue);
@@ -390,7 +422,7 @@ class Level1Hard : GameObject
         if (_startAmazingText)
         {
             ((MyGame)game).Talk();
-            ((MyGame)game).Play("Amazing.wav", 5000);
+            ((MyGame)game).Play("Look.wav", 5000);
             _startAmazingText = false;
         }
         else if (Input.GetMouseButtonDown(0) && _startAmazingText != true && _startWellText)

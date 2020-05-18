@@ -237,6 +237,12 @@ class BoneSlide : Canvas
         }
     }
 
+    //private void createQuiz()
+    //{
+    //    quiz = new Quiz("quizquesttest1.png", new Vec2(25, 25), 0);
+    //    AddChild(quiz);
+    //}
+
     private void BoneSlideDoneButton()
     {
         _buttonBoneSDone = new Button("arrowR_spritesheet_2.png", new Vec2(900, 700), 7, 1);

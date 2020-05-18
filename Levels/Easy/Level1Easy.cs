@@ -395,7 +395,7 @@ class Level1Easy : GameObject
     {
         if (_quiz == null)
         {
-            _quiz = new Quiz("quizquesttest1easy.png", new Vec2(0,0), 1);
+            _quiz = new Quiz("quizquesttest1easy.png", "infoQeasy", new Vec2(0,0), 1);
             AddChild(_quiz);
         }
 
